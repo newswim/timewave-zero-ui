@@ -17,6 +17,16 @@ the 2012 date that refuted it — is part of the exhibit.
 
 ## Status
 
+**Phase 3 (done): the explorer is built.** `npm install && npm run dev` —
+a full-bleed, zoomable wave from the 72-Gyr top cycle down to the final
+minutes before 2012-12-21 06:00. Drag to pan, scroll to zoom, `R` /
+`Shift+R` for resonance jumps (×64 about the zero date — the identical
+waveform, relabeled by history), four number sets, ~100 curated events
+with a violet McKenna layer, the hexagram band at fine zoom, and the
+void after zero with "you are here." Explorer code: [src/ui/](src/ui/).
+Deploy: static build via `npm run build`; import this repo in Vercel
+(framework auto-detects as Vite) to host it.
+
 **Phase 1 (done): the engine is recapitulated and validated.**
 
 - [src/timewave.mts](src/timewave.mts) — dependency-free ES module port of
@@ -44,13 +54,9 @@ node test/validate.mts
   with/without the half twist → Sheliak's vector construction), so every
   number in `data/` is derived, not transcribed. Reference texts are in
   [reference/](reference/).
-- **Phase 3 — the explorer.** A zoomable, full-bleed wave (canvas/WebGL)
-  spanning ~72 billion years down to the final minutes before
-  2012-12-21 06:00. Zoom is the native verb of a self-similar curve:
-  resonance overlays show the same waveform at 64× scales. At fine zoom
-  the wave resolves into its 384 steps and their hexagram transitions.
-- **Phase 4 — the history layer.** Curated, tiered event sets (cosmic →
-  geological → human → personal) rendered along the wave, plus a
+- **Phase 3 — the explorer.** ✅ Built (see Status above).
+- **Phase 4 — the history layer.** A starter set of ~100 tiered events
+  ships with the explorer; remaining: a richer curated set and a
   "McKenna's readings" layer of the correlations he actually claimed in
   lectures, cited to recordings.
 - **Phase 5 — the exhibit.** The story as an explorable essay woven into

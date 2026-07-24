@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Timewave Zero — a restoration</title>
+  <meta name="description" content="Terence McKenna's Timewave Zero, restored: the fractal wave of novelty, zoomable from the age of the universe to the final minutes before 2012-12-21." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='16' y='24' font-size='24' text-anchor='middle' fill='%23c98500'%3E%E4%B7%BF%3C/text%3E%3C/svg%3E" />
+  <script type="module" src="/src/ui/main.mts"></script>
+</head>
+<body>
+  <canvas id="wave"></canvas>
+
+  <header id="topbar">
+    <div id="title">
+      <h1>TIMEWAVE ZERO</h1>
+      <span class="sub">a restoration</span>
+    </div>
+    <nav id="presets" aria-label="Views">
+      <button data-view="all">All time</button>
+      <button data-view="history">History</button>
+      <button data-view="modern">67 years</button>
+      <button data-view="year">Final year</button>
+      <button data-view="terminus">Terminus</button>
+      <button data-view="void">The void</button>
+    </nav>
+    <div id="controls">
+      <div id="sets" role="radiogroup" aria-label="Number set">
+        <button data-set="kelley" class="on" title="Original 1975 set, with the half twist">Kelley</button>
+        <button data-set="watkins" title="Half twist removed">Watkins</button>
+        <button data-set="sheliak" title="1998 vector re-derivation">Sheliak</button>
+        <button data-set="huangti" title="Alternative hexagram sequence">Huang Ti</button>
+      </div>
+      <div id="resonance" aria-label="Resonance jumps">
+        <button id="res-up" title="Jump ×64 outward — the same waveform, 64 times the span (R)">⇡64</button>
+        <button id="res-down" title="Jump ÷64 inward — the same waveform, 1/64 the span (Shift+R)">⇣64</button>
+      </div>
+      <button id="about-btn" title="About this instrument" aria-haspopup="dialog">?</button>
+    </div>
+  </header>
+
+  <aside id="readout" hidden>
+    <div id="ro-date">—</div>
+    <div id="ro-val">—</div>
+    <div id="ro-hex">—</div>
+    <div id="ro-res">—</div>
+    <div id="ro-ev" hidden>—</div>
+  </aside>
+
+  <div id="about" role="dialog" aria-modal="true" hidden>
+    <div id="about-card">
+      <h2>Timewave Zero, restored</h2>
+      <p>
+        In the 1970s Terence McKenna derived a "map of novelty" from the King Wen
+        sequence of the I Ching: 384 numbers, nested in themselves at ratio 64,
+        descending to zero — infinite novelty, the eschaton — on
+        <b>December 21, 2012</b>. It ran as software from 1974 until his death in
+        2000. This instrument is an exact port of that software's mathematics,
+        validated against the original C program.
+      </p>
+      <p>
+        High is habit, low is novelty. The wave is exactly self-similar: press
+        <b>⇡64</b> and the curve you land on is the <i>same shape</i> you left,
+        spanning 64× the time — McKenna's "temporal resonance." At fine zoom the
+        final 384-day cycle resolves into the 64 hexagrams, six days per hexagram,
+        ending on Wei Chi, <i>Before Completion</i>.
+      </p>
+      <p class="honest">
+        Honesty note: the mathematics is real and the fractal is genuine, but
+        "novelty" was never given a measurable definition, the zero date was
+        chosen — then moved to match the Maya calendar — and December 21, 2012
+        passed without incident. This restoration preserves the artifact, not the
+        prophecy. Read the <a href="https://github.com/newswim/timewave-zero-ui/blob/main/docs/assessment.md">assessment</a>
+        and the <a href="https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md">research dossier</a>.
+      </p>
+      <p class="keys">
+        <b>Drag</b> pan · <b>scroll / pinch</b> zoom · <b>double-click</b> zoom in ·
+        <b>R / Shift+R</b> resonance jump · <b>1–6</b> preset views · <b>Esc</b> close
+      </p>
+      <p class="colophon">
+        Wave engine ported from Peter Meyer's public-domain C (1998). Four number
+        sets: Kelley (with the half twist), Watkins (without), Sheliak (1998
+        re-derivation), Huang Ti (alternative sequence).
+        <a href="https://github.com/newswim/timewave-zero-ui">Source</a>.
+      </p>
+      <button id="about-close">Close</button>
+    </div>
+  </div>
+</body>
+</html>
