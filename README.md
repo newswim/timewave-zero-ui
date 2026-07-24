@@ -1,5 +1,7 @@
 # Timewave Zero — a restoration
 
+**Live: [timewave-zero-ui.vercel.app](https://timewave-zero-ui.vercel.app)**
+
 A recapitulation of Terence McKenna's *Timewave Zero* — the fractal "map of
 novelty" he derived from the King Wen sequence of the I Ching and ran as
 software from 1974 until his death in 2000 — rebuilt with modern web
@@ -24,8 +26,8 @@ minutes before 2012-12-21 06:00. Drag to pan, scroll to zoom, `R` /
 waveform, relabeled by history), four number sets, ~100 curated events
 with a violet McKenna layer, the hexagram band at fine zoom, and the
 void after zero with "you are here." Explorer code: [src/ui/](src/ui/).
-Deploy: static build via `npm run build`; import this repo in Vercel
-(framework auto-detects as Vite) to host it.
+Deployed at [timewave-zero-ui.vercel.app](https://timewave-zero-ui.vercel.app)
+(Vercel, framework preset Vite, `npm run build` → `dist/`).
 
 **Phase 1 (done): the engine is recapitulated and validated.**
 
