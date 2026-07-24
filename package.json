@@ -1,0 +1,19 @@
+{
+  "name": "timewave-zero",
+  "version": "0.1.0",
+  "description": "A restoration of Terence McKenna's Timewave Zero as an explorable web artifact",
+  "type": "module",
+  "main": "src/timewave.mts",
+  "scripts": {
+    "test": "node test/validate.mts",
+    "typecheck": "tsc"
+  },
+  "engines": {
+    "node": ">=23.6.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "typescript": "^7.0.2"
+  }
+}

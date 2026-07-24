@@ -1,0 +1,1656 @@
+(Local study copy, decoded from PDF font encoding; imperfect around equations.
+Source: J. Sheliak, via github.com/kl4yfd/timewave_z3r0/Reference/Sheliak.pdf)
+
+Delineation, Specification, and Formalization of the TWZ Data Set
+Generation Process — Philosophical, Procedural, and Mathematical
+John Sheliak
+Abstract
+Elements of vector mathematics and piecewise linear analysis are used to delineate and
+mathematically formalize each step in the process by which the TimeWave Zero (TWZ)
+384 number data set is generated.  This development begins with the King Wen
+hexagram sequence and proceeds to the final 384 number data set, using standard
+mathematical procedures and operations.  The process is clarified and streamlined by the
+introduction of vector notation and operations, which also preserves the notion of wave
+"directed" flow, described by McKenna.
+This 384 number data set serves as the input data file for the TWZ software, which
+performs a "fractal" transform on the input data in order to produce the output
+TimeWave viewed on the computer screen as an x-y graph of Novelty.  The basis for this
+data set is the first order of difference (FOD) of the King Wen sequence, defined as the
+number of lines that change as one moves from hexagram to hexagram, beginning at
+hexagram 1 and proceeding to hexagram 74.  This first order of difference (FOD) number
+set and its derivatives are produced by a series of clearly defined mathematical
+operations, which are all described in detail.
+Once this revised 384 number data set has been calculated, it is used as input to the
+TWZ software in order to generate revised TimeWaves that may be compared with the
+original standard TimeWaves.  Several random number sets are also generated and used
+similarly to produce random TimeWaves for comparison.  Fourier transform operations
+are performed on each of the 384 number data sets, in order to examine wave noise and
+information content.  Correlation is used to determine the degree of interdependence
+between the  two data sets, and between the data and random number sets.
+The results of the mathematical formalization and subsequent comparison analysis show
+that the revised data set produces a TimeWave that appears to reflect historical process
+with greater accuracy than the standard TimeWave.  This difference is likely due to the
+fact that the standard data set produces a distorted TimeWave, as the result of imbedded
+mathematical errors that increase the noise level in the wave.  Comparisons of the
+standard and revised data sets and TimeWaves, show a generally high degree of
+correlation, inferring that the standard wave retains much of the information content of
+the revised wave, despite its distortion.  This TimeWave information content, or the wave
+signal-to-noise ratio (s2n), is improved by using the revised data set, which serves to
+correct the noise distortion introduced by the standard wave.
+xquestions C commentsz             xdowload pdf documentsz
+O
+Introduction
+TimeWave Zero1 (TWZ) is a mathematical and graphical expression of the Novelty Theory
+advanced by Terence McKenna, and implemented by computer software called Time
+Surfer for Macintosh, and Time Explorer for DOS operating systems.  It is based on a
+specific mathematical relationship exhibited by the King Wen sequence of the I-Ching —
+i.e. the number of lines that change as one moves from one hexagram to the next,
+beginning at hexagram 1 and proceeding to hexagram 74.  This number set, called the
+First Order of Difference (FOD), was first expressed and expanded by McKenna
+ë and
+others, into the TimeWave that is produced by the TWZ software.  The philosophical
+nature and theoretical basis of the TimeWave, have been reported extensively elsewhere
+1
+and will not be discussed in detail here.  However, the general thrust of Novelty Theory,
+is that information about some fundamental natural process is encoded in the I-Ching in
+general, and the FOD number set in particular.  This process is thought to express itself
+in nature and the cosmos, as the ongoing creation and conservation of increasingly
+higher ordered states of complex form.  The TimeWave is then viewed as expressing this
+process as a kind of fractal map of temporal resonance in nature, or as an expression of
+the ebb and flow of an organizing principle called Novelty.
+The conversion of this FOD number set into the TimeWave (viewed on the TWZ
+computer screen as a graph of the Novelty process), involves the performance of a series
+of mathematical procedures and operations on this number set.  The TimeWave is
+actually produced in two distinct and mathematically different phases.  The first phase
+includes the creation of a simple bi-directional wave using the FOD number set.  This
+wave is then expanded into linear, trigramatic, and hexagramatic bi-directional waves
+that are subsequently combined to form the tri-level complex wave, or 384 number data
+set.  The second phase is performed by the TWZ software itself, which includes an
+expansion, or §fractal transform¨ of the 384 number data set (input file to TWZ) to
+produce the TimeWave viewed on the computer screen.  Phase I uses the mathematics of
+piecewise linear analysis to generate the 384 number data set from the FOD number set,
+whereas Phase II uses infinite series expansions, that are slightly more complex, to
+convert the Phase I data set into the final TimeWave.  The formalization and comparison
+work described in this report is concerned only with the Phase I mathematics.
+Until recently, the details of the genesis and development of Novelty Theory and the
+TimeWave, although available to all with the will and energy to examine them, have
+remained largely out of sight and out of mind for most.  The primary focus has been on
+the results of that development — i.e. the reflective and apparently projective
+characteristics of Novelty Theory as expressed by the TimeWave, and graphed by the
+TWZ software.  That is, until Mathew Watkins, a British mathematician proceeded to
+deconstruct the wave generating process and examine those details more closely.  The
+results of his investigation were reported in a paper entitled Autopsy for a Mathematical
+Hallucination3, linked to the McKenna website Hyperborea as the Watkins Objection.
+There were several things that Watkins found objectionable in his scathing critique of
+Novelty Theory and TWZ, but there was only one significant finding that he
+P
+substantiated in his report.  He showed that one of the operational steps used in the
+production of the 384 number data set, the notorious §half twist¨, was not
+mathematically consistent with the standard linear analysis that is implied by the
+documentation in the Invisible Landscape and the Time Explorer software manual.  He
+pointed out the fact that the two number sets produced by first the inclusion, then the
+exclusion of the half twist would be different sets resulting in different TimeWaves.
+However, he didn't quantify this difference in number sets, nor show what the resulting
+impact of the final TimeWave would be.  He then concluded that without some
+miraculous justification for the §half twist¨, his findings would prove fatal to TimeWave
+Zero and Novelty Theory.  This claim seemed somewhat speculative and overstated to
+me, since he hadn't actually shown what the impact of his findings on the TimeWave
+itself would be.  Nonetheless, it was an important finding, so I decided to investigate the
+matter for myself in order to assess the actual impact on the TimeWave and the
+corresponding damage to Novelty Theory.  This meant, of course, that I would have to
+immerse myself in the details of the TWZ mathematical development.
+Becoming familiar with the details of the mathematical development of TWZ proved to
+be more of a challenge than expected, partially because the available documentation
+lacked the necessary descriptive detail to faithfully reconstruct the process of TimeWave
+generation.  Additionally, some of the mathematical operations were described with
+unconventional language that was somewhat confusing, making it more difficult to
+understand what was actually being done. So in order to clarify this process of wave
+generation, I proceeded to delineate and mathematically formalize each of the steps in
+the process that takes one from the King Wen hexagram sequence to the final 384
+number data set - Phase I of the TimeWave generating process.  I felt that it was
+important as well, that this formalization be done in a way that could be clearly
+visualized, in order to give one a mental picture of what might actually be happening as
+one proceeds through the development process.  I felt that it should be more than merely
+a correct, but arcane, mathematical formulation.
+An important feature of the standard development process, clearly shown in all the
+TimeWave Zero documentation, is that the process is expressed by piecewise linear
+mathematics — meaning simply that the final 384 number data set is the result of the
+expansion and combination of straight line segments.  These linear segments are
+bounded by integers that are derived from the FOD number set, although the actual
+inclusion of the line segments establishes non-integer values in the set.  Another
+important and well-documented feature of the process, is the generation of the simple bi-
+directional wave from the FOD number set.  This bi-directional wave consists of a
+forward and reverse flowing wave pair, and it is the fundamental waveform or building
+block of the TimeWave generating process.  These two features, a piecewise linear nature
+and wave directed flow, clearly lend themselves to expression through the principles of
+vector mathematics.  Vector notation and operations were consequently chosen as
+appropriate tools for this modeling process.
+It should be noted here, that there is nothing unique or exceptional about the use of
+vector mathematics.   It is only one of several approaches that could have been usedâ but
+it is one that clearly expresses the notion of wave directed flow, and one that also has the
+capacity to generate straight-line segments.  The fact is that only a few of the basic
+Q
+features of vectors are used here — vector addition and subtraction, and the vector
+parametric equation of the straight line.  However, the generation of straight-line
+segments using vectors, converts the discrete function (integer values only) represented
+by the FOD number set, into a continuous function in the domain bounded by the FOD
+integers.  This is important if the wave is to be well defined over the entire range of its
+expression (i.e. the inclusion of fractional values).
+This work is the formalization of the procedures already established with the standard
+wave development, by McKenna, but one that removes inconsistencies and makes the
+process more coherent and intelligible.  It does not, in any way, make fundamental
+changes in the development process, nor does it modify the underlying theory.
+Generating the Simple Bi-directional Wave
+(1) The Simple Forward Wave
+The process by which the 384 number data set is generated begins with the King Wen
+sequence of I-Ching hexagrams (a listing of which appears in the Time Explorer
+manual, pp. 58-59), which is believed to be the earliest arrangement of hexagrams.
+McKenna chose to examine
+4 the number of lines that change (yin to yang, and yang to
+yin) as one moves from hexagram to hexagram, beginning at hexagram 1 and proceeding
+to hexagram 74, and he called this quantity the First Order of Difference (FOD).  The
+FOD number set that is generated as one moves from hexagram 1 to hexagram 74
+contains 73 elementsâ a 74
+th element is determined by recording the FOD as one moves
+from hexagram 74 §wrapping¨ back to hexagram 1, thus establishing a closed system
+with periodic waveform.  This FOD number set can be computed mathematically by
+treating each hexagram as a binary number as reported by Meyer
+5, but in this case I
+simply recorded each number manually in DeltaGraph7 and Excel6 spreadsheets.
+The FOD number set, which I will now call the Simple Forward Wave8, is graphed in Fig.
+1 with straight line segments connecting the individual FOD data points.  The x-axis of
+this graph shows the hexagram transition number, where transition n is defined as the
+transition from hexagram n to hexagram nò1â transition n 0 is simply an x-axis wrap of
+transition 74, and is thus defined as the transition from hexagram 74 to hexagram 1.
+The inclusion of the zero transition data point is a way of graphically illustrating the
+§wrap-around¨ nature of this number set, or possibly a way of mapping an apparent 3-
+dimemsional cylindrical surface onto a ë-dimensional plane.  For clarity, let us define
+this feature of the FOD number set:
+Definition 1:
+The collection of simple forward wave x, y integer pairs, or FOD number set
+[Xn, Yn], form a closed loop such that the final value [74, Y(74)] "wraps" to an
+initial value [0, Y(0)]â Where Y(74)   Y(0), and the waveform is periodic.
+The y-axis values shown in Fig. 1 are the actual FOD transition values, integers that
+would normally be shown as points along the transition axis.  In Fig. 1, however, these
+points are connected by straight line segments, which establishes the piecewise linear
+R
+nature of this number set, generating non-integer values and creating a general function
+that is defined at every point in its domain (all possible x values in the domain
+M PUQ≤≤x ).   Generating this function requires the acceptance of a general principle,
+which will now be defined for clarity:
+Definition ë:
+The collection of FOD numbers is a set of integers that establish the boundary
+conditions for a piecewise linear function, which is defined for all x in the domain
+of the FOD set and its expansions.  The domain of x is defined:  M PUQ≤≤x
+This FOD function is viewed as having a forward flowing, or òx directed nature, and it is
+the basic or simplest number set in the TimeWave development process.  Thus it is called
+the simple forward flowing wave, or just the Simple Forward Wave.
+Figure 1
+(ë) The Simple Reverse Wave
+In order to clarify the process of simple bi-directional wave generation, and the
+production of the Simple Reverse Wave, let us first define another general principle:
+Definition 3:
+The Simple Forward Wave (the FOD function) has a Reverse Wave partner, and
+the two are aligned with one another such that closures (nodes) occur at either end
+of the properly superimposed wave pair.  The proper superimposition produces
+forward and reverse wave closure at the Index 1, and at Indices 7ë, 73, and 74
+endpoints.
+This is an important statement, for without it there is neither reason nor unambiguous
+path for the construction of the bi-directional wave function, nor is the proper form of
+
+S
+wave closure obvious.  Once this principle has been established, however, it is then
+possible to proceed with a step-by-step process of reverse wave, and bi-directional wave
+generation.  Figures ëa—ëf illustrate this process of generating the Simple Reverse Wave,
+followed by a closure with the Simple Forward Wave to form the Simple Bi-directional
+Wave.  Fig. ëa shows Step 1 in the process of Simple Reverse Wave generation — a 180°
+rotation of the Simple Forward Wave about the x, y axes origin (0,0).
+This rotation operation can be visualized by observing that the Simple Forward Wave,
+shown in quadrant I (upper right hand corner of Fig. ëa) is fixed relative to the x, y axes
+(red lines).  The axes are then spun counter-clockwise 180° around their origin
+(intersection point), carrying the wave with them.  The mathematical formulas for this
+rotation are expressed as:
+′ZHxx y cos sin
+θθ  [ 1 ]
+′Z− Hyx y sin cosθθ            [ë]
+Where:    ′x  is the rotated  x value
+′y  is the rotated  y value
+          θ  Is the angle of rotation in degrees
+With 180° as the rotation angle, these equations reduce to:
+′Z− H Z−xx x M [3]
+′Z− − Z−yy y M [4]
+Figure ëa
+
+T
+Equation [3] and [4] show that this 180° rotation operation results in a simple sign
+change of the original forward wave x, y pair data set.  The rotation places the
+developing reverse wave in quadrant III of the graph, shown as the solid blue line-plot.
+The dotted blue line-plot shows the position of the parent Simple Forward Wave.
+Step ë of the reverse wave generation process is shown in Fig. ëb, and involves the
+translation of the rotated forward wave in the  Hx direction.  This operation is expressed
+by the following translation equation:
+xx hZ′ H [5]
+Where:  x is the translated value of  ′x  of equation [3]
+h is the magnitude of the translation in the  Hx direction
+Since this translation must x-align the endpoints of the forward and reverse waves, the
+magnitude of the translation,  h, is ò74.  This positions the developing reverse wave in
+quadrant IV as shown in Fig. ëb.
+Figure ëb
+Fig. ëc shows Step 3 of the reverse wave generation process, and is defined as the  H y
+translation of the x-translated wave of Fig. ëb.  This translation is performed so that the
+forward and reverse waves will be in position to achieve closure at the Index 1 and
+Indices 7ë, 73, 74 endpoints as specified by definition 3, once the next and final step is
+performed.  The translation equation for this step of the process is express as follows:
+
+U
+yy kZ ′H [7]
+Where:  y is the translated value of  ′y  as expressed in equation [4]
+k is the magnitude of the translation required to position the
+    reverse wave for proper closure with the forward wave
+In this case the  y positioning for proper wave closure requires a  k value of ò9.  Fig. ëc
+shows the reverse wave position that results from this translation, and also shows that
+the forward and reverse waves are offset, and have not yet achieved endpoint closure.
+The next and final step is performed using a different type of mathematical operation
+called the §shift¨, which can be understood by using the following analogue:
+Take 75 marbles and place them in the slots of a roulette wheel that has been
+§unrolled¨, so that the slots are in a straight line rather that a circle.  The slots are
+numbered from 0 to 74, and each marble is placed contiguously in its designated
+slot.  Now remove marble ú0 from its slot, and shift marble ú1 to its place, then
+continue the process up the line until all the remaining marbles have been shifted
+down one slot.  Now place the marble from slot ú0 into slot number 74 and you
+have a —1 shifted marble train.  This is the type of shift that is necessary to
+achieve forward and reverse wave closure at the Index 1 and Index 74 endpoints,
+shown in the next figure, by using line segments instead of marbles.
+Figure ëc
+This final step, the 
+—1  x-shift, is shown in Fig ëd, where the dotted blue line-plot is the
+pre-shifted reverse wave position, and the solid blue line-plot is the —1 x-shifted reverse
+wave position.  The larger plot at the top shows the shift operation for the overall wave
+
+V
+pair, whereas the two smaller plots at the bottom of Fig. ëd are magnifications showing
+the closure process at the beginning and end sections of the wave pair.  The mathematics
+for this operation can be expressed as a two step process as follows:
+For  MS Q≤≤xf x f x
+sEF E F ZH N [6]
+Where  f EFSR  is defined: ffEF E FSR MZ [8]
+such that:  fx sEF  is the y value of the —1 x-shifted wave at x
+and: fxEF H N  is the y value of the pre-shifted reverse wave at xò1
+There are two features of Fig. ëd that should be noted here.  First notice that in the
+small graphs at the bottom, closure between the forward and reverse waves occurs at
+four transition axis points (excluding zero).  These points are x   1, x   7ë, x   73, and x  
+74, so that wave closure occurs at one initial point (x   1) and three terminal points.
+Point zero is excluded since it is simply a §wrap¨, or duplicate, of point 74 and will
+eventually be discarded.  Secondly, the two smaller graphs at the bottom of Fig. ëd show
+the process of endpoint shift, or transferring the §marble2line segment¨ that was initially
+in slot 0 into the vacated end slot 74. The green arrow line runs from line segment 1 in
+the graph at the left, to line segment 74 in the graph at the right, and shows that
+segment 1 is being transferred to segment 74 as the 
+—1 x-shift is performed.  The figure
+shows that this is not a simple translation operation as in the previous two steps, but a
+definite shift — much like the operation of a shift register in digital electronics.  Note that
+if a simple —x translation were performed, line segment 1 would be translated into the
+negative x domain to the left of the y-axis, and there would be no line segment 74.
+With the performance of the 
+—1 x-shift operation, the production of the Simple Bi-
+directional Wave is now complete.  We have thus created a forward and reverse flowing
+waveform, which is closed at either end, something like nodes on a standing wave.
+Although this is the correct procedural process for generating the reverse wave from the
+forward wave, and for producing endpoint closure, the relationship between forward and
+reverse waves can be expressed simply by the following equations:
+For  MS Q≤≤xf x f x
+rEF E F Z− −VS P [9]
+Where  f EF−N  is defined: ffEF EF−ZNS Q [10]
+and where: fx rEF  is the y value of the reverse wave at x
+fxEFSP −  is the y value of the forward wave at (73 — x)
+NM
+Figure ëd
+Equations [9] and [10] are good examples of mathematics that do the job, but fail to give
+one a visual image or sense of what is really going on in the process.  This type of math is
+actually quite useful, nonetheless, for computer generation of the reverse wave number
+set.
+We have thus created a simple bi-directional waveform, having the properties of directed
+flow and endpoint closure, and which can be characterized as a piecewise linear function
+— a function we have yet to define over its non-integer domain.  That will be our next
+step in the formalized development of the TimeWave data set.
+Vector Expression of the Piecewise Linear Function
+The Simple Bi-directional Wave, as described thus far, is fundamentally a collection of
+
+NN
+ [x, y] integer data points, that are generated by the FOD number set and the
+performance of several subsequent mathematical operations.  By connecting these points
+with straight line segments we are inferring that some piecewise linear process is
+responsible for filling in the gaps between integers, creating a continuous function over
+the domain defined by these endpoint integers.  However, we have yet to define such a
+function mathematically - a necessary process if we are to correctly expand the Simple
+Bi-directional Wave into the Tri-Level Complex Wave, or 384 number data set.
+Fig. 3 shows the Simple Bi-directional Wave in its final form.  The forward and reverse
+waves are properly superimposed with the correct endpoint closure, and the data set
+integers are connected with straight-line segments.  Note that the primary closures occur
+at transition index 1 and index 7ë, with secondary closures and index 73 and 74.  A
+primary endpoint closure, in this context, is simply the first endpoint closure point as
+seen from within the bi-directional wave envelope (area enclosed by the double
+waveform), whereas a secondary endpoint closure point would be all subsequent points of
+closure.  The notion of primary and secondary wave closure is introduced here because it
+will be used later when the trigramatic and hexagramatic waves are generated and then
+indexed with the linear wave.
+Figure 3
+Although Fig. 3 shows the properly superimposed forward and reverse waves, there is
+nothing in the graph that provides this sense of directed flow, except the wave labeling.
+Fig. 4 introduces, for the first time, vector representation of the forward and reverse
+wave segments, providing a visual image of wave directed flow.  This graph shows the
+forward and reverse waves engaged a continuously flowing process — forward wave flows
+into the reverse wave, and the reverse wave flows back into the forward wave.  This
+dynamic and continuous cycle is akin to the flow from Yin to Yang, Yang to Yin,
+expressed in the well-known Yin-Yang symbol.  It is also similar to a process that is
+described in quantum theory, as the flow of matter to energy, energy to matter, in a
+
+NO
+continuous and never-ending cycle.  Fig. 4 can be then viewed as a continuously flowing
+counter-clockwise loop — always in motion, and always changing.  So how is this process
+to be expressed mathematically so that these principles are preserved, and so they might
+be expanded into a form of higher ordered expression"  This is where the principles of
+vector mathematics can serve the process well.
+Figure 4
+The graph in Fig. 5 shows the generalized form of forward and reverse wave linear
+elements, expressed as vectors 
+C
+cNEFi  for the forward wave segment, and   for the
+reverse wave segment.  The subscript 1 in this vector notation signifies that this vector is
+a first order element (i.e. a linear wave element as opposed to a trigramatic or
+hexagramatic element), and the  subscript signifies that this segment is the i-th
+element of the forward and reverse wave line segment set.  The vectors 0A, 0B, 0C, and
+0D are construction vectors for   and  , whereas vectors 0P and 0Q are variable, or
+parametric vectors that map the lines along which  and   lie.
+In this graph, the x-axis values correspond to the FOD transitions, with   or  being
+the i-th FOD transition, and   or   being the i-th ò1 transition, and together
+they define the domain of the linear bi-directional wave elements.  The y-axis values in
+Fig. 5 correspond to the magnitude of the forward and reverse waves, with    and 
+being the i-th integer values (at x   i) of the forward and reverse waves respectively.  The
+values   and   are the i-th ò1 integer values (at x   iò1) of the forward and
+reverse waves respectively.  These y values define the range of the Simple Bi-directional
+Wave, from the forward and reverse wave values:  .  The subscript i is important
+
+NP
+here because it establishes the boundary conditions (x domain) within which each line
+segment expresses itself.  This subscript is associated with the linear wave, and is a
+function of the independent variable x.  Let us define X   ^x` as the set of all positive real
+numbers in the domain of the TWZ data set,   and the subscript i as a function
+of x:
+[11]
+Where int() indicates the argument x is rounded down to its integer value.
+The vector notation view of Fig. 5, can be viewed as an abstraction for motion or flow.
+With this notation we leave the realm of classical geometry, or statics, and enter the
+realm of kinematics — the path of a moving point.  When sketching a line or a curve with
+pencil, for example, the point of the pencil occupies a unique position on the line or curve
+Figure 5
+at any given instant of time.  Then as we move our hand, the position of the pencil point
+changes in time and traces the line or curve. This is essentially how vector mathematics
+serves the foundation and spirit of the 384 number data set development.  Similarly, the
+Simple Bi-directional Wave describes the path of a moving point, a counter-clockwise
+
+NQ
+flow of some entity, be it matter, energy, photon, graviton, novelton, or eschaton.  In this
+dynamic or kinematics process, we will make use of the notion of the parameter.
+The parameter has been described by Anderson9 as an independent variable which serves
+to determine the coordinates of a point or describe its motion.  This is the notion that will
+be used here, to establish the vector parametric equation of the straight line in a plane.
+Again, according to Anderson9 the parametric form tells us where the point goes, when it
+gets there as well as the curve along which it travels.  Before this parameterization is
+begun, however, vectors   and    must first be defined mathematically.
+(1) Forward Wave Vector Equations
+Referring to Fig. 5, the forward wave vector  , for the i-th transition element can be
+expressed as directed line segment AB:
+       [1ë]
+and the vector 0B is expressed:      [13]
+ Rearranging equation  [13]:     [14]
+Substituting standard form: [15]
+Which reduces to: [17]
+(ë) Reverse Wave Vector Equations
+The reverse wave vector  , for the i-th transition element can be expressed as directed
+line segment CD:
+[16]
+and the vector 0D is expressed: [18]
+Rearranging equation  [18]: [19]
+Substituting standard form: [ë0]
+Which reduces to: [ë1]
+With the derivation of equation [17] and [ë1], we have now defined the generalized
+forward and reverse wave vectors mathematically.  These vector definitions will be used
+NR
+to formulate the vector parametric equations of the generalized line segment, the basis
+for the Simple Bi-directional Wave and the wave expansions that follow.
+(3) The Linear Bi-directional Wave
+The Simple Bi-directional Wave is all that we have thus far defined or describedâ but this
+wave forms the basis for the Linear, Trigramatic, and Hexagramatic waves which are all
+products of the expansion of this basic building block.  The first step in the process of
+wave expansion and combination that eventually leads to the 384 number data set is the
+generation of the Linear Bi-directional Wave.  This wave is produced from the Simple Bi-
+directional Wave (SBW) by simple concatenation — i.e. inserting five copies of the SBW
+end-to-end with the original, and producing six SBW cycles.  According to McKenna, the
+Linear Wave is an expression of the six lines that define each I-Ching hexagram - The
+SBW then represents one line of the hexagram, and there are six SBW connected end-to-
+end to form the Linear Bi-directional Wave (LBW).  Fig. 7 is a graph of this expanded
+SBW, or Linear Bi-directional Wave (LBW), and shows the concatenation process that
+expands the SBW (74 values, excluding zero) into the LBW (384 values, excluding zero).
+Although this graph does not show the vector structure of Fig. 4 (to avoid crowding the
+graph), it is implied here. The LBW therefore expresses the same process of directed flow
+as does the SBW, a counter-clockwise flow of some point entity along the path traced by
+the forward and reverse waves in Fig. 7.
+Figure 7
+The concatenation process that produces the LBW can be expressed mathematically as
+follows:
+For:          
+[ëë]
+
+NS
+and for:   [ë3]
+Where:      (pronounced lin of i) is the value of the forward or reverse linear wave at
+transition point i or at  â  and   is the value of the forward or reverse
+linear wave at  , where   is the remainder when i is divided by 74.
+The Linear Bi-directional Wave (LBW) will now be expressed mathematically, and
+expanded into the Trigramatic Bi-directional Wave (TBW), and Hexagramatic Bi-
+directional Wave (HBW), using mathematics derived from the vector parametric equation
+of the straight line.
+Vector Parametric Equations of the Forward and Reverse Line Segments
+(1) The Linear Forward Wave Vector
+The parameter is introduced by defining the straight line in terms of a point  , a
+vector  , and a parameter t.  Refer to Fig. 5 and locate the vectors 0A, AB, and 0P.  We
+have already defined vector AB in equation [1ë] as the forward wave vector   (Eqn
+[17]), which establishes a direction for our line segment.  Vector 0A is in standard
+position (tail positioned at the coordinate system origin), so that it is defined by the
+position of its head at point  .  Vector 0P is the variable or moving vector and,
+like the moving pencil point, its head traces the path of the straight line that we are
+interested in.  Let us rename vector 0P as the linear forward wave vector  , and since it
+is in standard position (tail at the origin so that it is defined by the coordinates of its
+head), it is described mathematically by the following expression:
+[ë4]
+in which   are the variable coordinates of the vector head.  This vector can also be
+expressed as the sum of vectors 0A and the forward wave vector   as follows:
+[ë5]
+ Vector 0A in standard position is expressed as 
+and from equation [17]     
+NT
+so that equation [ë5] can now be expressed as:
+[ë7]
+with the parameter t having a range:    over the x domain 
+Equation [ë7] can now be solved for x and yF, the general coordinates of the vector  , to
+determine the parametric equation of the line describing the motion of the forward wave.
+Solving for x and yF yields the following parametric equations of the line:
+[ë6]
+         [ë8]
+Solving [ë6] and [ë8] for the parameter t we get:
+[ë9]
+These expressions for the x and y variables in equation [ë9], are the standard form of the
+line equation, and show that the parameter t behaves as an interpolation operator for the
+x and y coordinates of the forward wave line segment.  Rearranging terms for the
+variables in equation [ë9] leads to the slope y-intercept form of the straight-line equation,
+which is a convenient form of expression for the line segment of interest in this
+development.  The slope y-intercept form of the line is determined by solving [ë9] for the
+variable  , which results in the expression:
+      [30]
+Define:   and    , so that [ë9] becomes:
+[31]
+which is the slope y-intercept form of the forward linear wave line segment, where the
+slope is   , and the intercept is  .  Equation [31] is the
+vector-derived expression that is used to generate the linear forward wave over the
+domain  . This forward wave vector generation process is now repeated for
+the reverse wave vector.
+NU
+(ë) The Linear Reverse Wave Vector
+The process for generating the vector parametric equations for the reverse wave segment
+is the same as for the forward segment, but with a vector that has the opposite sense
+(opposite flow) of the forward wave vector.  Again, refer to Fig. 5 and find vectors 
+0C, CD,
+and 0Q.  Vector CD has already been defined in equation [16] as the reverse wave vector,
+.  Vector 0Q, like vector 0P, is the moving variable vector (tail is fixed, but head
+moves and traces the line of interest) which will trace the path of our reverse wave line
+segment.  We now rename 0Q as the reverse wave-generating vector  and since it is in
+standard position it can be expressed as:
+[3ë]
+In which   are the variable coordinates for the head of  .  Expressing   as the
+sum of 0C and the parameter scaled  , we have:
+[33]
+Substituting for 0C and   we have:
+     [34]
+Solving for x and yR yields the following parametric equations of the line:
+[35]
+[37]
+Solving for the parameter t we get:
+[36]
+then solving for yR gives us the slope y-intercept form of the linear reverse line segment:
+[38]
+NV
+Define:   and    , so that [38]  is expressed in
+the slope y-intercept form of the linear reverse wave line segment.  Notice also that
+ΔΔxxrEiF fEiFZ − , an identity that will be exploited later.  For the slope y-intercept form
+of [38] we substitute the delta ( ) expressions and collect terms:
+[39]
+Equations [31] and [39] constitute the defining expressions for the linear forward and
+reverse waves respectively, and equation [11] provides the correct value for the subscript
+i in equation [39].  These equations can be either expanded into the trigramatic and
+hexagramatic bi-directional waves (TBW and HBW) directly, which are then combined to
+form complex wavesâ or they can be first combined into a linear complex wave, then
+expanded into the trigramatic and hexagramatic complex waves.  Either of these two
+procedures will lead to the same final 384 number data set, but the latter is a more
+streamlined process that eliminates several operational steps.  The complex wave is
+defined here, as any wave that is a linear combination of one or more bi-directional
+waves, and is not expressed in bi-directional form.  So now let us continue with the
+process of wave combination, beginning with the linear bi-directional (forward and
+reverse) wave.
+(3) The Linear Complex Wave
+Before beginning the mathematical development of the linear complex wave, let us first
+establish the procedure for forward and reverse wave combination.
+Definition 4:
+ In order to produce forward and reverse wave endpoint (node) closure at zero (0) value,
+the forward and reverse waves must be subtracted from one another to yield zero valued
+endpoints for the combined simple wave.  In order to maximize the number of positive
+values for the resultant combined wave, the forward wave is subtracted from the reverse
+wave.
+The linear complex wave is therefore produced by subtracting equation [31]  (the forward
+wave line segment), from equation [39] (the reverse wave line segment).  The combined
+or complex linear wave is thereby expressed as:
+    
+[40]
+Replacing the expression   with the right hand sides of equation [39] and
+[31], we get:
+OM
+    y`N
+rEiF
+rEiF
+rEi NF
+rEiF
+rEiF
+Ei NF
+fEiF
+fEiF
+fEiF
+fEiF
+fEiF
+iExF y
+x xy y
+x x y
+x xy y
+x xZH − −− −
+á
+!  
+"
+A##
+á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh
+á
+!  
+"
+A##
+á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh
+HH
+Δ
+Δ
+Δ
+Δ
+Δ
+Δ
+Δ
+Δ [41]
+and combining like terms and rearranging equation [41] gives us:
+     yx`N
+rEiF
+rEiF
+fEiF
+fEiF
+rEi NF fEiF
+rEiF
+rEiF
+Ei NF
+fEiF
+fEiF
+iExF y
+x
+y
+x xy y y
+x
+y
+x xZ− H − − H
+á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh
+á
+!  
+"
+A##
+á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh
+HH
+Δ
+Δ
+Δ
+Δ
+Δ
+Δ
+Δ
+Δ            [4ë]
+Using the identity shown previously,  ΔΔxxrEiF fEiFZ − , equation [4ë] is reduced to the
+defining equation for the linear complex wave:
+   y`NExF yy
+x ExF y y yx yx
+x
+rEiF fEiF
+fEiF
+rEi NF fEiF
+rEiF Ei NF fEiF i
+fEiF
+Z− H ∗H − H Há
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh á! "A#
+á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh
+H
+HΔΔ
+Δ
+ΔΔ
+Δ  [43]
+Where yC1(x) is the linear complex wave function and the delta (Δ) functions defined as:
+Δ yE y y FrEiF rEiF rEi NFZ− H ,
+Which is the change in the linear reverse wave dependent variable yr over the x domain
+of   xx xiE i N F≤≤ H
+Δ yE y y FfEiF fEi NF fEiFZ− H ,
+Which is the change in the linear forward wave dependent variable yf over the x domain
+of  xx xiE i N F≤≤ H
+Δ xE x x FfEiF Ei NF iZ− H ,
+Which is the change in the independent variable x over the domain of the linear complex
+wave line segment,  xx xiE i N F≤≤ H
+ixZ intE F
+As defined in equation [11]
+Substituting the domain endpoints, xi and x(iò1) for the x-variable, equation [43] reduces
+to:
+] xx iZ y`N ExF y y rEiF fEiFZ− [44]
+] xx Ei NFZ H y`N ExF y y rEi NF fEi NFZ− HH [45]
+ON
+Which confirms what we observe at the linear wave line segment endpoints, and
+validates equation [43]
+Expansion of the Linear Complex Wave (LCW)
+According to McKenna10 the Trigramatic wave is an expression of the trigram pair that
+form each I-Ching hexagram.  Since each hexagram has a pair of trigrams, a Trigramatic
+Wave pair is constructed such that the two trigramatic waves are placed end-to-end
+(concatenated), and have the domain (x-axis range) of six simple wave cycles.  The
+Trigramatic wave is also viewed as having a value of three times the linear wave, since a
+trigram consists of three lines (trigram   3 x 1 lines).  Similarly, the Hexagramatic wave
+is viewed as an expression of the unity of each hexagram, and is constructed so that a
+single hexagramatic wave occupies the domain of six simple waves cycles (six lines to a
+hexagram), or two trigramatic wave cycles (two trigrams to a hexagram).  Additionally,
+since the hexagram contains six lines, the hexagramatic wave is seen as six times as
+large as the simple wave (hexagram   7 x 1 lines, and hexagramatic wave   7 x 1 simple
+waves).
+This Tri-Level Complex Wave is described as having the same three nested levels of
+expression as exhibited by an I-Ching hexagram.  The top level is the Hexagramatic
+Wave, or hexagram as a whole, which contains the two lower levels, two Trigramatic
+Waves and six Simple Wave cycles.  The mid level of expression is the Trigramatic Wave,
+which contains the six Simple Wave cycles below and is contained by the one
+hexagramatic cycle above.  The bottom level of expression is the linear wave, having six
+simple wave cycles that are contained within two trigramatic wave cycles and one
+hexagramatic wave cycle.
+If we were to look at the complex wave as analogous to some physical wave, be it
+electromagnetic or acoustic, then this tri-level wave structure could be viewed as
+harmonic in nature.  The hexagramatic wave would then correspond to the wave
+fundamental or 1
+st harmonic, the trigramatic wave would correspond to the second
+harmonic (ëx the fundamental frequency), and the linear wave would correspond to the
+sixth harmonic (7x the fundamental frequency).  In the case of the Tri-Level Complex
+Wave, however, the harmonic waves are not only frequency multiples, they are also
+amplitude multiples of the fundamental, or hexagramatic wave.  Although this notion of
+wave harmonics may only be an interesting perspective at this point, it may be useful
+when examining the wave features of these number sets using Fourier analysis.
+The Expansion Process Expressed Graphically
+Graphically speaking the Trigramatic Complex Wave is simply a 3x magnification of the
+linear complex wave, i.e. the magnification of the first two of its simple wave cycles.  This
+3x magnification means that the linear complex wave segments are expanded by a factor
+of three, in both the 
+x and y directions. Similarly, the Hexagramatic Complex Wave is a
+7x magnification of the linear complex wave, i.e. the magnification of the first of the
+OO
+simple wave cycles.  Figure 6 is a graphical representation of this process, and shows the
+3x and 7x magnification over the first 74 transition index values (74 of 384).  The graph
+shows one complete linear cycle, one-third of a trigramatic wave cycle, and one-sixth of a
+hexagramatic wave cycle.
+One significant feature to notice in Fig. 6, is that the linear, trigramatic, and
+hexagramatic waves are offset from one another — the first peak of each wave level is not
+aligned with its neighbor.  Notice also, that this first peak at each wave level (linear, tri,
+and hex) occurs at the primary closure point (i.e. the first closure point as observed from
+within the envelope of the linear, tri, and hex bi-directional waves).  For the linear wave
+this closure occurs at index 1, for the trigramatic wave it is at index 3, and for the
+hexagramatic wave it occurs at index 7.  This is exactly the defining 1-3-7 ratio for
+linear, trigramatic, and hexagramatic waves, which this graph illustrates well.
+Another feature to notice about Fig. 6 is that this wave offset is due to the fact that
+linear wave segment 1 is included in the linear wave number set.  Remember that this
+first segment (from index 0 to index 1) is a result of the §wrapping¨ feature of the simple
+Figure 6
+Bi-directional wave — transition 74 is wrapped (copied) to transition zero for the simple
+wave, or transition 384 is wrapped to zero for the entire linear bi-directional wave.
+Therefore, transition number 0 is not the starting point of the wave, but transition 1 is.
+Nonetheless, let us mathematically express the linear forward wave expansion, shown in
+Fig. 6, as follows:
+[47]
+
+OP
+Or by rearranging terms in [47]:
+[46]
+Likewise for the linear reverse wave:
+[48]
+and rearranging: [49]
+This same set of equations,  [47] through [49] can be used to expand the linear wave into
+the hexagramatic wave shown in Fig. 6, by replacing all number 3's by 7's.  However,
+since the actual starting point for this wave set is at transition 1 and not transition 0,
+the proper expansion will look as shown in Fig. 8.  In this figure, alignment between
+linear, trigramatic, and hexagramatic waves occurs at transition index 1â also a point of
+primary closure.
+Figure 8
+Fig. 8 also shows this expansion in terms of the linear, tri, and hex bi-directional waves,
+in which the linear bi-directional wave is expanded into the trigramatic, and
+hexagramatic bi-directional waves.  However, these bi-directional waves are eventually
+combined to form the complex wave system, as described by equation [43] for the linear
+wave case.  Since all three bi-directional waves are to be expressed as complex waves,
+
+OQ
+several operational steps can be omitted and the process streamlined, by expanding the
+linear complex wave directly.  Consequently, we will follow a mathematical process that
+expands the linear complex wave, described by equation [43], into the tri and hex
+complex waves.  In the interest of maintaining visual clarity of this process, however,
+and of remaining true to the notion of a directed flowing wave cycle at all three levels of
+expression, we show the expanded wave system as bi-directional in nature.
+Fig. 9 shows the proper expansion of the linear bi-directional wave into the trigramatic
+and hexagramatic bi-directional waves, with wave indexing at transition 1.  This graph
+shows the entire 384 number wave domain, in which a single hexagramatic wave cycle
+contains two trigramatic wave cycles and six linear wave cycles.  This notion of all three
+levels of wave expression being contained, or nested in one level is the actual theoretical
+basis for the tri-level wave combination that produces a single Tri-Level Complex Wave —
+the data set.
+Figure 9
+Fig. 10 shows the same tri-level bi-directional wave set as Fig. 9, but with the average
+value of the linear and trigramatic bi-directional waves aligned with the average value
+of the hexagramatic wave.  These two figures are mathematically equivalent for this
+development, as we shall see.
+Fig. 10 is included here because it is the form of the Tri-Level Bi-directional Wave that
+appears in the TWZ documentation, and it is obvious that it looks different than Fig. 9.
+The linear and trigramatic bi-directional waves in Fig. 10 have their average values
+aligned to the hexagramatic wave average value, so that they move about a common line
+— the hexagramatic average.  This graph may look different than Fig. 9, but the fact is
+that they are identical mathematically.  The reason is that, in order to produce the
+
+OR
+combined complex wave,  the forward wave is subtracted from the reverse wave, as
+shown in equations [40] through [43].  Since the forward and reverse waves remain
+Figure 10
+closed, or connected at their endpoints, it doesn't matter where along the y-axis they are
+shifted — the resulting difference is the same.  Consequently, Fig. 9 is equivalent to Fig.
+10, and the graphs appearing in the TWZ documentation.
+So let us now begin with the mathematical expansion of the Linear Complex Wave, of
+equation [43], into the Trigramatic and Hexagramatic Complex Waves, and then finally
+into the Tri-Level Complex Wave — the 384 number data set.
+The Mathematics of the Trigramatic and Hexagramatic Complex Waves
+(1) The Trigramatic Complex Wave
+Close inspection of Figs 8 and 9 reveals the relationship between the functions
+describing the linear, trigramatic, and hexagramatic waves.  The relationship between
+linear and trigramatic forward waves is shown in Figs 8 and 9, and is expressed
+mathematically as follows:
+yycP cNEPx OF P ExF− Z [50]
+Where the quantity within the parentheses is the argument for y( ), and not a
+multiplier.  Rearranging terms in [50] we get:
+
+OS
+yycP cNExF P EFxO
+P
+Z H [51]
+Where  yE x FcP  is the value of the trigramatic forward wave at x, and  P O
+PycN EFxH  is three
+times the value of the linear forward wave at EFxH O
+P .   Likewise, the trigramatic reverse
+wave is expressed in terms of the linear reverse wave by the equation:
+y EPx OF Py ExFoP oN −Z             [5ë]
+and by rearranging terms we get:
+yyoP oNExF P xO
+PEFZ H  [53]
+The trigramatic complex wave is defined in the same manner as the linear complex
+wave, with the tri forward wave subtracted from the tri reverse wave as in equation [40]
+and expressed in trigramatic terms by:
+y ExF y ExF y ExF`P oP cPZ−  [54]
+Using [50], [5ë], and [54] we can express the trigramatic complex wave in terms of the
+linear complex wave as follows:
+yy y yoP cP oN cNEPx OF EPx OF P ExF P ExF−− −Z −     [55]
+or equivalently: yy y`P oN cNEF P P ExF ExFPOx −Z −  [57]
+Factoring the right side of [57` gives:      y{ y y`P oN cNEF P ExF ExF }POx −Z −  [56]
+Substituting the expression for the linear complex wave on the right hand side of
+equation [40], into [56]:
+y`P EPx OF linExFPxz− Z   [58]
+then rearranging [58] we get: yx`P E F lin xPxz EF O
+PZ H [59]
+Equation [59] shows that the value of the trigramatic complex wave at x, is equal to
+three times the value of the linear complex wave at  xOPHNS .   Replacing the x-term
+term in the  linExF expression of equation [43] with the expression  xH OPNS , then
+substituting into [59] gives us the defining equation of the trigramatic complex wave as
+follows:
+OT
+yE x F y y`P P yy
+x
+yx yx
+x
+rEiF fEiF
+fEiF
+rEiF Ei NF fEiF i
+fEiF
+xO
+P EF rEi NF fEiFZ− −H H HHá
+!  
+"
+A## á! "A# á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh∗ H H
+H
+ΔΔ
+Δ
+ΔΔ
+Δ [70]
+In this expression the subscript i is expressed as a function of x, using the process
+similar to that which produced equation [11].  In this case, since the x term has become
+xH OPNS , the expression defining the bounding subscript i then becomes:
+i x jZ H Zint OPNSY^ [71]
+Where subscript i is renamed as j to distinguish it from the linear wave expression
+subscript shown in the previous linear wave equations.  Equation [71] defines subscript j
+as the rounded down integer value of the function  x H OPNS , thus establishing the
+boundary conditions for the trigramatic line segment mapped by this function.
+Equation [70] expresses the Trigramatic Complex Wave (TCW) as an expansion of the
+Linear Complex Wave (LCW) directly.  However, the same result would be obtained if the
+linear forward and reverse waves had been expanded into the trigramatic forward and
+reverse waves, and those results combined to for the trigramatic complex wave.  This
+direct approach clearly eliminates two very detailed mathematical steps.  The same
+series of steps will now be used to find the expression for the hexagramatic complex
+wave.
+(ë) The Hexagramatic Complex Wave
+As for the trigramatic wave, inspection of Figs. 8 and 9 reveals that the relationship
+between the linear forward wave and the hexagramatic forward wave can be expressed:
+yycc NE x F ExFS SRS−Z [7ë]
+Rearranging terms for this function we get:
+yE x F ycc N EFx
+S S R
+SZ H [73]
+Where  y ExFcS  is the value of the hexagramatic forward wave at x, and  S RSycN xHNSY^  is
+six times the value of the linear forward wave at  xH RSNSY^ .  Likewise, the hexagramatic
+reverse wave is expressed in terms of the linear reverse wave by the equation:
+     yyoo NE x F ExFS SRS−Z [74]
+and by rearranging terms we get:
+     yyoo NExF xEFS S R
+SZ H       [75]
+OU
+The hexagramatic complex wave is defined in the same manner as the linear and
+trigramatic complex waves, with the hex forward wave subtracted from the hex reverse
+wave as in equation [40] and  [54], and expressed in hexagramatic terms by:
+    yyy`o cExF ExF ExFSS S Z− [77]
+Using [7ë], [74], and [77] we can express the hexagramatic complex wave in terms of the
+linear complex wave as follows:
+yy y yoc o N c NE x F E x F ExF ExFSS SR SRS S−− −Z −    [76]
+or equivalently: yy y`o N c NEF ExF ExFS SRS Sx −Z −  [78]
+Factoring the right side of [78] gives:      y{ y y`o N c NEF ExF ExF }S SRSx −Z −  [79]
+Substituting the expression for the linear complex wave on the right hand side of
+equation [40], into [79]:
+y{ }` E x F linExFS SRS− Z   [60]
+then rearranging [60] we get: yx` E F lin x{ EF }S S R
+SZ H [61]
+Equation [61] shows that the value of the hexagramatic complex wave at x, is equal to six
+times the value of the linear complex wave at  xH RSNSY^ .   Replacing the x-term term in
+the  y ExF`N  expression of equation [43] with the expression  xH RSNSY^ , then substituting
+into [61] gives us the defining equation of the hexagramatic complex wave as follows:
+yE x F`
+yy
+x
+yx yx
+x
+rEiF fEiF
+fEiF
+rEiF Ei NF fEiF i
+fEiF
+x EFyyrEi NF fEiFS S R
+SZ− H H HHá
+!  
+"
+A## á! "A# á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh∗ H H
+H −ΔΔ
+Δ
+ΔΔ
+Δ [6ë]
+In this expression the subscript i is expressed as a function of x, using the process
+similar to that which produced equations [11] and [71].  In this case, since the x term has
+become  x H RSNS , the expression defining the bounding subscript i then becomes:
+    i xkZ H Zint RSNSY^ [63]
+Where subscript i is renamed as k to distinguish it from the linear and trigramatic wave
+expression subscripts shown in the defining wave equations.  Equation [63] defines
+subscript k as the rounded down integer value of the function  x H RSNS , thus establishing
+the boundary conditions for the hexagramatic line segment mapped by this function.
+OV
+As with the Trigramatic Complex Wave (TCW) expressed in [70], equation [6ë] expresses
+the Hexagramatic Complex Wave (HCW) as an expansion of the Linear Complex Wave
+(LCW) directly.  Similarly, the same result would be obtained if the linear forward and
+reverse waves had been expanded into the hexagramatic forward and reverse waves, and
+those results combined to form the hexagramatic complex wave.  With the linear [43],
+trigramatic [70], and hexagramatic [6ë] complex waves now defined mathematically and
+expressed graphically, we are now in a position to combine them to form the Tri-Level
+Complex Wave, or 384 number §data set¨.
+(3) The Combined Tri-Level Complex Wave
+Now that the three levels of TimeWave expression have been described and defined
+mathematically, we are now in a position to integrate these three levels into a single
+unitary system of expression.  The Tri-Level Complex Wave is seen as an integrated
+whole, and analogous to the I-Ching hexagram that functions as a holistic entity, but
+contains the individual expression of hexagram, trigram, and line (yin or yang).  In order
+to establish this tri-level expression mathematically, we combine the complex waves of
+the linear, trigramatic, and hexagramatic levels of expression.  The general equation
+expressing the summation of the three wave levels is written as follows:
+y ExF linExF triExF hexExFq ZH H [64]
+Substitutions in [64] for lin(x), tri(x), and hex(x) from equation [43], [70], and [6ë] give
+us:
+y ExF y ExF y ExF y ExFq` N ` P ` SZHH [65]
+and further substitutions from [43], [70], and [6ë] give us the defining expression for the
+Tri-Level Complex Wave:
+  yE x Fq
+yy
+x x yx yx
+x
+rEiF fEiF
+fEiF
+rEiF Ei NF fEiF i
+fEiF
+Ey y FrEi NF fEiFZ− HHá
+!  
+"
+A##
+á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh∗H H H
+H − H⋅⋅⋅ΔΔ
+Δ
+ΔΔ
+Δ
+        
+   H− H H
+H H Há
+!
+  
+"
+A
+## á
+! "
+A# á
+!
+  
+"
+A
+## H
+B
+Ch
+Dh
+E
+Fh
+Gh∗ H − H⋅⋅⋅Py y
+yy
+x
+xO
+P
+yx yx
+x
+rEjF fEjF
+fEjF
+rEjF Ej NF fEjF j
+fEjF
+EF rEj NF fEjF
+ΔΔ
+Δ
+ΔΔ
+Δ
+    H− H H
+H H Há
+!
+  
+"
+A
+## á
+! "
+A# á
+!  
+"
+A##
+BCh
+Dh
+EFh
+Gh∗ H
+H −Sy y
+yy
+x
+xR
+S
+yx yx
+x
+rEkF fEkF
+fEkF
+rEkF k
+rEk NF fEkF
+Ek NF fEkF
+fEkF
+EF
+ΔΔ
+Δ
+ΔΔ
+Δ  [67]
+PM
+Equation [67] is the defining equation for the Tri-Level Complex Wave.  This expression
+takes one from the individual elements of the linear complex wave, up to the trigramatic
+and hexagramatic complex waves, and finally to the tri-level complex wave.  Notice that
+the subscripts j for the trigramatic section, and  k for the hexagramatic section of
+equation [67] have replaced the subscript i in equations  [70] and [6ë], as they have been
+defined in equations [71] and [63].  We now have a complete and well-defined function
+for our Tri-Level Complex Wave, or data set.
+Equation [67] produces a tri-level wave number set that contains some negative values.
+The 384 number data set, on the other hand, is the set of positive real numbers in the
+domain  M PUQ≤≤x .   This means that part of the §raw¨ data set produced by equation
+[67] lies outside the y-value domain that is thought to be the proper expression of this
+waveform.  One procedure that is widely used for converting negative values of some
+arbitrary waveform, into positive values, is the use of the absolute value operator.  If one
+views this tri-level complex wave as some kind of information carrying signal, like an
+amplitude modulated radio wave, for example, then a valid procedure for processing such
+a signal is the application of the absolute value operator.  In the rf signal processing
+case, the received modulated-carrier waveform is passed through absolute value circuitry
+(rectifier) so that the negative values of the wave are converted to positive values.  This
+actually improves the signal to noise ratio of the carrier envelope, which is the
+information carrying modulation signal.  This §rectified¨ signal is then processed by a
+detector circuit that extracts the information carrying modulation wave from the carrier
+wave.  Although the tri-level wave and the radio wave are not strictly analogous, they
+appear similar enough to make a plausible argument for the application of the absolute
+value operator here.  This operation is expressed as:
+   
+yyat q ^_pZ [66]
+Where:  yat is the Data Wave that is graphed in Fig. 11, and defined as the absolute
+value of the Tri-Level Complex Wave as expressed in equation [63].  This number set is
+used as input data for the TimeWave Zero software, which performs an infinite series
+expansion that Meyer calls a fractal transform11, to generate the TimeWave viewed on
+the computer screen.
+Standard and Revised Data Set Comparisons
+With equation [63] and [64], and the graph in Fig. 11, we have completed this formalized
+development of the TWZ data set.  We are now in a position to compare these results
+with those of the standard development reported by McKenna and Meyer in the Invisible
+Landscape and the TimeExplorer manual, as well as address the issues raised by the
+Watkins Objection.
+Fig. 1ë is a graph of both the standard and revised data sets, and it shows some
+remarkable similarities as well as significant differences.  One interesting feature of this
+graph, is the nature of each wave at its respective endpoints.  Recall that the value of the
+PN
+wave at x   0 will be discarded because it is a duplicate or §wrap¨ of the value at x   384.
+This will not effect the relative values of the two waves at x   384, because they are both
+zero-valued at this endpoint.  However, the value of each wave at x   1 is not the same,
+with the standard wave having a value of 10 while the revised wave value is zero.
+Figure 11
+Why does this matter, you may ask, since there are many obvious differences between
+the two waves — what is the significance of this difference"  For the standard wave, it has
+been argued that the zero value at the end of the waveform implies some kind of
+singularity at the end of the process — or at the end of time.  This revised wave is
+implying, however, that there may be singularities at both ends of the continuum. This is
+Also an argument for a closed system that may be undergoing some kind of cyclic
+renewal process — perhaps each cycle expressing ever higher ordered states of complex
+form, or Novelty.
+There are concepts emerging from the field of quantum cosmology that may describe an
+analogous cyclic process.  This is theory in which universes are treated like quantum
+particles that inhabit a larger, or higher dimensional domain called a multiverse.  Michio
+Kaku1ë, a theoretical physicist and co-founder of string field theory, has described a
+process where universes emerge from the zero-point, or vacuum field, go through an
+evolutionary process, then perhaps return to the zero-point field at the end of the cycle.
+This cycle may then repeat itself, possibly with increased complexity and Novelty.  So
+could this be similar to the process that the TimeWave and Novelty Theory attempt to
+reveal"  Perhaps further investigation into the nature of the TimeWave will shed some
+light on these questions.
+
+PO
+Figure 1ë
+Another significant feature of Fig. 1ë is the apparent agreement of the two waves in the
+lower frequency domain.  Frequency content of any waveform expresses itself as
+variations in the rate of change of its value as the wave propagates in some realm, that
+could be either a space or time domain, or both.  So the slope of a waveform at any given
+point, or its general shape, can reveal frequency content (the magnitude and rate of
+specific underlying processes).  Examination of the wave pair in Fig. 1ë shows that there
+is a common lower frequency process occurring for each waveform.  The higher frequency
+processes appear as relatively shorter duration peaks riding upon the slower process.
+The lowest frequency process occurring in these waveforms can be seen by drawing an
+imaginary line between the highest of all the peaks as one moves over the domain of the
+waveforms.  Slightly higher frequency components can be seen by drawing that
+imaginary line over the peaks and valleys upon which the sharpest and shortest
+duration peaks ride.  The graphs do differ in the higher frequency domain as can be seen
+by the steeper slopes of the largest standard wave transitions.  This could very well be
+due to high frequency noise present in the standard data set because of the imbedded
+mathematical errors.
+The low frequency, or long duration processes, are those that may occur on the scale of
+millennia or even billions of years, whereas the higher frequency processes may occur on
+the scale of a human lifetime.  Could it be that the lowest frequency process is the
+signature of some creative principle at work, be it strange attractor, zero-point field, or
+eschaton.  Could this creative energy, be perturbing the fabric of space-time in such a
+way as to trigger the creation and conservation of higher ordered states — something like
+the gravitational energy of a passing nearby star triggering the formation of a comets
+from the Ort cloud"  Is this lowest frequency process then a kind of ground state, upon
+which all higher frequency processes express themselves"  Perhaps in time these
+questions will be answerable, although certainly not today.
+
+PP
+An obvious feature of Fig. 1ë that clearly shows in this graph, is the difference in the
+average wave value between standard and revised waves.  The average wave value for
+the standard wave is somewhat greater than the average value of the revised wave.  This
+difference in average wave value appears to be the result of differences in the higher
+frequency components of the wave pair, perhaps due to noise in the standard wave that
+is produced by the mathematical errors that are present.  These high frequency
+components of the standard wave show up as the steep peaks that rise well above the
+peaks in the revised wave.  In the Fourier analysis that follows, these large peaks appear
+as high frequency noise that adds randomness to the wave.  The impact of this difference
+on the final TimeWave, is to shift the average level of novelty upward (lower values)
+from that expressed by the standard wave.  In other words, the revised wave expresses a
+process with somewhat higher levels of novelty, than does the standard wave.  Since
+Novelty isn't a calibrated process, it's not possible to determine what the more
+§reasonable¨ level of Novelty would be.  All that can be expressed then, is relative
+Novelty.
+One final feature of Fig. 1ë that requires some discussion, is the correlation number at
+the top of the graph.  In order to determine and quantify the degree of interdependence,
+or inter-relatedness of the standard and revised waveforms, a mathematical operation
+called correlation was performed with these two number sets.  The number at the top of
+the graph is the result of that analysis — a value of 0.574.  A correlation of 1.0 would
+mean that the waveforms are identical, whereas a correlation of zero would indicate no
+functional relationship between the two.  Additionally, a correlation of —1 would indicate
+that the waveforms were mirror images of one another — a peak reflected by a trough etc.
+In this case a correlation of 0.574 indicates that these two waveforms show a significant
+level of interdependence, although far from identical.  This level of correlation could be
+considered likely for two number sets that share a common origin, as well as sharing
+many of the same developmental procedures.
+Data Wave and Random Number Set Comparisons
+One method for assessing the information carrying potential of the Data Wave, and
+convincing oneself that it is not a random process, is to compare it with a data set that
+has been randomly generated. Several such random wave sets were consequently
+produced to be compared with the revised and standard Data Wave number sets directly,
+and to also use as input to the TWZ software to generate random seeded TimeWaves.
+Fig. 13 is a graph of the revised Data Wave with a random wave set overlay, and it
+clearly shows that these number sets bear little resemblance to one another.  Correlation
+analysis of the two sets shows a correlation of 0.03, or essentially un-correlated as one
+would expect for any random number set.  Fig. 13 also appears to show that the revised
+Data Wave is a very different type of number set from the random wave set, and it
+appears to showing some kind of information carrying process.  Is this in fact the case, or
+does it just appear that way"
+Examination of the power spectra for the data and random waves shown in Figs. 1ë and
+13 can reveal something about the nature of these three waveforms and their
+PQ
+relationship. The conversion of time, or space domain waveforms into frequency domain
+waveforms (frequency spectrum or power spectrum) is performed using a mathematical
+operation called a Fourier transform.  With this method, a frequency spectrum can be
+produced, which can tell us how much power is contained in each of the frequency
+components (harmonics) of a given waveform, and thereby providing the frequency
+distribution of the wave power.  This distribution would typically be different for
+information carrying waveforms than for random, or noise signals.  The random, or noise
+signal spectrum is typically flat over the signal bandwidth, and often distinguishable
+from an information carrying signal spectrum that exhibits 
+N f (f   frequency) behavior.
+Figure 13
+Fourier transform operations were performed on the data sets shown in Figs. 1ë and 13,
+with the results shown in Fig. 14.  The top graph of Fig. 14 includes plots for the
+standard and revised Data Wave power spectra, while the bottom graph displays the
+Random Wave power spectrum.  The colored lines drawn through each of the spectra are
+power function curve-fits, that show the frequency roll-off characteristics of each wave.
+Notice that the two power spectra in the top graph exhibit frequency roll-off (power level
+decreases with increasing frequency), whereas the lower graph power spectrum exhibits
+a flat frequency response (power level is frequency independent).  This frequency roll-off
+is characteristic of information carrying signals, whereas the flat response is
+characteristic of noise or random signals.
+The revised data wave spectrum, shown in the top graph in green, is exhibiting the
+nearly perfect 
+N f frequency response that is typical for an information carrying
+waveform. On the other hand, the standard data wave power spectrum shown in blue,
+exhibits frequency roll-off, but with a flatter response that is not  N f .  In fact, the flatter
+
+PR
+Figure 14
+frequency response of the standard data wave is the likely result of high frequency noise
+that increases the power at the tail end of the spectrum and prevents a steeper roll-off.
+This is something that should be expected from the distorted standard data wave with
+imbedded mathematical errors, which would tend to add randomness to the wave.  The
+signature of such randomness can be seen in the Random Wave power spectrum, shown
+in the lower graph in red.  This plot shows the typically flat frequency response of a
+
+PS
+random, or noise signal with no information content.  Apparently, the graphs in Fig. 14
+are showing that the standard and revised data waves are definite information carrying
+waveforms, but that the distorted standard data wave has imbedded high frequency
+noise that flattens its response.  This is essentially what Figs. 1ë and 13 are showing as
+well.
+Standard, Revised, and Random Generated TimeWave Results
+(1) The TimeWave Zero Screen Set Comparisons
+Once the Data Wave, or 384 number data set has been generated, it becomes the input
+data for the TimeWave Zero software package.  As mentioned previously, the software
+performs what has been called a fractal transform, or expansion of the 384 data number
+set to produce the TimeWave viewed on the computer screen as a graph of Novelty.  In
+order for this fractal expansion to be performed properly, the software requires that the
+384 number data set shown in Fig. 10 be reversed, such that data point 384 becomes
+data point 1 and data point 0 is discarded (since it's a duplicate or wrap of data point
+384).
+Figure 15a
+
+PT
+Three separate data sets were used in order to generate the TimeWaves needed for
+comparison — the standard data set, the revised data set, and a random data set. The
+results of some of these TimeWave comparisons will be shown in the graphs that follow,
+beginning with the default TimeWave graphs that are included with the TimeExplorer
+software as pre-computed waveforms.
+Figs. 15a and 15b show the TimeWave that is stored by the software as Screen 1, and it
+covers the period between 194ë and ë01ë.  Fig. 15a shows both the TimeWave resulting
+from the standard data set on the left, and that for the revised data set on the right.  On
+the other hand, Fig. 15b is the TimeWave generated by the random data set, and it
+clearly bears little resemblance to the graphs of Fig. 15a.
+This is the TimeWave graph that McKenna has called §history's fractal mountain¨,
+because of its mountain-like shape.  There are several features to notice here, with the
+first being that these two plots have remarkably similar shapes — obviously not identical,
+but there is clearly a common dominant process at work.  Another common feature of
+significance shown in these two graphs, is that the major decent into Novelty (peak of the
+mountain) begins sometime in 1976.  Finally, as mentioned earlier, the TimeWave
+produced by the revised Data Wave number set, shows a higher average level of Novelty
+for this time period (lower values), than does the TimeWave produced by the standard
+
+PU
+Figure 15b
+data set.  This Novelty difference is the likely result of the standard wave distortion,
+caused by the imbedded mathematical errors that produce significant high frequency
+noise in the wave.  As shown in Fig. 14, the high frequency components of the revised
+data wave are lower than the standard wave by an order of magnitude.
+Fig. 17a shows the standard and revised TimeWave graphs for Screen 4 of the TWZ
+display.  Again, these two plots are quite similar in terms of their appearance, and seem
+to be showing evidence of some common underlying process.  The differences may be due
+to the fact that the standard number set produces more high frequency noise because of
+the imbedded errors in the number set. The correlation between these two graphs was
+Figure 17a
+found to be 0.631, not as high as Screen 1, but still a significant correlation nonetheless.
+On the other hand, the random data set TimeWave shown in Fig. 17b, shows very little
+correlation with either of the graphs in Fig. 17a.  This is expected, since random number
+sets are by definition, un-correlated with any other number set.
+A complete set of comparisons like those shown in Figs. 15 and 17 were performed on all
+the TimeWave Zero screen sets (Screens 1-10) with very similar results.  The correlation
+results for the TWZ Screen set comparisons ranged from a low of 0.63 to a high of 0.98
+
+PV
+with an average correlation of 0.87, showing that the standard and revised TimeWaves
+in this screen set were remarkably similar.  This was not the case for other TimeWaves
+that were examined, which will be shown later.  In other cases of TimeWave comparison,
+the differences between the standard and revised waves, appears to show that the
+revised TimeWave expresses a Novelty process having better alignment with known
+historical process  — something one would expect from a more precise formalization
+process.  More analysis is certainly in order, but the data thus far seems to make that
+case.
+Figure 17b
+(ë) Comparisons for Other Significant Historical Periods
+Several other TimeWave periods having historical significance were examined for
+comparison, but the two reported here are the periods from 1895-19ë5, and from 1935-
+1955.  The first period includes major advances in physics and technology, as well as a
+world warâ and the second period includes the development and use of nuclear weapons,
+as well as two major wars.  Fig. 16 is a graph of the TimeWave comparison for the 1895-
+
+QM
+19ë5 period, and again these plots are remarkably similar in form.  Several significant
+dates are marked with green and red arrows to signify Novel and Habitual phenomena.
+The first powered flight happens at Kittyhawk on December 16, 1903â followed by
+Einstein's Special Theory of Relativity (STR) on June 30, 1905â General Relativity in
+1915, and the World War I period of 1914-1918.  The events that would be considered
+novel (manned flight and breakthroughs in physics) all occur at Novelty troughs or
+Novelty descents.  The Habitual phenomenon (war), on the other hand, appears to drive
+what seems to be a very novel period, back into habit.  When both novel and habitual
+phenomenon are occurring simultaneously, they both influence the shape of the
+TimeWave.  WWI may have driven the wave further into habit than it did, if it weren't
+for the simultaneous occurrence of very novel phenomena.  For example, the work on the
+General Theory of Relativity occurs in the midst of World War I with its §same ©OLE¨
+habitual nature.  The more novel process of a significant advancement in scientific
+knowledge, actually appears to suppress what would be a major ascent into habit, and
+actually driving the wave into novelty troughs.
+Figure 16
+Notice that the standard TimeWave on the left doesn't show the regression into habit
+during the First World War — the revised TimeWave clearly does.  This is one case in
+which the revised TimeWave appears to provide a better description of the Novelty
+process than does the standard TimeWave.  However, this is something that should be
+expected for a process with a more precise and consistent mathematical model.
+
+QN
+Fig. 18 shows the 1915 time period, for which the two waves exhibit a substantial
+disagreement.  With the exception of a brief two-month period, the standard TimeWave
+shows a steady descent into Novelty.  The revised TimeWave, however, shows more of
+what one might expect for a planet embroiled in global conflict.  Additionally, the revised
+TimeWave shows several instances where the determined march into habit is either
+slowed or temporarily reversedâ and with the publication of the general theory in early
+1917, the level of Novelty becomes too great for the forces of habit, and the wave plunges.
+This figure provides a good example of how the standard and revised TimeWaves can
+exhibit behavioral divergence, and how this divergence tends to affirm the improved
+accuracy of the revised waveform.  Let us now take a look at another period that most of
+us are familiar with — the period that includes World War II, nuclear energy
+development, and the Korean War.
+Figure 18
+Figure 19 shows the standard and revised TimeWave comparison graphs for the period
+1935-1955, and there are obvious similarities and clear differences between the two
+waves.  Both graphs show that WWII begins and ends during steep ascents into habit,
+but they describe somewhat diverging processes, for much of the middle period of the
+war.  The revised TimeWave shows that a very novel process is apparently at work for
+much of the period of the war.  The standard TimeWave does show novel influences, but
+it is neither as consistent nor dramatic as for the revised TimeWave.  Some very potent
+novel process seems to be occurring during much of the war period, and that process may
+be suppressing a major ascent into habit that might otherwise be happening.   Could this
+novel process be the development of nuclear science and technology, eventually leading
+
+QO
+to the production and use of nuclear weapons"  That may be an offensive notion, but let's
+take a closer look at it.
+The development of nuclear science is really about becoming more aware and
+knowledgeable of a process that powers the sun and the stars — more aware of just how a
+very powerful aspect of nature works.  What one then does with such knowledge is a
+different process entirely — and largely a matter of consciousness and maturity.  As we
+can see from the revised TimeWave graph, the moment that this knowledge is converted
+to weapons technology — the nuclear explosion at Trinity Site in New Mexico — the wave
+begins a steep ascent into habit.
+The use of this awesome power against other human beings in Hiroshima and Nagasaki
+occurs shortly after the test at Trinity Site, and occurs on a very steep ascending slope of
+habit.  Perhaps the process of becoming more aware of nature, and ourselves — is very
+novel indeed.  It is the sacred knowledge of the shaman, who returns from an immersion
+into an aspect of nature, with guidance or healing for her or his people.  We seem to have
+lost the sense of sacred knowledge with its accompanying responsibility, somewhere
+along the way.  Perhaps it is time to regain that sense, and reclaim responsibility for our
+knowing.
+Figure 19
+The revised TimeWave of Fig. 19 also shows the period of the Korean war as a very steep
+ascent into habit, although something occurring early in 195ë did momentarily reverse
+the habitual trend.
+
+QP
+Correlation Data and TimeWave Comparisons
+Correlation analysis was performed for all the data sets compared in this report, as well
+as the remaining eight TWZ screen sets not shown here, and selected time periods.  This
+type of analysis allows us to examine the relationship between data sets, and estimate
+their degree of interdependence — i.e. how similar their information content is.  The
+results of these analyses are shown graphically in Fig. ë0, and they include the ten
+TimeWave screens included with the TWZ software, nine selected historical windows,
+and the 384 number data sets.  In all cases shown, the revised and random data sets are
+being correlated (compared) with the standard data set.  Since any number set correlated
+with itself, has a correlation coefficient of one, the blue line at the top of the graph
+represents the standard data self-correlation.
+Recall that a correlation of 1 signifies number sets that have identical information
+content, a correlation of zero signifies no common information content, and a correlation
+of —1 means that the number sets information content exhibit §mirror image¨ behavior —
+wave peaks to wave valleys etc.  The green line in the graph shows the degree of
+correlation between the revised waveform and the standard waveform, for each of the
+separate TimeWaves that were examined.  The red line shows the correlation level
+between waves generated by the random seeded data sets, and those generated by the
+standard data set. The first point of each line, is the correlation coefficient for each of the
+384 number data sets examined — random, revised, and standard data sets.
+Figure ë0
+
+QQ
+The first feature to notice about the revised and standard data set correlations shown in
+Fig. ë0, is the fact that the revised 384 number data set shows a correlation with the
+standard number set of about 70ø - a comparison that is shown in Fig. 1ë.  This is a
+significant cross-linking of information content, but something that one might expect for
+number sets with a common base and very similar developmental procedures.  The next
+feature of significance is the fact that the correlation between the revised and standard
+TimeWaves, for all ten TWZ screen sets, is better than 60ø and as high as 98ø, showing
+a very high level of interdependence.  The time periods represented by these ten
+TimeWave screens, ranges from 4 years to 37,000 years, which is labeled on the graph.
+The duration of these TimeWave periods may have a bearing on the level of correlation,
+as we shall see in a moment.
+Beginning with the period 1895-19ë5, the graph shows more scatter in the correlation
+between standard and revised data sets, which ranges from about 98ø down to 8ø, with
+one anti-correlation of —95ø.  Notice that the correlation appears worse for very short
+time periods, one to two months or so.  One possible explanation is that the very short
+time period TimeWaves are generated by a very few data points — in other words a low
+wave sampling frequency or rate.  A small, and under-sampled input data set would add
+a higher level of noise to the wave signal, and consequently produce the higher data
+scatter observed.  The sampling theorem, from information theory, states that aliasing
+(noise generation) begins to occur when the signal sampling rate becomes less than twice
+the highest frequency component of the sampled signal.  This is certainly something that
+may be occurring in the mathematics of TimeWave generation.
+Additionally, as mentioned previously, this difference could be the consequence of having
+an improved model of the process.  It is important to remember through all of this
+comparison analysis, that the standard data set is generated by a process with imbedded
+flaws - not enough to destroy the information content of the wave signals, but enough to
+cause some distortion of that information content.  This correlation analysis is
+interesting, primarily because it leaves the standard TimeWave intact, more or less — but
+the important point to remember is that even with low correlation the revised data set
+appears to produce a better TimeWave.
+It is probable that the variations we observe in Fig. ë0 are the result of both the
+distortion of the information content of the 384 number data set, as a result of
+mathematical errors, and the low data wave sampling rate that occurs for short duration
+TimeWaves (an unexamined but plausible thesis).  It is also important to point out here,
+that when we do see significant differences in the TimeWaves generated by the standard
+and revised data sets, those differences have revealed a revised TimeWave of greater
+accuracy.  However, it is important that we examine a significant variety of additional
+TimeWave periods, to gather more statistics on the functioning of the revised waveâ but
+the data in hand so far, seem to be suggesting that the mathematical formalization of the
+data set generating process, does improve the TimeWave accuracy.
+Another significant feature of the revised data correlation plot in Fig. ë0 that should be
+mentioned here, is the fact that the correlation coefficient for the 1915 period is nearly   -
+1, signifying an anti-correlation or mirror image relationship between the waves.  This is
+QR
+the TimeWave comparison that is shown if Fig. 18.  If one were to place an imaginary
+two-sided mirror between the standard and revised TimeWave graphs, then the
+reflection on either side of the mirror would closely resemble the wave that is on the
+other side — hence the description of anti-correlation as a mirror image relationship.
+Also notice, that a green dotted line marks the average of all the standard2revised wave
+correlations at about 60ø.
+The red line of Fig. ë0 shows the correlation of the random number generated waves,
+with the standard data set.  By definition, the random data sets should show little or no
+correlation with either the standard or revised data sets, nor with any other random
+number set.  In several cases in Fig. ë0, this turns out to be true, but there are also
+several cases in which the random set correlation is not near zero, as one would expect.
+In general, the red line plot of Fig. ë0 shows a much lower level of correlation with the
+standard number set than does the revised set — as expected.  Each data point on the red
+line, however, is actually an average of either two, or seven random number set
+correlations.  In other words, either two or seven random number correlations were
+averaged to produce each point on the red line graph.  It turns out that most of the
+sixteen correlation points produced by averaging only two random sets, have much more
+scatter than do the four points produced by averaging seven random set correlations.
+The 384 number random data set, and the periods 1895-19ë5, 1905, and 1915, were all
+produced by averaging seven random set correlations.  The violet dotted line running
+through the random number set correlations, is the average correlation level for all the
+random sets shown, and it shows a very low average correlation of about 5ø.
+It is also possible that the same process proposed for producing the larger correlation
+scatter of the revised data set, could be at work for the random data sets — i.e. short
+duration time periods with low sampling frequencies, could be causing data scatter due
+to noise.  If a small number of the 384 data file points are used to generate a short period
+TimeWave, then there is a much higher probability of correlation between the random
+sets and the TimeWave number sets.  Without further investigation, however, this is a
+speculative, if plausible thesis.
+The graphs of Fig. ë0 do show that the standard and revised data sets and their
+derivative TimeWaves are remarkably well correlated.  In the regions where the
+correlation weakens, or breaks down entirely, the revised TimeWave appears to show a
+Novelty process that is in closer agreement with known historical process.  In addition,
+the plots in Fig. ë0 may be revealing a process whereby short period TimeWaves produce
+sampling noise that weakens the correlation.  This data supports the view, that the
+information content of the standard TimeWave is somewhat distorted, but not destroyedâ
+and suggests that the revised TimeWave and its piecewise linear function is able to
+correct this distortion, and provides an improved expression of the Novelty process.
+Concluding Remarks
+The development of the 384 number data set from the set of First Order of Difference
+(FOD) integers has been expressed as a process that is piecewise linear in nature.  This
+process involves the combination and expansion of straight-line segments, which can be
+QS
+expressed mathematically as a piecewise linear function.  The standard development has
+been described by McKenna and Meyer in the TimeWave Zero documentation and in
+other reports.  But this process includes a procedural step called the §half twist¨, that is
+not consistent with the structure of piecewise linear mathematicsâ and consequently
+produces a distortion of the FOD information content.  Watkins elaborated on this in
+some detail, in his well-documented expose on the nature of the half twist, in which he
+described the distortions and inconsistencies involved.  He then concluded that this
+distortion would render the TimeWave meaningless, as a realistic graphical depiction of
+the Novelty process as had been described by McKenna.  I maintain that this conclusion
+was premature, and apparently incorrect.
+The revised development of the 384 number data set includes the use of mathematics that
+correctly expresses the piecewise linear development process, and therefore produces an
+undistorted expansion of the FOD number set.  The TimeWave that results from this
+expansion process, is then an accurate reflection of the FOD number set, provided the set
+can be described or modeled by a piecewise linear function.  The piecewise linear function
+described here, may only be an approximation to some more complex function that has
+yet to be found.  In fact, I would argue that this is quite likely for a phenomenon or
+process of this nature, which further study may shed some light on. If we assume that
+the revised TimeWave is a reasonably accurate reflection of the information content of
+the FOD number set, then the standard TimeWave should have a degree of accuracy
+proportional to its degree of correlation with the revised TimeWave.  As we have seen
+thus far, these two TimeWaves show an average correlation of about 60ø, so that the
+standard wave has an average accuracy of about 60ø when compared with the revised
+wave.  However, we have also seen this correlation as high as 98ø, or as low as 7ø, with
+one case of a mirror image or anti-correlation of —0.94.
+This work has served to clarify and formalize the process by which the 384 number
+TimeWave data set is generated.  This has been done by showing that the process is
+describable within the framework of piecewise linear mathematics in general, and vector
+mathematics in particular.  Each step has been delineated and formalized
+mathematically, to give the process clarity and continuity.  The formalized and revised
+data set serves as the foundation of the TimeWave generated by the TimeWave Zero
+software, which is viewed as a graphical depiction of a process described by the ebb and
+flow of a phenomenon called Novelty.  Novelty is thought to be the basis for the creation
+and conservation of higher ordered states of complex form in nature and the universe.
+The results reported here make no final claims as to the validity of the TimeWave as it is
+expressed by Novelty Theory, nor does it claim that the current TimeWave is the best
+description of this Novelty process.  It does show that the proper mathematical treatment
+of the FOD number set, produces a TimeWave that appears to be more consistent with
+known historical process.  This consistency is general, however, and more work needs to
+be done to examine the specific reflections or projections that the TimeWave may be
+revealing.  If Novelty Theory is a valid hypothesis, reflecting a real phenomenon in
+nature, then one would expect that it is verifiable in specific ways.
+It has also seemed appropriate to examine some of the steps in this wave development
+process in terms of their correspondence with elements of philosophy and science.  The
+QT
+flow of Yin and Yang energy reflected in the expression of the forward and reverse bi-
+directional waves, for example, finds philosophical correspondence in a natural cycle of
+life-death-rebirth, or in the process of the shamanic journey — immersion, engagement,
+and return.  Correspondence can also be found in science, in the fields of cosmology,
+astronomy, astrophysics, and quantum physics — the life cycles and motion of heavenly
+bodies, quarks, and universesâ the harmonic and holographic nature of light and wave
+mechanicsâ and the cyclic transformation of matter to energy, and energy to matter.  The
+reflection of all natural phenomena and processes over the continuum of existence, from
+the smallest scales up to the largest scales, must surely include whatever process is
+occurring in the I-Ching as well.  The question is, are we are clever and conscious enough
+to decipher and express it correctly and appropriately"
+Acknowledgements
+I would like to thank qerence jchenna, for bringing this intriguing and provocative notion
+into the collective, and for the courage and foresight shown, by his willingness to open
+himself and his ideas to scrutiny and boundary dissolution.  If there is any relevance or
+meaning to be found in the TimeWave or Novelty Theory, then it is surely something that
+is larger than he, or any of usâ and it is also something that is properly in the domain of
+all human experience, with each of us a witness, participant, and contributor.
+I would also like to express my thanks and appreciation to jathew tatkins for his work in
+exposing the mathematical inconsistencies, vagaries, and procedural errors of the
+standard TimeWave data set development, and challenging a theory that may have
+become far too sedentary and inbred for its own good.  Whatever the final outcome of this
+endeavor of Novelty Theory, he has set the enterprise on its proper course of open and
+critical inquiry.
+I am also greatly indebted to meter jeyer for his skill and foresight in creating a TWZ
+software package that is flexible, accessible, and friendly to the serious investigator.
+Without his DOS version of TimeWave Zero software, this work would have been much
+more difficult if not impossible.  He has created a software package that makes these
+notions realistically testable, in a relatively straightforward manner.  This made it
+possible for me to examine the effects of the revised data set on the TimeWave itself, as
+well as facilitating the examination of the detailed structure of the wave in work to
+follow.
+My thanks also to aan ievy for his offer to publish this work on his Levity
+ site, as well as
+hosting an upcoming TimeWave mathematical annex to Novelty Theory.  I want also to
+acknowledge _rian `rissey at Blue Water Publishing for his help in integrating the new
+process into the TimeWave Zero software packages and documentation.
+                                               
+N
+ `omputer poftware program written by jeyer and othersI based on a  mathematical relationship exhibited by the fJ
+`hingI  formulated and reported by qK jchenna and aK jchennaI  the fnvisible iandscapeI earper pan cranciscoI NVVPI
+pK NON
+O
+ qK jchennaI the fnvisible iandscapeI pK NQM
+P
+ jK tatkinsI ^utopsy for a jathematical eallucination I qerence jchenna’s eyperborea at wwwKlevityKcom
+QU
+                                                                                                                                                                
+Q
+ qK jchennaI qime bxplorer janualI pSMI the fnvisible iandscapeI ppK NQMJNQO
+R
+ mK jeyerI  httpWLLwwwKmagnetKchLserendipityLtwzLkwsKhtml
+S
+ aeltamointI fncKI OO iower oagsdale arKI jontereyI `^ VPVQMI  EQMUF SQUJQMMM
+T
+ jicrosoft `orpKI lne jicrosoft tayI oedmondI t^ VUMRO
+U
+ jchennaI qimebxplorer janualI mmK SMJSPI  httpWLLwwwKlevityKcomLeschatonLwaveexplainKhtml
+V
+ eK_K ^ndersonI ^nalytic deometry with sectorsI pTNI jc`utchan mublishing `orpKI _erkeleyI `aK NVSS
+NM
+ qK jchennaI qimebxplorer software manualI ppK SOJSP
+NN
+ mK jeyerI qimebxplorer software manualI ppK URJVN
+NO
+ jK hakuI that eappened _bclob the _ig _ang\ I ^stronomyI jay NVVSI ppK PQJQN
+xgohn pheliakz  sheliak]dsrtKcom
+xqerence jchennaz  syzygy]ultraconnectKcom
+xreturn to ievityz  httpWLLwwwKlevityKcomLeschatonL
+cilenameW jathtave maperff
+airectoryW aWyadQyqtw ciles
+qemplateW `Wymrogram cilesyjicrosoft
+lfficeyqemplatesykloj^iKalq
+qitleW aelineationI ppecificationI and cormalization of the qtw
+aata pet deneration mrocess J mhilosophicalI mroceduralI and jathematical
+pubjectW
+^uthorW gohn pheliak
+heywordsW
+`ommentsW
+`reation aateW NNLNNLVT VWRM mj
+`hange kumberW O
+iast paved lnW NNLNNLVT VWRM mj
+iast paved _yW gohn pheliak
+qotal bditing qimeW N jinute
+iast mrinted lnW NNLNNLVT VWRN mj
+^s of iast `omplete mrinting
+kumber of magesW QU
+kumber of tordsW NPIUMO EapproxKF
+kumber of `haractersW TUISTO EapproxKF
