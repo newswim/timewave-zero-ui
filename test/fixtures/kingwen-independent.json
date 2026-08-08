@@ -1,0 +1,391 @@
+{
+  "source": "https://en.wikipedia.org/wiki/List_of_hexagrams_of_the_I_Ching",
+  "retrieved": "2026-08-08",
+  "note": "binary is the six lines bottom-to-top, 1 = yang (solid), 0 = yin (broken); derived from the article's inner (lower) + outer (upper) trigram symbols (U+2630-U+2637), each expanded bottom-to-top; anchor-verified with kw 11 Tai = 111000 and kw 12 Pi = 000111. pinyin/english are the article's primary name and first gloss.",
+  "hexagrams": [
+    {
+      "kw": 1,
+      "binary": "111111",
+      "pinyin": "qián",
+      "english": "Force"
+    },
+    {
+      "kw": 2,
+      "binary": "000000",
+      "pinyin": "kūn",
+      "english": "Field"
+    },
+    {
+      "kw": 3,
+      "binary": "100010",
+      "pinyin": "zhūn",
+      "english": "Sprouting"
+    },
+    {
+      "kw": 4,
+      "binary": "010001",
+      "pinyin": "méng",
+      "english": "Enveloping"
+    },
+    {
+      "kw": 5,
+      "binary": "111010",
+      "pinyin": "xū",
+      "english": "Attending"
+    },
+    {
+      "kw": 6,
+      "binary": "010111",
+      "pinyin": "sòng",
+      "english": "arguing"
+    },
+    {
+      "kw": 7,
+      "binary": "010000",
+      "pinyin": "shī",
+      "english": "Leading"
+    },
+    {
+      "kw": 8,
+      "binary": "000010",
+      "pinyin": "bǐ",
+      "english": "Grouping"
+    },
+    {
+      "kw": 9,
+      "binary": "111011",
+      "pinyin": "xiǎo xù",
+      "english": "Small Accumulating"
+    },
+    {
+      "kw": 10,
+      "binary": "110111",
+      "pinyin": "lǚ",
+      "english": "Treading"
+    },
+    {
+      "kw": 11,
+      "binary": "111000",
+      "pinyin": "tài",
+      "english": "Pervading"
+    },
+    {
+      "kw": 12,
+      "binary": "000111",
+      "pinyin": "pǐ",
+      "english": "Obstruction"
+    },
+    {
+      "kw": 13,
+      "binary": "101111",
+      "pinyin": "tóng rén",
+      "english": "Concording People"
+    },
+    {
+      "kw": 14,
+      "binary": "111101",
+      "pinyin": "dà yǒu",
+      "english": "Great Possessing"
+    },
+    {
+      "kw": 15,
+      "binary": "001000",
+      "pinyin": "qiān",
+      "english": "Humbling"
+    },
+    {
+      "kw": 16,
+      "binary": "000100",
+      "pinyin": "yù",
+      "english": "Providing-For"
+    },
+    {
+      "kw": 17,
+      "binary": "100110",
+      "pinyin": "suí",
+      "english": "Following"
+    },
+    {
+      "kw": 18,
+      "binary": "011001",
+      "pinyin": "gǔ",
+      "english": "Correcting"
+    },
+    {
+      "kw": 19,
+      "binary": "110000",
+      "pinyin": "lín",
+      "english": "Nearing"
+    },
+    {
+      "kw": 20,
+      "binary": "000011",
+      "pinyin": "guān",
+      "english": "Viewing"
+    },
+    {
+      "kw": 21,
+      "binary": "100101",
+      "pinyin": "shì kè",
+      "english": "Gnawing Bite"
+    },
+    {
+      "kw": 22,
+      "binary": "101001",
+      "pinyin": "bì",
+      "english": "Adorning"
+    },
+    {
+      "kw": 23,
+      "binary": "000001",
+      "pinyin": "bō",
+      "english": "Stripping"
+    },
+    {
+      "kw": 24,
+      "binary": "100000",
+      "pinyin": "fù",
+      "english": "Returning"
+    },
+    {
+      "kw": 25,
+      "binary": "100111",
+      "pinyin": "wú wàng",
+      "english": "Without Embroiling"
+    },
+    {
+      "kw": 26,
+      "binary": "111001",
+      "pinyin": "dà xù",
+      "english": "Great Accumulating"
+    },
+    {
+      "kw": 27,
+      "binary": "100001",
+      "pinyin": "yí",
+      "english": "Swallowing"
+    },
+    {
+      "kw": 28,
+      "binary": "011110",
+      "pinyin": "dà guò",
+      "english": "Great Exceeding"
+    },
+    {
+      "kw": 29,
+      "binary": "010010",
+      "pinyin": "kǎn",
+      "english": "Gorge"
+    },
+    {
+      "kw": 30,
+      "binary": "101101",
+      "pinyin": "lí",
+      "english": "Radiance"
+    },
+    {
+      "kw": 31,
+      "binary": "001110",
+      "pinyin": "xián",
+      "english": "Conjoining"
+    },
+    {
+      "kw": 32,
+      "binary": "011100",
+      "pinyin": "héng",
+      "english": "Persevering"
+    },
+    {
+      "kw": 33,
+      "binary": "001111",
+      "pinyin": "dùn",
+      "english": "Retiring"
+    },
+    {
+      "kw": 34,
+      "binary": "111100",
+      "pinyin": "dà zhuàng",
+      "english": "Great Invigorating"
+    },
+    {
+      "kw": 35,
+      "binary": "000101",
+      "pinyin": "jìn",
+      "english": "Prospering"
+    },
+    {
+      "kw": 36,
+      "binary": "101000",
+      "pinyin": "míng yí",
+      "english": "Darkening of the Light"
+    },
+    {
+      "kw": 37,
+      "binary": "101011",
+      "pinyin": "jiā rén",
+      "english": "Dwelling People"
+    },
+    {
+      "kw": 38,
+      "binary": "110101",
+      "pinyin": "kuí",
+      "english": "Polarising"
+    },
+    {
+      "kw": 39,
+      "binary": "001010",
+      "pinyin": "jiǎn",
+      "english": "Limping"
+    },
+    {
+      "kw": 40,
+      "binary": "010100",
+      "pinyin": "jiě",
+      "english": "Taking-Apart"
+    },
+    {
+      "kw": 41,
+      "binary": "110001",
+      "pinyin": "sǔn",
+      "english": "Diminishing"
+    },
+    {
+      "kw": 42,
+      "binary": "100011",
+      "pinyin": "yì",
+      "english": "Augmenting"
+    },
+    {
+      "kw": 43,
+      "binary": "111110",
+      "pinyin": "guài",
+      "english": "Displacement"
+    },
+    {
+      "kw": 44,
+      "binary": "011111",
+      "pinyin": "gòu",
+      "english": "Coupling"
+    },
+    {
+      "kw": 45,
+      "binary": "000110",
+      "pinyin": "cuì",
+      "english": "Clustering"
+    },
+    {
+      "kw": 46,
+      "binary": "011000",
+      "pinyin": "shēng",
+      "english": "Ascending"
+    },
+    {
+      "kw": 47,
+      "binary": "010110",
+      "pinyin": "kùn",
+      "english": "Confining"
+    },
+    {
+      "kw": 48,
+      "binary": "011010",
+      "pinyin": "jǐng",
+      "english": "Welling"
+    },
+    {
+      "kw": 49,
+      "binary": "101110",
+      "pinyin": "gé",
+      "english": "Skinning"
+    },
+    {
+      "kw": 50,
+      "binary": "011101",
+      "pinyin": "dǐng",
+      "english": "Holding"
+    },
+    {
+      "kw": 51,
+      "binary": "100100",
+      "pinyin": "zhèn",
+      "english": "Shake"
+    },
+    {
+      "kw": 52,
+      "binary": "001001",
+      "pinyin": "gèn",
+      "english": "Bound"
+    },
+    {
+      "kw": 53,
+      "binary": "001011",
+      "pinyin": "jiàn",
+      "english": "Infiltrating"
+    },
+    {
+      "kw": 54,
+      "binary": "110100",
+      "pinyin": "guī mèi",
+      "english": "Converting the Maiden"
+    },
+    {
+      "kw": 55,
+      "binary": "101100",
+      "pinyin": "fēng",
+      "english": "Abounding"
+    },
+    {
+      "kw": 56,
+      "binary": "001101",
+      "pinyin": "lǚ",
+      "english": "Sojourning"
+    },
+    {
+      "kw": 57,
+      "binary": "011011",
+      "pinyin": "xùn",
+      "english": "Ground"
+    },
+    {
+      "kw": 58,
+      "binary": "110110",
+      "pinyin": "duì",
+      "english": "Open"
+    },
+    {
+      "kw": 59,
+      "binary": "010011",
+      "pinyin": "huàn",
+      "english": "Dispersing"
+    },
+    {
+      "kw": 60,
+      "binary": "110010",
+      "pinyin": "jié",
+      "english": "Articulating"
+    },
+    {
+      "kw": 61,
+      "binary": "110011",
+      "pinyin": "zhōng fú",
+      "english": "Center Returning"
+    },
+    {
+      "kw": 62,
+      "binary": "001100",
+      "pinyin": "xiǎo guò",
+      "english": "Small Exceeding"
+    },
+    {
+      "kw": 63,
+      "binary": "101010",
+      "pinyin": "jì jì",
+      "english": "Already Fording"
+    },
+    {
+      "kw": 64,
+      "binary": "010101",
+      "pinyin": "wèi jì",
+      "english": "Not Yet Fording"
+    }
+  ]
+}

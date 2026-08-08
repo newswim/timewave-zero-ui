@@ -2,7 +2,7 @@
 
 Output of Peter Meyer's original timewave C program
 (`reference/original-c/twz-generator.c`, compiled locally with clang on
-macOS, wave factor 64), used by `test/validate.mts` as ground truth.
+macOS, wave factor 64), used by `test/engine.test.mts` as ground truth.
 
 | File | Command | Coverage |
 |---|---|---|

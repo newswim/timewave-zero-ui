@@ -43,9 +43,20 @@ rotated 180°, except the eight palindromic hexagrams (1, 2, 27, 28, 29,
 30, 61, 62), whose partners are line-complements. ✓ 48 even / 16 odd
 differences — exactly 3:1. ✓ The odd values are fourteen 3s and two 1s
 (the single-line transitions are 52→53 and 60→61); no value 5 occurs.
+✓ All 64 line-patterns verified against an independently fetched second
+source ([test/fixtures/kingwen-independent.json](../test/fixtures/kingwen-independent.json),
+from Wikipedia's hexagram list) — exact match, names differing only in
+accepted romanization variants (chù/xù, hé/kè, jiě/xiè).
 McKenna reports a ~27,000-sequence Monte Carlo giving 1-in-3770 odds
-for these properties in comparable random sequences (unreplicated here
-— a Phase 2 target).
+for these properties in comparable random sequences — **replicated
+(2026-08-08)**: [scripts/montecarlo.mts](../scripts/montecarlo.mts)
+(seeded, one million trials under each of two sampling models) puts the
+joint rate between 1-in-660 (lenient closure reading) and **1-in-7,246**
+(strict Sheliak-canonical closure on the King Wen pair-permutation
+model). Since his figure rests on just 4 hits (95% CI roughly
+1-in-2,600 to 1-in-25,000), the strict reading lands *inside* his error
+bars: one of the few checkable quantitative claims McKenna ever made,
+and it checks out to within its own uncertainty.
 
 ### From FOD to the 384 numbers
 
@@ -69,9 +80,53 @@ The output is Table 2 of McKenna's essay: 384 integers beginning
 `0,0,0,2,7,4,3,2,6,8,13,5,26,25,24,…` ✓ **Verified identical to the
 Kelley set shipped in Meyer's software** (`DATA.TW1`), digit for digit.
 
-Reproducing this pipeline in code — with the twist (Kelley), without it
-(Watkins), and per Sheliak's vector formalization — is **Phase 2**; the
-recipe texts are in [../reference/](../reference/).
+**Phase 2 result (2026-08-08): the pipeline is implemented and the
+numbers are now derived, not transcribed** — [src/derivation.mts](../src/derivation.mts),
+proven in [test/derivation.test.mts](../test/derivation.test.mts) and
+independently re-verified by an adversarial pass (fresh scripts, plus a
+perturbation test proving the outputs are genuine functions of the
+hexagram data):
+
+- **The closed formula** (Watkins' condensation, printed identically in
+  his Autopsy and in Ian Bell's *McKenna's TimeWave Examined*), over
+  the cyclic FOD `h` (`h[0]=h[64]=3`), for k = 0…383:
+  `w[k] = |s₁·L(k) + 3·s₃·T(k) + 6·s₆·X(k)| + |b(k)|`, where
+  `L(k) = h[k−1] − h[k−2] + h[−k] − h[1−k]` (T and X the same shape at
+  k/3 and k/6), `b(k) = (9−h[−k]−h[k−1]) + 3·(9−h[−k/3]−h[k/3−1]) +
+  6·(9−h[−k/6]−h[k/6−1])`, and the **half twist is exactly the three
+  alternating-sign factors** `s₁=(−1)^⌊(k−1)/32⌋`, `s₃=(−1)^⌊(k−3)/96⌋`,
+  `s₆=(−1)^⌊(k−6)/192⌋` on the skew terms (the divergence term is never
+  twisted).
+- **Watkins set: exact.** The formula *without* the sign factors
+  reproduces `sets.watkins` at 384/384.
+- **Kelley set: 383/384 — one unrecorded anomaly.** *With* the sign
+  factors, the formula reproduces the shipped set everywhere except
+  index 119: every historical copy (`DATA.TW1` and McKenna's published
+  Table 2, which are identical) reads **22**, but the formula gives
+  **32** (the untwisted value there is 20). No source acknowledges this
+  point. Either a transcription/computation error from the 1970s has
+  propagated for fifty years, or the closed formula deviates from the
+  original stepwise procedure at exactly one of 384 points.
+  `deriveKelley` defaults to reproducing the shipped artifact
+  bit-for-bit and documents the deviation (`KELLEY_DISCREPANCY`).
+- **Sheliak set: 382/384.** His construction was recovered from the
+  decoded 1998 paper (whose equation-font cipher was cracked — capitals
+  M…V encode digits 0…9): forward wave through the FOD points; reverse
+  wave `r(x) = 9 − f(63−x)`; linear complex wave `r − f`, interpolated
+  and tiled ×6 across 384; trigrammatic `3·lin((x+2)/3)`; hexagrammatic
+  `6·lin((x+5)/6)`; sum, absolute value, reverse for storage. This
+  reproduces `sets.sheliak` everywhere except indices 63 and 187
+  (construction 34 and 8 vs shipped 19 and 2); every tested variant is
+  drastically worse (≥324 diffs), so these two points are either
+  Meyer-era data errors or a subtlety of Sheliak's own numerics
+  (`SHELIAK_DISCREPANCIES`).
+- **The comma bug in `datapoints-watkins.c`, resolved.** Line ~106 of
+  the reference C file contains a comma operator that silently discards
+  the 6× divergence component; compiled as-is it matches *no*
+  historical set. Both published sources include the term, and with `+`
+  restored the formula works — the comma is a transcription typo. (The
+  file also retains the twist factors despite its "without the
+  half-twist" comment; it needs both fixes to produce the Watkins set.)
 
 ### The four number sets
 
@@ -168,6 +223,9 @@ eye-fit correlations, Eurocentric event selection, chronology errors
 | This repo | Derived from |
 |---|---|
 | `src/timewave.mts` | `twz-generator.c` (Meyer, public domain, via kl4yfd/timewave_z3r0) |
+| `src/derivation.mts` | Watkins' closed formula (Autopsy / Ian Bell) + Sheliak's 1998 construction, verified against `DATA.TW1–3` |
+| `test/*.test.mts` | Vitest suite (206 tests): oracle fidelity, King Wen structure + independent fixture, derivation exactness, UI math |
+| `scripts/montecarlo.mts` | McKenna's Monte Carlo experiment, replicated (seeded, 2 sampling models, 1M trials each) |
 | `data/numbersets.json` | `DATA/DATA.TW1–4` (same source) |
 | `data/kingwen.json` | Standard King Wen order; structure validated against McKenna's claimed properties + Wikipedia's King Wen article ✓ |
 | `test/oracle/*.csv` | Output of the original C, compiled locally (clang, macOS) |
@@ -175,12 +233,18 @@ eye-fit correlations, Eurocentric event selection, chronology errors
 
 ## Open questions / next research targets
 
-1. Replicate the 384-derivation pipeline (Phase 2) and McKenna's
-   1-in-3770 Monte Carlo claim.
-2. The exact Kelley "half twist" recipe end-to-end — Watkins' PDF
-   (`McKenna's TimeWave Examined.pdf` in the kl4yfd repo) has the full
-   formula; needs OCR-quality extraction.
-3. The Huang Ti hexagram sequence's identity and provenance.
+1. ~~Replicate the 384-derivation pipeline and the Monte Carlo claim~~
+   — **done 2026-08-08**; see "Phase 2 result" above. (The half-twist
+   recipe question is also closed: it is the three alternating-sign
+   factors, established numerically and via Watkins/Bell.)
+2. **The three anomalous points** — Kelley index 119 (shipped 22 vs
+   computed 32) and Sheliak indices 63/187: check any surviving
+   TimeExplorer-era printouts, and consider asking Peter Meyer directly
+   (he still maintains fractal-timewave.com) whether data-set errata
+   are known.
+3. The Huang Ti hexagram sequence's identity and provenance — its FOD
+   would let `deriveWatkins` reproduce `DATA.TW4` and close the loop on
+   all four sets.
 4. McKenna's *own* claimed historical correlations, from lecture
    recordings and the TWZ manual's example screens — the future
    "McKenna's readings" data layer, with citations per event.

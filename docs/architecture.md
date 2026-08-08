@@ -86,7 +86,8 @@ package's resampler).
 
 - **Node ≥ 23.6 native TS**: `.mts` sources, erasable syntax only —
   enforced via `erasableSyntaxOnly` in [tsconfig.json](../tsconfig.json).
-  Tests run as `node test/validate.mts`, no build step.
+  Tests run under Vitest (`npm test`); standalone scripts run directly
+  (`node scripts/montecarlo.mts`), no build step.
 - **TypeScript 7** (native compiler) for `npm run typecheck`.
 - **Vite** (added when the site lands in Phase 3): serves `.mts`
   unchanged, bundles for production, base-path config for GitHub Pages.

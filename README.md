@@ -38,24 +38,29 @@ Deployed at [timewave-zero-ui.vercel.app](https://timewave-zero-ui.vercel.app)
   384-value data sets (Kelley, Watkins, Sheliak, Huang Ti)
 - [data/kingwen.json](data/kingwen.json) — the 64 hexagrams in King Wen
   order: lines, trigrams, names, Unicode
-- [test/validate.mts](test/validate.mts) — proves fidelity: matches
+- [test/](test/) — a 206-test Vitest suite proving fidelity: matches
   Meyer's compiled C program across ~1,900 reference points × 4 number
-  sets (sub-tolerance everywhere, from 383 days to 4.4 billion years
-  before zero); verifies the King Wen structural claims McKenna's
-  derivation rests on; verifies McKenna's published Table 2 equals the
-  software's Kelley set; proves exact 64× self-similarity in ideal mode
+  sets (from 17 hours to 4.4 billion years before zero); verifies the
+  King Wen structural claims McKenna's derivation rests on, plus an
+  independent cross-check fixture; proves exact 64× self-similarity in
+  ideal mode; and proves the derivation results below
 
 ```bash
-node test/validate.mts
+npm test
 ```
 
 ## Roadmap
 
-- **Phase 2 — derivation pipeline.** Recompute the 384 numbers *from the
-  hexagrams* (first-order differences → tri-level bidirectional wave →
-  with/without the half twist → Sheliak's vector construction), so every
-  number in `data/` is derived, not transcribed. Reference texts are in
-  [reference/](reference/).
+- **Phase 2 — derivation pipeline.** ✅ Done ([src/derivation.mts](src/derivation.mts)):
+  the 384 numbers are now *derived* from the hexagrams, not transcribed.
+  The Watkins set reproduces exactly (384/384) from Watkins' closed
+  formula; the Kelley set reproduces at 383/384 — the shipped historical
+  data deviates from the formula at exactly one point (index 119: 22 vs
+  a computed 32), an apparently unrecorded 50-year-old anomaly; Sheliak's
+  1998 construction was recovered from his paper and reproduces 382/384.
+  McKenna's "1 in 3770" Monte Carlo claim replicates within its own
+  sampling error ([scripts/montecarlo.mts](scripts/montecarlo.mts)).
+  Full findings in [docs/research.md](docs/research.md).
 - **Phase 3 — the explorer.** ✅ Built (see Status above).
 - **Phase 4 — the history layer.** A starter set of ~100 tiered events
   ships with the explorer; remaining: a richer curated set and a

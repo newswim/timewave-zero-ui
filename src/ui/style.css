@@ -103,6 +103,7 @@ button:hover { background: var(--wash); color: var(--ink); }
 #sets button[data-set="huangti"]::before { background: var(--huangti); }
 #sets button.on { background: var(--wash); color: var(--ink); }
 #sets button.on::before { opacity: 1; }
+#sets .abbr { display: none; }
 
 #resonance button, #about-btn {
   border: 1px solid var(--hairline);
@@ -168,8 +169,82 @@ button:hover { background: var(--wash); color: var(--ink); }
   margin-top: 4px;
 }
 
+/* ---------- touch (tablet & phone) ---------- */
 @media (max-width: 900px) {
   #topbar { gap: 8px; padding: 6px 10px; }
-  #presets button { padding: 6px 6px; }
-  #readout { display: none; }
+
+  /* touch targets >= 40px effective — via padding, font size unchanged */
+  button { padding: 14px 10px; }
+  #presets button { padding: 14px 8px; }
+  #about-btn { width: 40px; height: 40px; }
+
+  /* compact readout: slim full-width bar resting on the axis strip */
+  #readout[hidden] { display: none; }
+  #readout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 10px;
+    left: 0; right: 0; bottom: 44px; /* just above the time axis */
+    min-width: 0;
+    max-width: none;
+    padding: 6px 12px 7px;
+    border: none;
+    border-top: 1px solid var(--hairline);
+    border-radius: 0;
+    background: color-mix(in srgb, #10162a 66%, transparent);
+    font-size: 11px;
+    line-height: 1.45;
+  }
+  #ro-date { font-size: 11px; }
+  #ro-val { font-size: 11px; }
+  #ro-hex {
+    flex-basis: 100%;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #ro-res, #ro-ev { display: none; }
+}
+
+/* ---------- phone ---------- */
+@media (max-width: 700px) {
+  #topbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "title   about"
+      "presets presets"
+      "sets    res";
+    align-items: center;
+    gap: 4px 8px;
+    padding: 6px 10px 8px;
+  }
+  #controls { display: contents; }
+  #title { grid-area: title; }
+  #title h1 { font-size: 12px; letter-spacing: 0.08em; }
+  #title .sub { font-size: 10px; }
+  #about-btn { grid-area: about; justify-self: end; }
+  #presets {
+    grid-area: presets;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -10px; /* bleed the scroll row to the screen edges */
+    padding: 0 10px;
+  }
+  #presets::-webkit-scrollbar { display: none; height: 0; }
+  #sets {
+    grid-area: sets;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  #sets::-webkit-scrollbar { display: none; height: 0; }
+  #sets button { padding: 14px 7px; }
+  #sets .full { display: none; }
+  #sets .abbr { display: inline; }
+  #resonance { grid-area: res; justify-self: end; }
 }
