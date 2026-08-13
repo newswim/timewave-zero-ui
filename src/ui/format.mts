@@ -5,7 +5,10 @@ import { ZERO_DATE_MS, DAY_MS } from "../timewave.mts";
 export const YEAR = 365.2425;
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-export const dateOf = (x: number): Date => new Date(ZERO_DATE_MS - x * DAY_MS);
+/** Date at x days before the given zero epoch (McKenna's by default —
+ * "your wave" mode passes a personal epoch instead). */
+export const dateOf = (x: number, epochMs: number = ZERO_DATE_MS): Date =>
+  new Date(epochMs - x * DAY_MS);
 
 /** UTC start-of-year timestamp, correct for years 0–99 and negative years. */
 function utcYear(y: number): number {
@@ -14,7 +17,6 @@ function utcYear(y: number): number {
   d.setUTCHours(0, 0, 0, 0);
   return d.getTime();
 }
-const xOfMs = (ms: number): number => (ZERO_DATE_MS - ms) / DAY_MS;
 
 const trim = (n: number): string => {
   const s = n >= 100 ? Math.round(n).toString() : n.toPrecision(3);
@@ -46,11 +48,17 @@ export function fmtValue(v: number): string {
 
 const pad = (n: number): string => String(n).padStart(2, "0");
 
+/** ISO YYYY-MM-DD for a timestamp (UTC). */
+export const isoDate = (ms: number): string => new Date(ms).toISOString().slice(0, 10);
+
+/** Parse a date-input value ("YYYY-MM-DD") as UTC midnight; NaN if malformed. */
+export const parseIsoUtc = (s: string): number => Date.parse(`${s}T00:00:00Z`);
+
 /** Human date for the cursor readout, granularity chosen by the visible span. */
-export function fmtDateAt(x: number, spanDays: number): string {
+export function fmtDateAt(x: number, spanDays: number, epochMs: number = ZERO_DATE_MS): string {
   const years = x / YEAR;
   if (years > 25e4 || spanDays / YEAR > 2e5) return `${siYears(years)} before zero`;
-  const d = dateOf(x);
+  const d = dateOf(x, epochMs);
   const y = d.getUTCFullYear();
   const yl = yearLabel(y);
   if (x < 0) {
@@ -77,11 +85,12 @@ function nice125(raw: number): number {
 }
 
 /** Ticks for the visible window [x1, x0] (x0 = left/older edge), ~110px apart. */
-export function ticks(x0: number, x1: number, widthPx: number): Tick[] {
+export function ticks(x0: number, x1: number, widthPx: number, epochMs: number = ZERO_DATE_MS): Tick[] {
   const span = x0 - x1;
   const target = Math.max(2, widthPx / 110);
   const out: Tick[] = [];
   const ySpan = span / YEAR;
+  const xOf = (ms: number): number => (epochMs - ms) / DAY_MS;
 
   if (ySpan > 2e5) {
     const stepY = nice125(ySpan / target);
@@ -99,15 +108,15 @@ export function ticks(x0: number, x1: number, widthPx: number): Tick[] {
     return out;
   }
 
-  const msLeft = ZERO_DATE_MS - x0 * DAY_MS;
-  const msRight = ZERO_DATE_MS - x1 * DAY_MS;
+  const msLeft = epochMs - x0 * DAY_MS;
+  const msRight = epochMs - x1 * DAY_MS;
 
   if (ySpan > 8) {
     const stepY = Math.max(1, nice125(ySpan / target));
-    const yA = dateOf(x0).getUTCFullYear() - 1;
-    const yB = dateOf(x1).getUTCFullYear() + 1;
+    const yA = dateOf(x0, epochMs).getUTCFullYear() - 1;
+    const yB = dateOf(x1, epochMs).getUTCFullYear() + 1;
     for (let y = Math.ceil(yA / stepY) * stepY; y <= yB; y += stepY) {
-      const x = xOfMs(utcYear(y));
+      const x = xOf(utcYear(y));
       if (x <= x0 && x >= x1)
         out.push({ x, label: yearLabel(y), major: y % (stepY * 5) === 0 });
     }
@@ -121,7 +130,7 @@ export function ticks(x0: number, x1: number, widthPx: number): Tick[] {
     while (d.getTime() <= msRight) {
       const mo = d.getUTCMonth();
       if (mo % stepM === 0) {
-        const x = xOfMs(d.getTime());
+        const x = xOf(d.getTime());
         if (x <= x0 && x >= x1)
           out.push({
             x,
@@ -141,7 +150,7 @@ export function ticks(x0: number, x1: number, widthPx: number): Tick[] {
     while (d.getTime() <= msRight) {
       const dom = d.getUTCDate();
       if ((dom - 1) % stepD === 0 && !(stepD > 1 && dom >= 29)) {
-        const x = xOfMs(d.getTime());
+        const x = xOf(d.getTime());
         if (x <= x0 && x >= x1)
           out.push({
             x,
@@ -166,7 +175,7 @@ export function ticks(x0: number, x1: number, widthPx: number): Tick[] {
       : stepMin < 1
         ? `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`
         : `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
-    out.push({ x: xOfMs(t), label, major: midnight });
+    out.push({ x: xOf(t), label, major: midnight });
   }
   return out;
 }

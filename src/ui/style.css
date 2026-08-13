@@ -169,6 +169,69 @@ button:hover { background: var(--wash); color: var(--ink); }
   margin-top: 4px;
 }
 
+/* ---------- your wave ---------- */
+#your-wave-btn.on { color: var(--ink); background: var(--wash); border: 1px solid var(--hairline); }
+#personal[hidden] { display: none; }
+#personal {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 6px;
+  border-top: 1px solid var(--hairline);
+  font-size: 11.5px;
+}
+.p-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.p-row label { color: var(--ink-2); }
+.p-hint { color: var(--muted); font-size: 10.5px; }
+.p-info { color: var(--ink-2); font-size: 11px; }
+#personal input[type="date"], #p-card input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  color: var(--ink);
+  font: 500 11.5px var(--font);
+  padding: 5px 7px;
+  color-scheme: dark;
+}
+#personal button { border: 1px solid var(--hairline); }
+
+#p-dialog[hidden] { display: none; }
+#p-dialog {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 7, 14, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+#p-card {
+  background: #0e1322;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 280px;
+}
+#p-card h3 { font-size: 13px; letter-spacing: 0.03em; }
+#p-card label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+#p-card input[type="text"] { flex: 1; }
+.p-actions { display: flex; gap: 6px; justify-content: flex-end; }
+.p-actions button { border: 1px solid var(--hairline); }
+#p-ev-delete { color: #e66767; margin-right: auto; }
+
 /* ---------- touch (tablet & phone) ---------- */
 @media (max-width: 900px) {
   #topbar { gap: 8px; padding: 6px 10px; }

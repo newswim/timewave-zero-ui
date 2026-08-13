@@ -4,8 +4,9 @@
  * local amplitude), so per-column sampling needs no decimation pyramid. */
 import type { Camera } from "./camera.mts";
 import type { Wave } from "../timewave.mts";
-import { ticks, fmtValue, YEAR } from "./format.mts";
+import { ticks, fmtValue } from "./format.mts";
 import { EVENTS, type Ev } from "./events.mts";
+import { epochShiftDays, xForDate, type PersonalEvent } from "./personal.mts";
 
 export interface Hexagram {
   kw: number; unicode: string; pinyin: string; english: string;
@@ -15,13 +16,21 @@ export interface Scene {
   wave: Wave;
   hue: string;
   hexagrams: Hexagram[];
-  nowX: number;                     // today, in days before zero (negative)
+  nowX: number;                     // today, in days before the zero epoch (negative if past it)
+  epochMs: number;                  // which date is "zero": McKenna's, or a personal one
+  zeroLabel: string;                // terminus caption
+  voidTitle: string;                // caption for the region past zero
+  voidSub: string;
+  personalEvents?: PersonalEvent[] | null;
   hover?: { px: number } | null;
   hoverEv?: PlacedEv | null;
   ghost?: { canvas: HTMLCanvasElement; t0: number } | null;
 }
 
-export interface PlacedEv { ev: Ev; px: number; py: number }
+/** A drawn marker: either a curated historical event or a user's own. */
+export interface PlacedEv { ev?: Ev; user?: PersonalEvent; px: number; py: number }
+
+const USER = "#d55181";
 
 const INK = "#f2f4fa";
 const INK2 = "#c3c7d4";
@@ -152,7 +161,7 @@ export class Renderer {
 
     // ---- time axis ----
     ctx.textAlign = "center";
-    for (const t of ticks(x0, x1, W)) {
+    for (const t of ticks(x0, x1, W, s.epochMs)) {
       const px = cam.pxAt(t.x);
       if (px < -60 || px > W + 60) continue;
       ctx.strokeStyle = t.major ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.05)";
@@ -176,10 +185,10 @@ export class Renderer {
         ctx.fillStyle = MUTED; ctx.globalAlpha = 0.85;
         ctx.font = "11px system-ui, sans-serif"; ctx.textAlign = "center";
         const cx = (vx + W) / 2;
-        ctx.fillText("the void", cx, plotTop + 30);
+        ctx.fillText(s.voidTitle, cx, plotTop + 30);
         ctx.globalAlpha = 0.55;
         ctx.font = "10px system-ui, sans-serif";
-        ctx.fillText("after the end of history", cx, plotTop + 46);
+        ctx.fillText(s.voidSub, cx, plotTop + 46);
         ctx.globalAlpha = 1;
       }
     }
@@ -226,8 +235,8 @@ export class Renderer {
       ctx.beginPath(); ctx.moveTo(px0, plotTop); ctx.lineTo(px0, plotBot); ctx.stroke();
       ctx.fillStyle = INK; ctx.globalAlpha = 0.9;
       ctx.font = "600 10px system-ui, sans-serif";
-      ctx.textAlign = px0 > W - 130 ? "right" : "left";
-      ctx.fillText("Z E R O · 2012-12-21", px0 + (px0 > W - 130 ? -8 : 8), plotTop + 14);
+      ctx.textAlign = px0 > W - 170 ? "right" : "left";
+      ctx.fillText(s.zeroLabel, px0 + (px0 > W - 170 ? -8 : 8), plotTop + 14);
       ctx.globalAlpha = 1;
     }
 
@@ -324,30 +333,80 @@ export class Renderer {
     let labels = Math.max(10, Math.min(30, Math.floor(W / 70)));
     let dots = 170;
     const voidBase = plotTop + (plotBot - plotTop) * 0.6;
+    // historical events keep their real dates; under a personal epoch their
+    // wave-position shifts by the difference between the two zeros
+    const shift = epochShiftDays(s.epochMs);
+
+    const tryLabel = (text: string, px: number, py: number, font: string, fill: string): void => {
+      if (labels <= 0 || px <= 4 || px >= W - 4) return;
+      ctx.font = font;
+      const w = ctx.measureText(text).width;
+      // clamp the label box inside the canvas; the leader still points at the dot
+      const cx = Math.min(W - 4 - w / 2, Math.max(4 + w / 2, px));
+      for (const dy of [-18, -34, -50, 22, 38]) {
+        const rx = cx - w / 2 - 3, ry = py + dy - 11, rw = w + 6, rh = 15;
+        if (ry < plotTop + 2 || ry + rh > plotBot - 2) continue;
+        if (rects.some(([ax, ay, aw, ah]) => rx < ax + aw && rx + rw > ax && ry < ay + ah && ry + rh > ay)) continue;
+        ctx.fillStyle = fill;
+        ctx.fillText(text, cx, ry + 11);
+        ctx.strokeStyle = "rgba(255,255,255,0.16)"; ctx.lineWidth = 1;
+        ctx.beginPath();
+        if (dy < 0) { ctx.moveTo(px, py - 6); ctx.lineTo(px, ry + rh - 2); }
+        else { ctx.moveTo(px, py + 6); ctx.lineTo(px, ry + 1); }
+        ctx.stroke();
+        rects.push([rx, ry, rw, rh]);
+        labels--;
+        break;
+      }
+    };
 
     const candidates = EVENTS
-      .filter((e) => e.x <= x0 && e.x >= x1)
+      .filter((e) => e.x + shift <= x0 && e.x + shift >= x1)
       .sort((a, b) => a.tier - b.tier || b.x - a.x);
 
-    // "you are here" in the void
+    // "you are here" — on the wave before the zero epoch, in the void after it
     if (s.nowX >= x1 && s.nowX <= x0) {
       const px = cam.pxAt(s.nowX);
-      ctx.fillStyle = INK;
-      ctx.beginPath(); ctx.arc(px, voidBase, 3, 0, Math.PI * 2); ctx.fill();
-      ctx.font = "600 10.5px system-ui, sans-serif";
+      const py = s.nowX >= 0
+        ? Math.min(plotBot - 4, Math.max(plotTop + 4, yPx(s.wave(s.nowX))))
+        : voidBase;
       ctx.textAlign = "center";
-      const w = ctx.measureText("you are here").width;
-      ctx.fillText("you are here", Math.min(W - 4 - w / 2, Math.max(4 + w / 2, px)), voidBase - 12);
+      ctx.fillStyle = INK;
+      ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI * 2); ctx.fill();
+      tryLabel("you are here", px, py, "600 10.5px system-ui, sans-serif", INK);
     }
 
     ctx.textAlign = "center";
+
+    // the user's own events, drawn first so their labels win placement —
+    // but bounded, so an imported list can't starve the historical layer
+    let userLabels = Math.min(12, labels);
+    for (const ue of s.personalEvents ?? []) {
+      if (dots-- <= 0) break;
+      const ux = xForDate(ue.t, s.epochMs);
+      if (ux > x0 || ux < x1) continue;
+      const px = cam.pxAt(ux);
+      const py = ux >= 0
+        ? Math.min(plotBot - 4, Math.max(plotTop + 4, yPx(s.wave(ux))))
+        : voidBase;
+      ctx.fillStyle = USER;
+      ctx.fillRect(px - 3, py - 3, 6, 6);
+      placed.push({ user: ue, px, py });
+      if (userLabels > 0) {
+        tryLabel(ue.label, px, py, "600 11px system-ui, sans-serif", USER);
+        userLabels--;
+      }
+    }
+
     for (const ev of candidates) {
       if (dots-- <= 0) break;
-      const px = cam.pxAt(ev.x);
-      const py = ev.v
+      const ex = ev.x + shift;
+      const inVoid = ex < 0;
+      const px = cam.pxAt(ex);
+      const py = inVoid
         ? voidBase
-        : Math.min(plotBot - 4, Math.max(plotTop + 4, yPx(s.wave(ev.x))));
-      ctx.globalAlpha = ev.v ? 0.55 : 1;
+        : Math.min(plotBot - 4, Math.max(plotTop + 4, yPx(s.wave(ex))));
+      ctx.globalAlpha = inVoid ? 0.55 : 1;
       if (ev.mk) {
         ctx.fillStyle = MK;
         ctx.save(); ctx.translate(px, py); ctx.rotate(Math.PI / 4);
@@ -359,28 +418,10 @@ export class Renderer {
       }
       placed.push({ ev, px, py });
 
-      if (labels > 0 && px > 4 && px < W - 4) {
-        const big = ev.tier === 0;
-        ctx.font = big ? "600 11.5px system-ui, sans-serif" : "10.5px system-ui, sans-serif";
-        const w = ctx.measureText(ev.label).width;
-        // clamp the label box inside the canvas; the leader still points at the dot
-        const cx = Math.min(W - 4 - w / 2, Math.max(4 + w / 2, px));
-        for (const dy of [-18, -34, -50, 22, 38]) {
-          const rx = cx - w / 2 - 3, ry = py + dy - 11, rw = w + 6, rh = 15;
-          if (ry < plotTop + 2 || ry + rh > plotBot - 2) continue;
-          if (rects.some(([ax, ay, aw, ah]) => rx < ax + aw && rx + rw > ax && ry < ay + ah && ry + rh > ay)) continue;
-          ctx.fillStyle = big ? "#e6e9f2" : ev.tier === 1 ? INK2 : MUTED;
-          ctx.fillText(ev.label, cx, ry + 11);
-          ctx.strokeStyle = "rgba(255,255,255,0.16)"; ctx.lineWidth = 1;
-          ctx.beginPath();
-          if (dy < 0) { ctx.moveTo(px, py - 6); ctx.lineTo(px, ry + rh - 2); }
-          else { ctx.moveTo(px, py + 6); ctx.lineTo(px, ry + 1); }
-          ctx.stroke();
-          rects.push([rx, ry, rw, rh]);
-          labels--;
-          break;
-        }
-      }
+      const big = ev.tier === 0;
+      tryLabel(ev.label, px, py,
+        big ? "600 11.5px system-ui, sans-serif" : "10.5px system-ui, sans-serif",
+        big ? "#e6e9f2" : ev.tier === 1 ? INK2 : MUTED);
       ctx.globalAlpha = 1;
     }
     return placed;
