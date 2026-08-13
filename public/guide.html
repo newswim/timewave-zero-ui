@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A Visitor's Guide to the Timewave</title>
+  <meta name="description" content="A plain-language, printable guide to the Timewave Zero restoration — what it is, what you're looking at, and a suggested walk through it." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='16' y='24' font-size='24' text-anchor='middle' fill='%23c98500'%3E%E4%B7%BF%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --paper: #0c101d;
+      --ink: #e9ecf5;
+      --ink-soft: #c3c7d4;
+      --muted: #8a8fa3;
+      --amber: #e2a223;
+      --violet: #a99df0;
+      --hairline: rgba(255, 255, 255, 0.14);
+    }
+    * { margin: 0; box-sizing: border-box; }
+    body {
+      background: var(--paper);
+      color: var(--ink-soft);
+      font: 16px/1.75 Charter, Georgia, "Times New Roman", serif;
+    }
+    main {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+    h1 {
+      color: var(--ink);
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 36px;
+    }
+    h2 {
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 600;
+      margin: 40px 0 10px;
+    }
+    p { margin-bottom: 14px; }
+    a { color: var(--violet); }
+    b, strong { color: var(--ink); font-weight: 600; }
+    .amber { color: var(--amber); }
+    .violet { color: var(--violet); }
+    ol.walk { padding-left: 0; list-style: none; counter-reset: stop; }
+    ol.walk > li {
+      counter-increment: stop;
+      margin: 0 0 18px 0;
+      padding-left: 44px;
+      position: relative;
+    }
+    ol.walk > li::before {
+      content: counter(stop);
+      position: absolute;
+      left: 0; top: 2px;
+      width: 28px; height: 28px;
+      border: 1px solid var(--hairline);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font: 600 14px/1 Charter, Georgia, serif;
+      color: var(--amber);
+    }
+    ol.walk b:first-child { display: block; }
+    .aside {
+      border-left: 2px solid var(--hairline);
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 15px;
+      margin: 18px 0;
+    }
+    dl { margin: 10px 0 0; }
+    dt { color: var(--ink); font-weight: 600; margin-top: 12px; }
+    dd { margin-left: 0; font-size: 15px; }
+    .hex { font-size: 20px; }
+    .footer {
+      margin-top: 48px;
+      padding-top: 18px;
+      border-top: 1px solid var(--hairline);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .toolbar { margin-bottom: 40px; font-size: 15px; }
+    @media print {
+      :root { --paper: #ffffff; --ink: #111111; --ink-soft: #222222; --muted: #555555;
+              --amber: #8a5d00; --violet: #4a3aa7; --hairline: rgba(0,0,0,0.25); }
+      body { font-size: 12pt; }
+      main { max-width: none; padding: 0; }
+      .toolbar { display: none; }
+      a { color: inherit; text-decoration: none; }
+      .footer a::after { content: " (" attr(href) ")"; font-size: 10pt; }
+      h2 { break-after: avoid; }
+      ol.walk > li { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>A Visitor's Guide to the Timewave</h1>
+    <p class="subtitle">for readers who prefer paper and patience</p>
+
+    <p class="toolbar">
+      The instrument itself lives at
+      <a href="https://timewave-zero-ui.vercel.app">timewave-zero-ui.vercel.app</a>.
+      This page reads well on paper — printing it makes a small pamphlet you
+      can keep beside the screen.
+    </p>
+
+    <h2>What this is</h2>
+    <p>
+      In the 1970s, Terence McKenna proposed that time itself has a shape —
+      that history doesn't just happen but <i>rises and falls</i>, like
+      weather, between habit and novelty. He drew that shape out of the
+      I&nbsp;Ching, the ancient Chinese Book of Changes: from the traditional
+      ordering of its 64 hexagrams he derived a long, jagged line, repeated
+      it inside itself at every scale of time, and declared that the whole
+      pattern ran downhill toward a final day — December&nbsp;21,&nbsp;2012 —
+      when novelty would become infinite and history would end. He called it
+      Timewave Zero. From 1974 until his death in 2000 it existed as actual
+      computer software, and he spent twenty years walking audiences along
+      the wave, pointing at its dips and peaks.
+    </p>
+    <p>
+      That day came and went quietly, and the world kept on. This project
+      restored the timewave anyway — the way a museum restores an orrery or
+      an astrolabe: a beautiful, wrong model of the cosmos, in full working
+      order. The mathematics is the original mathematics, checked digit for
+      digit against the software McKenna actually used. The claims are
+      labeled honestly. And the instrument is yours to wander.
+    </p>
+
+    <h2>What you're looking at</h2>
+    <p>
+      One line, drawn in <span class="amber">amber</span>: the wave. Time
+      flows left to right, and the line falls toward its zero at the right
+      edge — a soft glow marks the terminus, December&nbsp;21,&nbsp;2012.
+      When the line is <b>high</b>, McKenna said, the world is in the grip of
+      <b>habit</b> — settled, repetitive, conservative. When it <b>plunges</b>,
+      <b>novelty</b> is pouring in: invention, upheaval, connection, change.
+      Small dots along the wave mark historical events, from the Big Bang to
+      the moon landing. The <span class="violet">violet diamonds</span> are
+      McKenna's own story — the Amazon experiment that started it all, his
+      books, his software, the mathematician who found the flaw, his death in
+      2000 — his life, plotted on the very curve he believed explained it.
+    </p>
+
+    <h2>How to move</h2>
+    <p>
+      There is really only one trick: <b>drag</b> the picture to slide
+      through time, and <b>scroll</b> (or pinch) to zoom. Everything else is
+      a convenience. The row of buttons along the top — <i>All time,
+      History, 67 years, Final year, Terminus, The void</i> — are prepared
+      viewpoints; if you ever feel lost, press <b>History</b> and you are
+      home. Resting your cursor anywhere on the wave opens a small card that
+      tells you the date, the wave's value, and which hexagram of the
+      I&nbsp;Ching that day belongs to.
+    </p>
+
+    <h2>A suggested walk</h2>
+    <ol class="walk">
+      <li>
+        <b>Press “History.”</b>
+        Four thousand years in one view: the Bronze Age high, the long slide
+        through antiquity, the medieval trough, and at the far right the
+        modern plunge to zero. This is the picture McKenna showed most
+        often.
+      </li>
+      <li>
+        <b>Find the violet diamonds.</b>
+        Hover the ones crowded near the right edge: La Chorrera 1971, the
+        software in 1987, the objection in 1996, his death in 2000. The
+        theory's own history rides the theory's curve.
+      </li>
+      <li>
+        <b>Press “67 years.”</b>
+        The final cycle, 1945 to 2012 — Hiroshima at the left edge, the
+        postwar climb, a peak at the Summer of Love, then the long descent
+        through the rest of the century. McKenna read this screen aloud for
+        twenty years.
+      </li>
+      <li>
+        <b>Press the ⇡64 button, and look closely.</b>
+        You have leapt to a span 64 times longer — four thousand years
+        instead of sixty-seven — and yet <i>the curve is exactly the same
+        shape</i>. That is the timewave's one true and beautiful property:
+        it repeats inside itself perfectly at every scale. McKenna called
+        it resonance — the sixties, he liked to say, were the fall of Rome
+        played 64 times faster.
+      </li>
+      <li>
+        <b>Press “Terminus.”</b>
+        The last days before zero. The strip along the bottom names each
+        six-day span after a hexagram; the sequence ends, by the old
+        ordering's own logic, on hexagram 64 — <span class="hex">䷿</span>
+        <i>Before Completion</i>. The wave wanders down and touches zero
+        exactly at 6&nbsp;a.m. on December&nbsp;21,&nbsp;2012, Amazon time.
+      </li>
+      <li>
+        <b>Press “The void.”</b>
+        Everything after that morning. The wave simply ends; the years since
+        float as pale ghosts in the dark — the pandemics and telescopes and
+        machines that arrived after the end of history. A small white dot
+        marks <i>you are here</i>.
+      </li>
+      <li>
+        <b>Try the four names in the top corner.</b>
+        Kelley, Watkins, Sheliak, Huang&nbsp;Ti — four historical versions of
+        the wave's numbers, from the 1975 original to a 1998 correction.
+        Each redraws the curve. Notice that each was, in its day, said to
+        fit history well — a quiet lesson in how easily a wandering line
+        finds meaning.
+      </li>
+    </ol>
+
+    <h2>What is true here, and what isn't</h2>
+    <p>
+      The mathematics is real: the wave genuinely comes from the King Wen
+      sequence of the I&nbsp;Ching by fixed rules, and its self-similarity is
+      exact — we prove both, every time the software is tested, against
+      McKenna's original program. The I&nbsp;Ching's ordering really does
+      hold the curious patterns McKenna noticed; some of his statistical
+      claims about it even check out. What was never real is the reading:
+      "novelty" was never measured, the end date was chosen rather than
+      derived — and moved, once, to match the Maya calendar — and
+      December&nbsp;21,&nbsp;2012 passed like any other Friday. The
+      restoration keeps both truths in view. It asks only what a good museum
+      asks: wonder at the craft, and clear eyes about the claim.
+    </p>
+
+    <div class="aside">
+      A note on spirit: nothing here mocks him. McKenna knew the risk he was
+      taking — a theory with a date can fail in public, and his did, twelve
+      years after his death. It is precisely because he wagered so openly
+      that the instrument deserves to run again.
+    </div>
+
+    <h2>A few words, plainly</h2>
+    <dl>
+      <dt>Hexagram <span class="hex">䷊</span></dt>
+      <dd>A stack of six lines, broken or solid — the I&nbsp;Ching's 64
+      symbols. In the timewave's calendar, each hexagram governs six days.</dd>
+      <dt>King Wen sequence</dt>
+      <dd>The traditional order of the 64 hexagrams, some three thousand
+      years old. The number of lines that change between each hexagram and
+      the next is the seed of the entire wave.</dd>
+      <dt>Novelty</dt>
+      <dd>McKenna's word for newness itself — connection, complexity,
+      surprise. Downhill on the graph means more of it.</dd>
+      <dt>The zero date</dt>
+      <dd>Where the wave runs out: December&nbsp;21,&nbsp;2012. The wave
+      touches zero there once, and is silent afterward.</dd>
+    </dl>
+
+    <p class="footer">
+      The instrument: <a href="https://timewave-zero-ui.vercel.app">timewave-zero-ui.vercel.app</a><br />
+      The research, sources, and full honest accounting:
+      <a href="https://github.com/newswim/timewave-zero-ui">github.com/newswim/timewave-zero-ui</a><br />
+      Wave mathematics restored from Peter Meyer's original program (1987–1998).
+    </p>
+  </main>
+</body>
+</html>
