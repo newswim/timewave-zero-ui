@@ -272,6 +272,7 @@ document.getElementById("tour-btn")!.addEventListener("click", launchTour);
 // ---------- keyboard ----------
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { openAbout(false); return; }
+  if (e.key === "h") { openAbout(about.hasAttribute("hidden")); e.preventDefault(); return; }
   if (!about.hidden) return;
   const views = ["all", "history", "modern", "year", "terminus", "void"];
   if (e.key >= "1" && e.key <= "6") {
