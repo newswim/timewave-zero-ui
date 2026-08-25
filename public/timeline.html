@@ -139,6 +139,31 @@
       color: var(--muted); font-size: 12.5px; font-style: italic; }
     .gap-row b { color: var(--amber); font-weight: 600; font-style: normal; }
 
+    /* layout toggle + horizontal track */
+    .layouts { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+    #timeline.horizontal { display: flex; align-items: stretch; overflow-x: auto;
+      margin-top: 18px; padding-bottom: 18px; }
+    .horizontal .year-group { flex: 0 0 272px; width: 272px; margin-top: 0;
+      padding: 0 14px 8px; border-left: 1px solid var(--hairline); }
+    .horizontal .year-head { scroll-margin-inline-start: 15px; }
+    .horizontal .entries { border-left: none; margin-left: 0; }
+    .entry-card { background: var(--card); border: 1px solid var(--hairline);
+      border-radius: 5px; margin-top: 8px; }
+    .entry-card > summary { list-style: none; cursor: pointer; padding: 7px 9px;
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 7px; }
+    .entry-card > summary::-webkit-details-marker { display: none; }
+    .entry-card > summary:hover { border-color: rgba(255,255,255,0.4); }
+    .entry-card .mark { align-self: center; }
+    .entry-card .card-title { color: var(--ink); font-weight: 600; font-size: 14px; line-height: 1.35; }
+    .entry-card .card-chips { display: inline-flex; align-items: baseline; gap: 5px; }
+    .corr-dot { color: var(--amber); font-weight: 700; cursor: help; }
+    .entry-card .card-body { padding: 0 9px 9px; font-size: 14px; }
+    .entry-card .card-body .entry-date { display: block; margin-bottom: 2px; }
+    .entry-card[open] > summary { border-bottom: 1px dotted rgba(255,255,255,0.08); margin-bottom: 7px; }
+    .horizontal .gap-row { flex: 0 0 34px; width: 34px; margin: 0; padding: 12px 6px 8px;
+      border-left: 1px dashed rgba(226,162,35,0.55);
+      writing-mode: vertical-rl; overflow: hidden; white-space: nowrap; }
+
     .nothing { color: var(--muted); font-style: italic; padding: 30px 0; }
     .footer { margin-top: 54px; padding-top: 16px; border-top: 1px solid var(--hairline);
       color: var(--muted); font-size: 13.5px; }
@@ -156,6 +181,13 @@
       a { color: inherit; text-decoration: none; }
       .srcs a::after { content: " (" attr(href) ")"; font-size: 8pt; color: var(--muted); }
       .gaps .cell.empty { border-color: #7a5300; }
+      /* print is always the vertical listing; the page re-renders vertically
+         before printing, and these rules linearize the track as a backstop */
+      #timeline.horizontal { display: block; }
+      .horizontal .year-group { width: auto; border-left: none; padding: 0; margin-top: 26px; }
+      .horizontal .gap-row { writing-mode: horizontal-tb; width: auto; margin-left: 5px;
+        padding: 5px 4px 5px 26px; border-left: 1px solid var(--hairline); }
+      .entry-card { break-inside: avoid; border: none; background: none; }
     }
   </style>
 </head>
@@ -197,6 +229,10 @@
       <input type="search" id="search" placeholder="search titles and summaries" />
     </div>
     <div class="row">
+      <span class="layouts">layout:
+        <button id="lay-vertical" class="toggle on" title="Vertical listing, one year after another">vertical</button>
+        <button id="lay-horizontal" class="toggle off" title="Years as columns on a horizontally scrolling track">horizontal</button>
+      </span>
       <span class="exports">
         <button id="export-json" title="Download the current filtered view as JSON">download JSON</button>
         <button id="export-csv" title="Download the current filtered view as CSV">download CSV</button>
@@ -236,12 +272,21 @@
   var MONTHS = ["January","February","March","April","May","June","July",
                 "August","September","October","November","December"];
 
+  var LAYOUT_KEY = "mckenna-timeline-layout";
+
   var state = {
-    types: {}, confs: {}, tag: "", search: "",
+    types: {}, confs: {}, tag: "", search: "", layout: "vertical",
     data: null, entries: []
   };
   TYPES.forEach(function (t) { state.types[t] = true; });
   CONFS.forEach(function (c) { state.confs[c] = true; });
+  try {
+    if (localStorage.getItem(LAYOUT_KEY) === "horizontal") state.layout = "horizontal";
+  } catch (err) { /* private mode etc.; vertical is the default anyway */ }
+
+  /* printing always uses the vertical listing */
+  var printOverride = false;
+  function effectiveLayout() { return printOverride ? "vertical" : state.layout; }
 
   function $(id) { return document.getElementById(id); }
   function el(tag, cls, text) {
@@ -352,6 +397,21 @@
     };
     $("export-json").onclick = exportJSON;
     $("export-csv").onclick = exportCSV;
+
+    function paintLayout() {
+      $("lay-vertical").className = "toggle " + (state.layout === "vertical" ? "on" : "off");
+      $("lay-horizontal").className = "toggle " + (state.layout === "horizontal" ? "on" : "off");
+    }
+    function setLayout(l) {
+      if (state.layout === l) return;
+      state.layout = l;
+      try { localStorage.setItem(LAYOUT_KEY, l); } catch (err) { /* fine, just not remembered */ }
+      paintLayout();
+      renderTimeline();
+    }
+    paintLayout();
+    $("lay-vertical").onclick = function () { setLayout("vertical"); };
+    $("lay-horizontal").onclick = function () { setLayout("horizontal"); };
   }
 
   function renderDecades(years) {
@@ -365,6 +425,13 @@
     Object.keys(seen).sort().forEach(function (d) {
       var a = el("a", null, d + "s");
       a.href = "#y" + seen[d];
+      a.onclick = function (ev) {
+        var t = $("y" + seen[d]);
+        if (!t) return;
+        ev.preventDefault();
+        /* works on both axes: vertical page scroll, and the horizontal track */
+        t.scrollIntoView({ block: "start", inline: "start" });
+      };
       nav.appendChild(a);
     });
   }
@@ -381,19 +448,7 @@
     }
   }
 
-  function entryNode(e) {
-    var d = el("div", "entry");
-    d.appendChild(el("span", "mark " + e.type));
-
-    var head = el("div", "entry-head");
-    head.appendChild(el("span", "entry-date", fmtDate(e)));
-    head.appendChild(el("span", "entry-title", e.title));
-    head.appendChild(el("span", "chip t t-" + e.type, e.type));
-    head.appendChild(el("span", "chip c-" + e.confidence, e.confidence));
-    d.appendChild(head);
-
-    d.appendChild(el("p", "entry-summary", e.summary));
-
+  function entryFoot(e) {
     var foot = el("div", "entry-foot");
     var srcs = el("span", "srcs");
     srcs.appendChild(document.createTextNode("Sources: "));
@@ -419,12 +474,56 @@
       tl.appendChild(s);
     });
     foot.appendChild(tl);
-    d.appendChild(foot);
+    return foot;
+  }
+
+  /* vertical listing: one full row per entry */
+  function entryNode(e) {
+    var d = el("div", "entry");
+    d.appendChild(el("span", "mark " + e.type));
+
+    var head = el("div", "entry-head");
+    head.appendChild(el("span", "entry-date", fmtDate(e)));
+    head.appendChild(el("span", "entry-title", e.title));
+    head.appendChild(el("span", "chip t t-" + e.type, e.type));
+    head.appendChild(el("span", "chip c-" + e.confidence, e.confidence));
+    d.appendChild(head);
+
+    d.appendChild(el("p", "entry-summary", e.summary));
+    d.appendChild(entryFoot(e));
+    return d;
+  }
+
+  /* horizontal track: a compact card that expands for the details */
+  function entryCard(e) {
+    var d = el("details", "entry-card");
+    var sum = el("summary");
+    sum.appendChild(el("span", "mark " + e.type));
+    sum.appendChild(el("span", "card-title", e.title));
+    var chips = el("span", "card-chips");
+    chips.appendChild(el("span", "chip t t-" + e.type, e.type));
+    chips.appendChild(el("span", "chip c-" + e.confidence, e.confidence));
+    if (e.sources.length === 1) {
+      var dot = el("span", "corr-dot", "•");
+      dot.title = "single source: needs corroboration";
+      chips.appendChild(dot);
+    }
+    sum.appendChild(chips);
+    d.appendChild(sum);
+
+    var body = el("div", "card-body");
+    body.appendChild(el("span", "entry-date", fmtDate(e)));
+    body.appendChild(el("p", "entry-summary", e.summary));
+    body.appendChild(entryFoot(e));
+    d.appendChild(body);
     return d;
   }
 
   function renderTimeline() {
+    if (!state.data) return;
+    var horizontal = effectiveLayout() === "horizontal";
     var box = $("timeline");
+    box.className = horizontal ? "horizontal" : "";
     box.innerHTML = "";
     var shown = state.entries.filter(passes);
     $("showing").textContent = "showing " + shown.length + " of " + state.entries.length + " entries";
@@ -460,6 +559,7 @@
         if (run.length) {
           var label = run.length === 1 ? String(run[0]) : run[0] + "–" + run[run.length - 1];
           var gr = el("div", "gap-row");
+          gr.title = label + " — no entries yet";
           gr.appendChild(el("b", null, label));
           gr.appendChild(document.createTextNode(
             " — no entries yet (" + run.length + (run.length === 1 ? " year" : " years") + " to research)"));
@@ -475,7 +575,7 @@
       group.appendChild(h);
       var list = el("div", "entries");
       byYear[y].sort(function (a, b) { return sortKey(a) < sortKey(b) ? -1 : 1; })
-        .forEach(function (e) { list.appendChild(entryNode(e)); });
+        .forEach(function (e) { list.appendChild(horizontal ? entryCard(e) : entryNode(e)); });
       group.appendChild(list);
       box.appendChild(group);
     });
@@ -521,6 +621,29 @@
     var text = rows.map(function (r) { return r.map(csvCell).join(","); }).join("\r\n");
     download("mckenna-chronology-filtered.csv", "text/csv", text);
   }
+
+  /* ---- horizontal niceties ---- */
+  /* a vertical mouse wheel scrolls the horizontal track sideways */
+  $("timeline").addEventListener("wheel", function (ev) {
+    if (effectiveLayout() !== "horizontal") return;
+    var box = $("timeline");
+    if (box.scrollWidth <= box.clientWidth) return;
+    if (Math.abs(ev.deltaY) <= Math.abs(ev.deltaX)) return;
+    var delta = ev.deltaMode === 1 ? ev.deltaY * 32 : ev.deltaY;
+    var max = box.scrollWidth - box.clientWidth;
+    /* at either end, let the page scroll normally */
+    if ((delta < 0 && box.scrollLeft <= 0) || (delta > 0 && box.scrollLeft >= max - 1)) return;
+    box.scrollLeft += delta;
+    ev.preventDefault();
+  }, { passive: false });
+
+  /* print always gets the vertical listing */
+  window.addEventListener("beforeprint", function () {
+    if (state.layout === "horizontal") { printOverride = true; renderTimeline(); }
+  });
+  window.addEventListener("afterprint", function () {
+    if (printOverride) { printOverride = false; renderTimeline(); }
+  });
 
   /* ---- boot ---- */
   fetch("./timeline-data.json")
