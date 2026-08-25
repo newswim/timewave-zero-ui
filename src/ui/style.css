@@ -169,6 +169,46 @@ button:hover { background: var(--wash); color: var(--ink); }
   margin-top: 4px;
 }
 
+/* ---------- tour ---------- */
+#tour { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
+.tour-spot {
+  position: absolute;
+  border: 1px solid rgba(226, 162, 35, 0.55);
+  border-radius: 10px;
+  box-shadow: 0 0 0 9999px rgba(5, 7, 14, 0.72);
+  transition: all 0.35s ease;
+}
+.tour-card {
+  position: absolute;
+  pointer-events: auto;
+  max-width: 360px;
+  padding: 16px 18px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: #0e1322;
+  transition: left 0.3s ease, top 0.3s ease;
+}
+.tour-card h3 { font-size: 14px; color: var(--ink); margin-bottom: 6px; letter-spacing: 0.02em; }
+.tour-card p { font-size: 12.5px; line-height: 1.6; color: var(--ink-2); margin-bottom: 10px; }
+.tour-card .tour-links { font-size: 12px; }
+.tour-card a { color: var(--mk); text-decoration: none; }
+.tour-card a:hover { text-decoration: underline; }
+.tour-nav { display: flex; align-items: center; justify-content: space-between; }
+.tour-dots { color: var(--muted); font-size: 11px; }
+.tour-btns { display: flex; gap: 4px; }
+.tour-btns button { border: 1px solid var(--hairline); }
+.tour-btns .tour-next { color: var(--ink); background: var(--wash); }
+.tour-btns button:disabled { opacity: 0.4; cursor: default; }
+.tour-skip { color: var(--muted); }
+#tour-btn {
+  border: 1px solid var(--hairline);
+  background: var(--wash);
+  color: var(--ink);
+  font-size: 12.5px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
 /* ---------- touch (tablet & phone) ---------- */
 @media (max-width: 900px) {
   #topbar { gap: 8px; padding: 6px 10px; }

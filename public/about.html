@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About the Timewave</title>
+  <meta name="description" content="What Timewave Zero is, where it came from, how the mathematics works, what we restored, and how this site was made. With sources." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='16' y='24' font-size='24' text-anchor='middle' fill='%23c98500'%3E%E4%B7%BF%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --paper: #0c101d;
+      --ink: #e9ecf5;
+      --ink-soft: #c3c7d4;
+      --muted: #8a8fa3;
+      --amber: #e2a223;
+      --violet: #a99df0;
+      --hairline: rgba(255, 255, 255, 0.14);
+    }
+    * { margin: 0; box-sizing: border-box; }
+    body {
+      background: var(--paper);
+      color: var(--ink-soft);
+      font: 16px/1.75 Charter, Georgia, "Times New Roman", serif;
+    }
+    main { max-width: 640px; margin: 0 auto; padding: 56px 24px 80px; }
+    h1 { color: var(--ink); font-size: 30px; line-height: 1.2; font-weight: 600; margin-bottom: 6px; }
+    .subtitle { color: var(--muted); font-style: italic; margin-bottom: 36px; }
+    h2 { color: var(--ink); font-size: 19px; font-weight: 600; margin: 40px 0 10px; }
+    p { margin-bottom: 14px; }
+    a { color: var(--violet); }
+    b, strong { color: var(--ink); font-weight: 600; }
+    sup a { text-decoration: none; font-size: 12px; }
+    pre {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      font: 13px/1.6 ui-monospace, "SF Mono", Menlo, monospace;
+      color: var(--ink-soft);
+      margin: 14px 0;
+    }
+    .num { color: var(--amber); }
+    ol.sources { padding-left: 22px; font-size: 15px; }
+    ol.sources li { margin-bottom: 8px; }
+    .disclosure {
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 15px;
+    }
+    .footer {
+      margin-top: 48px; padding-top: 18px;
+      border-top: 1px solid var(--hairline);
+      color: var(--muted); font-size: 14px;
+    }
+    @media print {
+      :root { --paper: #ffffff; --ink: #111; --ink-soft: #222; --muted: #555;
+              --amber: #8a5d00; --violet: #4a3aa7; --hairline: rgba(0,0,0,0.25); }
+      body { font-size: 12pt; }
+      main { max-width: none; padding: 0; }
+      a { color: inherit; }
+      pre { border: 1px solid #999; }
+      h2 { break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>About the Timewave</h1>
+    <p class="subtitle">what this is, where it came from, and how it was rebuilt</p>
+
+    <h2>The idea</h2>
+    <p>
+      Terence McKenna (1946&ndash;2000) believed that time has a structure. In his
+      account, history moves between two conditions he called habit and
+      novelty, and the balance between them follows a fixed curve. He derived
+      that curve from the King Wen sequence, the traditional ordering of the
+      64 hexagrams of the I&nbsp;Ching, and claimed it repeated at every scale
+      of time, from billions of years down to minutes. The curve reaches zero
+      on December&nbsp;21,&nbsp;2012. At that point, he said, novelty would
+      become infinite and history as we know it would end.<sup><a href="#s5">[5]</a></sup>
+    </p>
+    <p>
+      He called the model Timewave Zero. It began after an experience in the
+      Colombian Amazon in 1971, took written form in <i>The Invisible
+      Landscape</i> (1975, with his brother Dennis), and became computer
+      software in the 1980s, principally written by Peter Meyer.<sup><a href="#s3">[3]</a></sup>
+      McKenna presented the wave in lectures for the rest of his life.
+    </p>
+
+    <h2>The history, briefly</h2>
+    <p>
+      The dates that matter: the La Chorrera experiment, 1971. <i>The
+      Invisible Landscape</i>, 1975. First graphical software on an Apple
+      II+, around 1978; Meyer's DOS program, 1989&ndash;91; his <i>Fractal
+      Time</i>, 1998.<sup><a href="#s3">[3]</a></sup> In 1996 the mathematician
+      Matthew Watkins showed that a step in the original construction, the
+      so-called half twist, did not do what the theory's documentation
+      claimed. McKenna acknowledged the problem and published Watkins'
+      critique himself.<sup><a href="#s6">[6]</a></sup> A physicist, John
+      Sheliak, produced a corrected construction in 1998, which McKenna
+      adopted.<sup><a href="#s8">[8]</a></sup> McKenna died of brain cancer in
+      April 2000. December&nbsp;21,&nbsp;2012 passed without incident.
+    </p>
+
+    <h2>The mathematics</h2>
+    <p>
+      The wave is built in three steps, and all three are reproduced in this
+      site's <a href="https://github.com/newswim/timewave-zero-ui">source code</a>,
+      where automated tests check them against the output of Meyer's original
+      program on every change.
+    </p>
+    <p>
+      <b>1. From the hexagrams to 64 numbers.</b> Take the 64 hexagrams in
+      King Wen order and count how many of the six lines change at each step
+      from one hexagram to the next, wrapping around at the end. The result
+      is this sequence:
+    </p>
+    <pre><span class="num">6 2 4 4 4 3 2 4 2 4 6 2 2 4 2 2 6 3 4 3 2 2 2 3 4 2 6 2 6 3 2 3
+4 4 4 2 4 6 4 3 2 4 2 3 4 3 2 3 4 4 4 1 6 2 2 3 4 3 2 1 6 3 6 3</span></pre>
+    <p>
+      This sequence has real structure. Exactly three quarters of the values
+      are even. The value 5 never appears. McKenna noticed these properties
+      and estimated, by generating random alternatives, that an ordering
+      this regular occurs about once in several thousand tries. We repeated
+      his experiment with a million trials; under the strictest reading his
+      estimate holds up within its own margin of error.<sup><a href="#s12">[12]</a></sup>
+    </p>
+    <p>
+      <b>2. From 64 numbers to 384.</b> A geometric procedure expands the
+      sequence: it is overlaid with a reversed copy of itself, then combined
+      at three scales (single lines, trigrams, whole hexagrams), and the
+      result is measured at 384 points. Watkins compressed the whole
+      procedure into one formula.<sup><a href="#s6">[6]</a>&nbsp;<a href="#s7">[7]</a></sup>
+      In simplified form, for each position <i>k</i> from 0 to 383:
+    </p>
+    <pre>w[k] = |skew(k)| + |divergence(k)|
+
+skew(k)       combines line, trigram, and hexagram terms of the
+              form h[k-1] - h[k-2] + h[-k] - h[1-k], the trigram
+              term scaled by 3, the hexagram term by 6; the
+              disputed "half twist" is a set of alternating signs
+              applied here
+divergence(k) combines terms of the form 9 - h[-k] - h[k-1],
+              scaled the same way</pre>
+    <p>
+      Run without the twist, the formula reproduces the 1996 "Watkins" data
+      set exactly, all 384 values. Run with the twist, it reproduces the
+      original 1975 "Kelley" set at 383 of 384 values. The one exception is
+      position 119, where every historical copy reads 22 and the formula
+      gives 32. No published source mentions this discrepancy; we found it
+      while rebuilding the pipeline, and we preserve the historical value
+      while documenting the difference.<sup><a href="#s12">[12]</a></sup>
+      Sheliak's 1998 construction, recovered from his paper, matches his
+      data set at 382 of 384 values, with similar small unexplained
+      differences at two points.
+    </p>
+    <p>
+      <b>3. From 384 numbers to a wave over all of time.</b> The 384 values
+      are treated as one cycle of a waveform, and cycles are nested inside
+      each other at a ratio of 64: one cycle spans 384 days, the next 67.29
+      years, the next 4,306 years, and so on past the age of the universe.
+      The value at any moment is the sum over all these scales:
+    </p>
+    <pre>f(x) = [ sum over scales i where 64^i &le; x of  64^i &middot; v(x / 64^i)
+       + sum over sub-day scales of        v(x &middot; 64^i) / 64^i ] / 64&sup3;
+
+x = days before the zero date; v = the 384 values, joined by
+straight lines and repeated</pre>
+    <p>
+      Because every data set begins 0,&nbsp;0,&nbsp;0, the first sum ends on
+      its own and the wave touches zero exactly once, at the end. The same
+      property makes the wave exactly self-similar: f(64x)&nbsp;=&nbsp;64&middot;f(x).
+      That identity is what the &#8657;64 button demonstrates, and it is the
+      one claim of the theory that is simply true.<sup><a href="#s1">[1]</a></sup>
+    </p>
+    <p>
+      The zero date is not produced by any of this. The wave's shape fixes
+      no endpoint. McKenna first anchored the end by placing Hiroshima at
+      the opening of the final 67.29-year cycle, which pointed at
+      November&nbsp;2012; he later moved the date to December&nbsp;21 to
+      match the Maya calendar's long-count ending.<sup><a href="#s4">[4]</a></sup>
+      Meyer, who wrote the software, reached the same conclusion we did: the
+      theory never derived its own end date.
+    </p>
+
+    <h2>What we make of it</h2>
+    <p>
+      As a prediction, the timewave failed on schedule. As mathematics, it
+      is real and rather elegant. As a cultural object, it mattered: it is a
+      root of the whole 2012 phenomenon, and it occupied one of the more
+      original minds of the late twentieth century for thirty years. We
+      restored it the way a museum restores an orrery: the mechanism runs,
+      the label tells the truth. Every number on this site can be traced to
+      a source, and the parts of the story that are wrong are said to be
+      wrong.
+    </p>
+
+    <h2>How this site was made</h2>
+    <p class="disclosure">
+      This site was built by Dan Minshew with substantial help from an AI
+      assistant (Anthropic's Claude), which contributed research, code, and
+      draft text under human direction and review. The mathematics is not
+      AI-generated: the wave algorithm is Peter Meyer's, ported from his
+      public-domain C code and verified against his compiled program at
+      about 1,900 reference points by an automated test suite that runs on
+      every change. The historical claims above are cited to their sources
+      below. Corrections are welcome at the
+      <a href="https://github.com/newswim/timewave-zero-ui/issues">project's issue tracker</a>.
+    </p>
+
+    <h2>Sources</h2>
+    <ol class="sources">
+      <li id="s1">Peter Meyer, <a href="https://www.fractal-timewave.com/articles/math_10.html">The Mathematical Definition of the Timewave</a> — the wave function itself.</li>
+      <li id="s2">Peter Meyer, <a href="https://www.fractal-timewave.com/articles/four_number_sets.htm">The Four Number Sets</a> — Kelley, Watkins, Sheliak, Huang&nbsp;Ti.</li>
+      <li id="s3">Peter Meyer, <a href="https://fractal-timewave.com/articles/hist.html">History of the Timewave Zero Software</a> — versions, platforms, and people, 1974&ndash;1998.</li>
+      <li id="s4">Peter Meyer, <a href="https://www.fractal-timewave.com/articles/zerodate_10.html">The Zero Date</a> — how the end date was chosen and moved.</li>
+      <li id="s5">Terence McKenna, <i>Derivation of the Timewave from the King Wen Sequence of Hexagrams</i> — his own account, including the 384 values (formerly at levity.com/eschaton/waveexplain.html).</li>
+      <li id="s6">Matthew Watkins, <a href="https://www.fourmilab.ch/rpkp/autopsy.html">Autopsy for a Mathematical Hallucination?</a> — the 1996 objection, published with McKenna's cooperation.</li>
+      <li id="s7">Ian Bell, <a href="https://github.com/kl4yfd/timewave_z3r0/blob/master/Reference/McKenna%27s%20TimeWave%20Examined.pdf">McKenna's TimeWave Examined</a> — an independent presentation of the closed formula.</li>
+      <li id="s8">John Sheliak, <i>Delineation, Specification, and Formalization of the TWZ Data Set Generation Process</i> (1998) — the corrected construction (formerly at levity.com/eschaton/sheliak).</li>
+      <li id="s9">John A. Phelps, <a href="https://github.com/kl4yfd/timewave_z3r0">timewave_z3r0</a> — Meyer's public-domain C code and the four data sets, preserved on GitHub.</li>
+      <li id="s10"><a href="https://en.wikipedia.org/wiki/Terence_McKenna">Terence McKenna</a>, Wikipedia — biography and reception.</li>
+      <li id="s11"><a href="https://archive.org/details/twz_20200405">Time Wave Zero software</a>, Internet Archive — the original DOS program.</li>
+      <li id="s12">This project's <a href="https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md">research notes</a> — full derivation results, the position-119 finding, and the Monte Carlo replication, with methods.</li>
+    </ol>
+
+    <p class="footer">
+      The instrument: <a href="https://timewave-zero-ui.vercel.app">timewave-zero-ui.vercel.app</a><br />
+      A gentler introduction: <a href="/guide.html">A Visitor's Guide to the Timewave</a><br />
+      Source and tests: <a href="https://github.com/newswim/timewave-zero-ui">github.com/newswim/timewave-zero-ui</a>
+    </p>
+  </main>
+</body>
+</html>
