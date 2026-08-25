@@ -25,7 +25,13 @@ minutes before 2012-12-21 06:00. Drag to pan, scroll to zoom, `R` /
 `Shift+R` for resonance jumps (×64 about the zero date — the identical
 waveform, relabeled by history), four number sets, ~100 curated events
 with a violet McKenna layer, the hexagram band at fine zoom, and the
-void after zero with "you are here." Explorer code: [src/ui/](src/ui/).
+void after zero with "you are here." **Your wave** (`Y`) turns the
+instrument on your own life: a birthday re-anchors zero to one full cycle
+(24,576 days) after your birth, your own events overlay the curve, and a
+slide-the-anchor control demonstrates the theory's central flaw on the
+most persuasive possible subject — your events fit anywhere. Personal
+data lives in localStorage only (JSON export/import; never in URLs).
+Explorer code: [src/ui/](src/ui/).
 Deployed at [timewave-zero-ui.vercel.app](https://timewave-zero-ui.vercel.app)
 (Vercel, framework preset Vite, `npm run build` → `dist/`).
 

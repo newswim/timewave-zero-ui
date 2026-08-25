@@ -48,9 +48,46 @@
         <button id="res-up" title="Jump ×64 outward — the same waveform, 64 times the span (R)">⇡64</button>
         <button id="res-down" title="Jump ÷64 inward — the same waveform, 1/64 the span (Shift+R)">⇣64</button>
       </div>
+      <button id="your-wave-btn" title="Overlay your own life on the wave (Y)">Your wave</button>
       <button id="about-btn" title="About this instrument" aria-haspopup="dialog">?</button>
     </div>
+    <div id="personal" hidden>
+      <div class="p-row">
+        <label for="p-birth">Born</label>
+        <input type="date" id="p-birth" />
+        <span id="p-zero" class="p-info">—</span>
+        <button id="p-exit" title="Return to the historical wave">exit</button>
+      </div>
+      <div class="p-row">
+        <span class="p-hint">slide your anchor — your events will fit anywhere; that's the lesson:</span>
+        <button data-slide="-1826">−5y</button>
+        <button data-slide="-365">−1y</button>
+        <button data-slide="365">+1y</button>
+        <button data-slide="1826">+5y</button>
+        <button id="p-reset" title="Back to the 67.29-year cycle">reset</button>
+      </div>
+      <div class="p-row">
+        <button id="p-add">+ event</button>
+        <button id="p-export">export</button>
+        <button id="p-import">import</button>
+        <input type="file" id="p-file" accept="application/json" hidden />
+        <span class="p-hint">shift-click the wave to add an event · stored only in this browser</span>
+      </div>
+    </div>
   </header>
+
+  <div id="p-dialog" hidden>
+    <div id="p-card">
+      <h3 id="p-dialog-title">Add event</h3>
+      <label>Date <input type="date" id="p-ev-date" /></label>
+      <label>Label <input type="text" id="p-ev-label" maxlength="120" placeholder="first day of school…" /></label>
+      <div class="p-actions">
+        <button id="p-ev-delete" hidden>delete</button>
+        <button id="p-ev-cancel">cancel</button>
+        <button id="p-ev-save">save</button>
+      </div>
+    </div>
+  </div>
 
   <aside id="readout" hidden>
     <div id="ro-date">—</div>
@@ -77,6 +114,17 @@
         spanning 64× the time — McKenna's "temporal resonance." At fine zoom the
         final 384-day cycle resolves into the 64 hexagrams, six days per hexagram,
         ending on Wei Chi, <i>Before Completion</i>.
+      </p>
+      <p>
+        <b>Your wave</b> turns the instrument on your own life: enter a
+        birthday and your span becomes one full cycle — your zero landing
+        24,576 days (67.29 years) after your birth, the same span McKenna
+        gave history's final act. Add your own events and watch them find
+        fitting dips and peaks. Then slide the anchor: they fit anywhere.
+        The wave will flatter any life you give it — that is the lesson,
+        and the fun. (The hexagram calendar and the preset views follow
+        your anchor too; nothing the instrument tells you is intrinsic to
+        your dates.) Everything you enter stays in this browser.
       </p>
       <p class="honest">
         Honesty note: the mathematics is real and the fractal is genuine, but
