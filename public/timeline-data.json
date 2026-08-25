@@ -1,0 +1,1128 @@
+{
+  "meta": {
+    "title": "Terence McKenna, 1946-2000: a working chronology",
+    "description": "A reconstruction scaffold for the archive project. Seeded from public sources in August 2026; every entry carries its sources and an honest confidence label. Corrections expected and welcome.",
+    "generated": "2026-08-25",
+    "version": "0.1.0",
+    "spanned_years": { "start": 1946, "end": 2000 },
+    "conventions": {
+      "precision": ["day", "month", "year", "circa"],
+      "confidence": ["documented", "reported", "circa", "disputed"],
+      "types": ["life", "talk", "publication", "artifact", "archive"],
+      "note": "An entry with precision 'year' and confidence 'reported' is good practice here. A fabricated exact date is the one unforgivable failure. Where sources conflict, the entry says so and is marked 'disputed'."
+    }
+  },
+  "entries": [
+    {
+      "id": "birth-paonia",
+      "date": "1946-11-16",
+      "precision": "day",
+      "type": "life",
+      "title": "Terence Kemp McKenna born in Paonia, Colorado",
+      "summary": "Terence Kemp McKenna is born in the small town of Paonia on Colorado's Western Slope.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["family", "colorado"]
+    },
+    {
+      "id": "dennis-born",
+      "date": "1950-12-17",
+      "precision": "day",
+      "type": "life",
+      "title": "Dennis McKenna born",
+      "summary": "His brother and lifelong collaborator Dennis Jon McKenna is born, also in Paonia.",
+      "sources": [
+        { "label": "Wikipedia: Dennis McKenna", "url": "https://en.wikipedia.org/wiki/Dennis_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["family", "colorado"]
+    },
+    {
+      "id": "life-seeking-magic-mushroom",
+      "date": "1957-05-13",
+      "precision": "day",
+      "type": "artifact",
+      "title": "Life magazine publishes \"Seeking the Magic Mushroom\"",
+      "summary": "Life runs R. Gordon Wasson's account of a Mexican mushroom ceremony. The article, which McKenna encountered as a boy in Paonia, was his first exposure to psilocybin mushrooms.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["mushrooms", "print"]
+    },
+    {
+      "id": "jung-alchemy-reading",
+      "date": "1960",
+      "precision": "circa",
+      "type": "life",
+      "title": "Reads Jung's Psychology and Alchemy",
+      "summary": "Around age fourteen he reads Carl Jung's Psychology and Alchemy, an early step into the esoteric reading that later filled his lectures.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "circa",
+      "tags": ["reading"]
+    },
+    {
+      "id": "move-to-california",
+      "date": "1962",
+      "precision": "circa",
+      "type": "life",
+      "title": "Sent to California at sixteen",
+      "summary": "He moves to Los Altos, California, to live with family friends, and finishes high school in Lancaster.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "circa",
+      "tags": ["california", "education"]
+    },
+    {
+      "id": "psychedelic-reading",
+      "date": "1963",
+      "precision": "year",
+      "type": "life",
+      "title": "Encounters the psychedelic literature",
+      "summary": "Through Aldous Huxley's books and The Village Voice he meets the psychedelic writing of the day.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["reading", "california"]
+    },
+    {
+      "id": "berkeley-enrollment",
+      "date": "1965",
+      "precision": "year",
+      "type": "life",
+      "title": "Enrolls at UC Berkeley",
+      "summary": "McKenna begins undergraduate study at the University of California, Berkeley.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["berkeley", "education"]
+    },
+    {
+      "id": "tussman-college",
+      "date": "1965",
+      "precision": "year",
+      "type": "life",
+      "title": "Accepted into the Tussman Experimental College",
+      "summary": "He is admitted to Berkeley's Tussman Experimental College, a two-year interdisciplinary program that let him shape his own course of study.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["berkeley", "education"]
+    },
+    {
+      "id": "first-dmt",
+      "date": "1967",
+      "precision": "year",
+      "type": "life",
+      "title": "First DMT experience",
+      "summary": "Introduced by Rick Watson, he smokes DMT for the first time, an experience he described for the rest of his life. In the same period he begins studying Tibetan religion.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["dmt", "berkeley"]
+    },
+    {
+      "id": "jerusalem-meets-kathleen",
+      "date": "1967",
+      "precision": "year",
+      "type": "life",
+      "title": "Travels to Jerusalem; meets Kathleen Harrison",
+      "summary": "On a trip to Jerusalem he meets Kathleen Harrison, the ethnobotanist he would later marry.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["travel", "family"]
+    },
+    {
+      "id": "nepal-tibetan-studies",
+      "date": "1969",
+      "precision": "year",
+      "type": "life",
+      "title": "Travels to Nepal",
+      "summary": "He goes to Nepal in pursuit of Tibetan painting and shamanic tradition, part of several years of travel through Asia.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["travel", "asia"]
+    },
+    {
+      "id": "smuggling-episode",
+      "date": "1969",
+      "precision": "circa",
+      "type": "life",
+      "title": "Customs seizure ends a smuggling sideline",
+      "summary": "One of his hashish shipments is seized by US customs. He spends the following period moving through Southeast Asia and Indonesia, partly earning his way collecting butterflies.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "circa",
+      "tags": ["travel", "asia"]
+    },
+    {
+      "id": "butterfly-collection",
+      "dateRange": { "start": "1969", "end": "1972" },
+      "precision": "circa",
+      "type": "life",
+      "title": "The butterfly collection",
+      "summary": "McKenna collects butterflies in Indonesia and elsewhere, wrapping specimens in scrap paper of the period. The surviving collection later became the material for his daughter Klea's 2008 book.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "Klea McKenna: Books", "url": "https://www.kleamckenna.com/books" }
+      ],
+      "confidence": "documented",
+      "tags": ["butterflies", "asia"]
+    },
+    {
+      "id": "mother-dies",
+      "date": "1970",
+      "precision": "year",
+      "type": "life",
+      "title": "Death of his mother",
+      "summary": "Hazelle McKenna dies of cancer. Both brothers later tied the timing of the Amazon expedition to this loss.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "Reality Sandwich: The Experiment at La Chorrera", "url": "https://realitysandwich.com/experiment_la_chorrera/" }
+      ],
+      "confidence": "documented",
+      "tags": ["family"]
+    },
+    {
+      "id": "la-chorrera-departure",
+      "date": "1971-02",
+      "precision": "month",
+      "type": "life",
+      "title": "Expedition sets out for La Chorrera",
+      "summary": "Terence, Dennis, and three companions travel into the Colombian Amazon toward La Chorrera, a mission settlement on the Rio Igara Parana. The stated goal was oo-koo-he, a DMT snuff; what they found was Psilocybe cubensis.",
+      "sources": [
+        { "label": "Attar Media: McKenna Explores the Invisible Landscape", "url": "https://attarmedia.substack.com/p/terence-mckenna-explores-the-invisible" },
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "Reality Sandwich: The Experiment at La Chorrera", "url": "https://realitysandwich.com/experiment_la_chorrera/" }
+      ],
+      "confidence": "documented",
+      "tags": ["la-chorrera", "amazon", "mushrooms"]
+    },
+    {
+      "id": "la-chorrera-arrival",
+      "date": "1971-02",
+      "precision": "month",
+      "type": "life",
+      "title": "Arrival at La Chorrera",
+      "summary": "The party reaches La Chorrera in late February. Sources agree on the month; this project has not yet pinned the exact day to a primary document.",
+      "sources": [
+        { "label": "Attar Media: McKenna Explores the Invisible Landscape", "url": "https://attarmedia.substack.com/p/terence-mckenna-explores-the-invisible" },
+        { "label": "Reality Sandwich: The Experiment at La Chorrera", "url": "https://realitysandwich.com/experiment_la_chorrera/" }
+      ],
+      "confidence": "reported",
+      "tags": ["la-chorrera", "amazon"]
+    },
+    {
+      "id": "la-chorrera-experiment",
+      "date": "1971-03-04",
+      "precision": "day",
+      "type": "life",
+      "title": "The experiment at La Chorrera",
+      "summary": "On the evening of March 4 the brothers attempt Dennis's protocol combining psilocybin mushrooms and harmine, intending nothing less than a permanent physical change in reality. Dennis's memoir dates the session precisely.",
+      "sources": [
+        { "label": "Reality Sandwich: The Experiment at La Chorrera", "url": "https://realitysandwich.com/experiment_la_chorrera/" },
+        { "label": "Attar Media: McKenna Explores the Invisible Landscape", "url": "https://attarmedia.substack.com/p/terence-mckenna-explores-the-invisible" }
+      ],
+      "confidence": "documented",
+      "tags": ["la-chorrera", "mushrooms", "timewave"]
+    },
+    {
+      "id": "la-chorrera-aftermath",
+      "dateRange": { "start": "1971-03-05", "end": "1971-03-18" },
+      "precision": "circa",
+      "type": "life",
+      "title": "The two weeks after the experiment",
+      "summary": "Dennis passes through roughly two weeks of severe psychological disturbance while Terence, watching over him, begins the speculations about time and the I Ching that became the timewave.",
+      "sources": [
+        { "label": "Reality Sandwich: The Experiment at La Chorrera", "url": "https://realitysandwich.com/experiment_la_chorrera/" },
+        { "label": "Attar Media: McKenna Explores the Invisible Landscape", "url": "https://attarmedia.substack.com/p/terence-mckenna-explores-the-invisible" }
+      ],
+      "confidence": "circa",
+      "tags": ["la-chorrera", "timewave"]
+    },
+    {
+      "id": "la-chorrera-return",
+      "date": "1971",
+      "precision": "circa",
+      "type": "life",
+      "title": "Return from the Amazon",
+      "summary": "The group leaves La Chorrera and the brothers eventually return to the United States. Accounts differ on how quickly they left: one has them flying to Bogota within days of the experiment, others describe a longer stay.",
+      "sources": [
+        { "label": "Attar Media: McKenna Explores the Invisible Landscape", "url": "https://attarmedia.substack.com/p/terence-mckenna-explores-the-invisible" },
+        { "label": "Reality Sandwich: The Experiment at La Chorrera", "url": "https://realitysandwich.com/experiment_la_chorrera/" },
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "disputed",
+      "tags": ["la-chorrera", "amazon"]
+    },
+    {
+      "id": "timewave-conception",
+      "date": "1971",
+      "precision": "year",
+      "type": "artifact",
+      "title": "The timewave idea is seeded",
+      "summary": "Out of the La Chorrera experience Terence begins constructing a mathematical map of novelty from the King Wen sequence of the I Ching. The idea occupied him for the rest of his life.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" },
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["timewave", "i-ching"]
+    },
+    {
+      "id": "berkeley-return",
+      "date": "1972",
+      "precision": "year",
+      "type": "life",
+      "title": "Returns to Berkeley",
+      "summary": "He goes back to UC Berkeley to finish his interrupted studies.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["berkeley", "education"]
+    },
+    {
+      "id": "kelley-taylor-fortran",
+      "dateRange": { "start": "1974", "end": "1975" },
+      "precision": "circa",
+      "type": "artifact",
+      "title": "First computed timewave: FORTRAN on a CDC 6400",
+      "summary": "Royce Kelley and Leon Taylor compute the wave's values in FORTRAN on a CDC 6400 at Berkeley, producing the 64 tables of 384 terms behind the original Kelley number set.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "reported",
+      "tags": ["software", "timewave"]
+    },
+    {
+      "id": "berkeley-degree",
+      "date": "1975",
+      "precision": "year",
+      "type": "life",
+      "title": "Graduates from Berkeley",
+      "summary": "McKenna takes his degree in ecology, shamanism, and natural resource conservation, a self-shaped course of study in the Tussman spirit.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["berkeley", "education"]
+    },
+    {
+      "id": "invisible-landscape",
+      "date": "1975",
+      "precision": "year",
+      "type": "publication",
+      "title": "The Invisible Landscape published",
+      "summary": "The Invisible Landscape: Mind, Hallucinogens and the I Ching (Seabury Press), written with Dennis, publishes the La Chorrera speculations and the first form of the timewave. The first edition circulated narrowly.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "Wikipedia: Dennis McKenna", "url": "https://en.wikipedia.org/wiki/Dennis_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["books", "timewave"]
+    },
+    {
+      "id": "marriage-kathleen",
+      "date": "1975",
+      "precision": "year",
+      "type": "life",
+      "title": "Marries Kathleen Harrison",
+      "summary": "He marries the ethnobotanist Kathleen Harrison, in the autumn of 1975 according to the Wikipedia account. A primary record has not yet been checked.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["family"]
+    },
+    {
+      "id": "mushroom-growers-guide",
+      "date": "1976",
+      "precision": "year",
+      "type": "publication",
+      "title": "Psilocybin: Magic Mushroom Grower's Guide",
+      "summary": "The brothers publish their cultivation manual with And/Or Press under the pseudonyms O. T. Oss and O. N. Oeric. Their method made home cultivation of Psilocybe cubensis practical for the first time.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "Wikipedia: Dennis McKenna", "url": "https://en.wikipedia.org/wiki/Dennis_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["mushrooms", "books"]
+    },
+    {
+      "id": "children-born",
+      "dateRange": { "start": "1978", "end": "1980" },
+      "precision": "circa",
+      "type": "life",
+      "title": "Birth of Finn and Klea",
+      "summary": "Terence and Kathleen's two children, son Finn and daughter Klea, are born in this period. The project still needs a family statement or record for exact dates.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "Klea McKenna: Books", "url": "https://www.kleamckenna.com/books" }
+      ],
+      "confidence": "circa",
+      "tags": ["family"]
+    },
+    {
+      "id": "broadwell-apple-ii",
+      "dateRange": { "start": "1978", "end": "1979" },
+      "precision": "circa",
+      "type": "artifact",
+      "title": "First graphical timewave software",
+      "summary": "Peter Broadwell's BASIC program for the Apple II+ gives the timewave its first on-screen graph.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "reported",
+      "tags": ["software", "timewave"]
+    },
+    {
+      "id": "scharff-pascal",
+      "date": "1981",
+      "precision": "year",
+      "type": "artifact",
+      "title": "Independent Pascal implementation in Germany",
+      "summary": "Klaus Scharff writes an independent Pascal version of the timewave software, evidence of the theory's early spread beyond McKenna's own circle.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "reported",
+      "tags": ["software", "timewave"]
+    },
+    {
+      "id": "speaking-career-begins",
+      "dateRange": { "start": "1980", "end": "1984" },
+      "precision": "circa",
+      "type": "life",
+      "title": "Becomes a public lecturer",
+      "summary": "In the early 1980s McKenna emerges as a speaker on the California circuit, the start of nearly two decades of recorded talks. Session-level dating of the early years is thin.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "circa",
+      "tags": ["speaking"]
+    },
+    {
+      "id": "tryptamine-esalen-1982",
+      "date": "1982-12",
+      "precision": "month",
+      "type": "talk",
+      "title": "\"Tryptamine Hallucinogen Consciousness\" at Esalen",
+      "summary": "Recorded at the Esalen Institute in December 1982, this is the earliest Esalen lecture the institute has republished from its own archive.",
+      "sources": [
+        { "label": "Esalen: Voices of Esalen, 1982 lecture", "url": "https://www.esalen.org/podcasts/archive-edition-terence-mckennas-1982-lecture-at-esalen-tryptamine-hallucinogen-consciousness" }
+      ],
+      "confidence": "documented",
+      "tags": ["esalen", "dmt", "speaking"]
+    },
+    {
+      "id": "esalen-era",
+      "dateRange": { "start": "1982", "end": "1999" },
+      "precision": "circa",
+      "type": "life",
+      "title": "The Esalen years",
+      "summary": "By Esalen's own count McKenna taught there nearly one hundred times, with seminars such as Dynamics of Hyperspace and Our Cyberspiritual Future. Dating each visit from Esalen's records is a major open task for this chronology.",
+      "sources": [
+        { "label": "Esalen: Voices of Esalen, 1982 lecture", "url": "https://www.esalen.org/podcasts/archive-edition-terence-mckennas-1982-lecture-at-esalen-tryptamine-hallucinogen-consciousness" }
+      ],
+      "confidence": "circa",
+      "tags": ["esalen", "speaking"]
+    },
+    {
+      "id": "dennis-doctorate",
+      "date": "1984",
+      "precision": "year",
+      "type": "life",
+      "title": "Dennis McKenna earns his doctorate",
+      "summary": "Dennis completes a PhD in botanical sciences at the University of British Columbia, on the pharmacology of Amazonian hallucinogenic plants. The brothers' paths diverge: one into science, one onto the stage.",
+      "sources": [
+        { "label": "Wikipedia: Dennis McKenna", "url": "https://en.wikipedia.org/wiki/Dennis_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["family", "botany"]
+    },
+    {
+      "id": "meyer-meets-mckenna",
+      "date": "1985",
+      "precision": "year",
+      "type": "life",
+      "title": "Peter Meyer meets McKenna",
+      "summary": "Programmer Peter J. Meyer meets McKenna. Their collaboration produced every later edition of the timewave software.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "reported",
+      "tags": ["software", "timewave"]
+    },
+    {
+      "id": "botanical-dimensions-founded",
+      "date": "1985",
+      "precision": "year",
+      "type": "life",
+      "title": "Botanical Dimensions founded",
+      "summary": "Terence and Kathleen found Botanical Dimensions, a nonprofit for preserving ethnobotanically significant plants and the knowledge around them, anchored by a forest garden on the Big Island of Hawaii.",
+      "sources": [
+        { "label": "Botanical Dimensions: Who We Are", "url": "https://botanicaldimensions.org/contact-botanical-dimensions/" },
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["botany", "hawaii"]
+    },
+    {
+      "id": "mushroom-guide-revised",
+      "date": "1986",
+      "precision": "year",
+      "type": "publication",
+      "title": "Revised mushroom guide",
+      "summary": "A revised edition of the grower's guide appears; combined sales passed one hundred thousand copies.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["mushrooms", "books"]
+    },
+    {
+      "id": "meyer-apple-iie",
+      "dateRange": { "start": "1986", "end": "1987" },
+      "precision": "circa",
+      "type": "artifact",
+      "title": "Meyer's Apple //e timewave software",
+      "summary": "Meyer writes the Apple //e version of the software, visiting McKenna in Hawaii in 1987 to work on it. Watkins' account credits Meyer with introducing the wave's full fractal nesting in this period.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" },
+        { "label": "Reality Sandwich: The Watkins Objection", "url": "https://realitysandwich.com/watkins_objection/" }
+      ],
+      "confidence": "reported",
+      "tags": ["software", "timewave", "hawaii"]
+    },
+    {
+      "id": "twz-software-1987",
+      "date": "1987",
+      "precision": "year",
+      "type": "artifact",
+      "title": "Timewave Zero software (contested dating)",
+      "summary": "Wikipedia dates the completed Timewave Zero software, by Meyer in collaboration with McKenna, to July 1987. The restoration dossier instead places the Apple //e work in 1986 and 1987 and the MS-DOS program named Timewave Zero in 1989 to 1991. The year is kept and the conflict flagged.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "disputed",
+      "tags": ["software", "timewave"]
+    },
+    {
+      "id": "trialogue-first-public",
+      "date": "1989-09-08",
+      "precision": "day",
+      "type": "talk",
+      "title": "First public trialogue, Esalen",
+      "summary": "McKenna, Rupert Sheldrake, and Ralph Abraham hold their first public three-way conversation at Esalen. The institute's archive preserves the recording with an exact date.",
+      "sources": [
+        { "label": "Esalen: Trialogue at Esalen, 9/8/89", "url": "https://www.esalen.org/podcasts/terence-mckenna-rupert-sheldrake-and-ralph-abraham-trialogue-at-esalen-9-8-89-pt-1-122123" },
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["esalen", "trialogues"]
+    },
+    {
+      "id": "trialogues-1989-series",
+      "date": "1989",
+      "precision": "year",
+      "type": "talk",
+      "title": "First trialogue series at Esalen",
+      "summary": "The 1989 series with Sheldrake and Abraham ranges over light and vision, the unconscious, the resacralization of the world, and the apocalypse. The three had been talking privately since meeting in 1982.",
+      "sources": [
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["esalen", "trialogues"]
+    },
+    {
+      "id": "twz-dos",
+      "dateRange": { "start": "1989", "end": "1991" },
+      "precision": "circa",
+      "type": "artifact",
+      "title": "Timewave Zero for MS-DOS",
+      "summary": "Meyer rewrites the software in C for MS-DOS under the name Timewave Zero and extends its range to 4.5 billion years. In December 1990 the program's default zero date becomes December 21, 2012.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "reported",
+      "tags": ["software", "timewave", "2012"]
+    },
+    {
+      "id": "zero-date-settles",
+      "date": "1990-12",
+      "precision": "month",
+      "type": "artifact",
+      "title": "The zero date settles on December 21, 2012",
+      "summary": "Watkins reports that McKenna first reached mid-November 2012 by adding 67.28 years to Hiroshima, then shifted to the winter solstice after learning it ended the Maya calendar. Accounts of exactly when and why the date moved do not agree.",
+      "sources": [
+        { "label": "Reality Sandwich: The Watkins Objection", "url": "https://realitysandwich.com/watkins_objection/" },
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "disputed",
+      "tags": ["timewave", "2012"]
+    },
+    {
+      "id": "mushrooms-program-talk",
+      "date": "1991-02",
+      "precision": "month",
+      "type": "talk",
+      "title": "\"This Is the Mushroom's Program\"",
+      "summary": "A February 1991 talk on the etiquette of working with plant teachers, preserved by the Psychedelic Salon as episode 484. The venue is not recorded in the program notes.",
+      "sources": [
+        { "label": "Psychedelic Salon: podcast 484", "url": "https://psychedelicsalon.com/podcast-484-this-is-the-mushrooms-program/" }
+      ],
+      "confidence": "documented",
+      "tags": ["speaking", "mushrooms"]
+    },
+    {
+      "id": "trialogues-1991",
+      "date": "1991",
+      "precision": "year",
+      "type": "talk",
+      "title": "Second trialogue series at Esalen",
+      "summary": "The 1991 sessions take up saving the world, gender, cannabis, crop circles, and psychedelics and the computer revolution.",
+      "sources": [
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["esalen", "trialogues"]
+    },
+    {
+      "id": "archaic-revival",
+      "date": "1992",
+      "precision": "year",
+      "type": "publication",
+      "title": "The Archaic Revival",
+      "summary": "A collection of essays and interviews from 1983 to 1990. Open Library records the HarperOne paperback of May 1992; some references cite a 1991 first edition, so the month is left open here.",
+      "sources": [
+        { "label": "Open Library: The Archaic Revival", "url": "https://openlibrary.org/books/OL9245160M/The_Archaic_Revival" },
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["books"]
+    },
+    {
+      "id": "food-of-the-gods",
+      "date": "1992",
+      "precision": "year",
+      "type": "publication",
+      "title": "Food of the Gods",
+      "summary": "Food of the Gods: The Search for the Original Tree of Knowledge (Bantam) argues that psilocybin mushrooms shaped early human cognition. Ethnobotanist Richard Evans Schultes reviewed it warmly; it remains his most systematic book.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["books", "mushrooms"]
+    },
+    {
+      "id": "synesthesia",
+      "date": "1992",
+      "precision": "year",
+      "type": "publication",
+      "title": "Synesthesia",
+      "summary": "A limited-edition artist book collaboration published the same year as Food of the Gods.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["books"]
+    },
+    {
+      "id": "trialogues-book",
+      "date": "1992",
+      "precision": "year",
+      "type": "publication",
+      "title": "Trialogues at the Edge of the West",
+      "summary": "Bear and Company publishes the first trialogue book with Sheldrake and Abraham, later retitled Chaos, Creativity and Cosmic Consciousness.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["books", "trialogues"]
+    },
+    {
+      "id": "boss-drum-album",
+      "date": "1992-09-14",
+      "precision": "day",
+      "type": "artifact",
+      "title": "Boss Drum carries McKenna onto the pop charts",
+      "summary": "The Shamen's platinum album Boss Drum (One Little Indian) includes Re:Evolution, eight minutes of McKenna spoken word over the band's production.",
+      "sources": [
+        { "label": "Wikipedia: Boss Drum", "url": "https://en.wikipedia.org/wiki/Boss_Drum" }
+      ],
+      "confidence": "documented",
+      "tags": ["music"]
+    },
+    {
+      "id": "bd-retirement-divorce",
+      "date": "1992",
+      "precision": "year",
+      "type": "life",
+      "title": "Retires from Botanical Dimensions; divorce",
+      "summary": "Terence retires from Botanical Dimensions, and he and Kathleen divorce the same year. Kathleen has directed the organization ever since.",
+      "sources": [
+        { "label": "Botanical Dimensions: Who We Are", "url": "https://botanicaldimensions.org/contact-botanical-dimensions/" },
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["family", "botany"]
+    },
+    {
+      "id": "trialogues-1992-series",
+      "date": "1992",
+      "precision": "year",
+      "type": "talk",
+      "title": "Third trialogue series at Esalen",
+      "summary": "The 1992 sessions cover psychedelics and mathematical vision, the immediate future and the millennium, and utopianism.",
+      "sources": [
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["esalen", "trialogues"]
+    },
+    {
+      "id": "re-evolution-single",
+      "date": "1993-02-22",
+      "precision": "day",
+      "type": "artifact",
+      "title": "\"Re:Evolution\" released as a single",
+      "summary": "The Shamen release Re:Evolution as a single, putting McKenna's voice into the UK charts and in front of the rave generation.",
+      "sources": [
+        { "label": "Wikipedia: Boss Drum", "url": "https://en.wikipedia.org/wiki/Boss_Drum" }
+      ],
+      "confidence": "documented",
+      "tags": ["music"]
+    },
+    {
+      "id": "true-hallucinations",
+      "date": "1993",
+      "precision": "year",
+      "type": "publication",
+      "title": "True Hallucinations",
+      "summary": "True Hallucinations (HarperSanFrancisco) finally tells the La Chorrera story at book length, twenty-two years after the events it recounts.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["books", "la-chorrera"]
+    },
+    {
+      "id": "invisible-landscape-revised",
+      "date": "1993",
+      "precision": "year",
+      "type": "publication",
+      "title": "The Invisible Landscape, revised edition",
+      "summary": "HarperSanFrancisco reissues The Invisible Landscape with Peter Meyer's appendix on the mathematics of the timewave. Watkins' account gives 1994 for the republication and the dossier gives 1993; worth settling from the copyright page.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" },
+        { "label": "Fourmilab: The Watkins Objection", "url": "https://www.fourmilab.ch/rpkp/autopsy.html" }
+      ],
+      "confidence": "reported",
+      "tags": ["books", "timewave"]
+    },
+    {
+      "id": "trialogues-devon",
+      "date": "1993",
+      "precision": "year",
+      "type": "talk",
+      "title": "Trialogues at Hazelwood, Devon",
+      "summary": "The trialogues travel to England: homing pigeons, time, fractal boundaries, angels and entities.",
+      "sources": [
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["trialogues", "travel"]
+    },
+    {
+      "id": "wen-tools",
+      "dateRange": { "start": "1993", "end": "1994" },
+      "precision": "circa",
+      "type": "artifact",
+      "title": "Meyer's WEN_SRCH and WEN_GRPH tools",
+      "summary": "Meyer builds tools that generate 384-value sets from any hexagram ordering, not just King Wen. They later mattered for testing how special the original sequence really is.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "reported",
+      "tags": ["software", "timewave"]
+    },
+    {
+      "id": "trialogues-hawaii",
+      "date": "1994",
+      "precision": "year",
+      "type": "talk",
+      "title": "Trialogues at McKenna's Hawaii home",
+      "summary": "Sheldrake and Abraham record with McKenna at his home in Hawaii, including two sessions on the World Wide Web, then a novelty.",
+      "sources": [
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["trialogues", "hawaii"]
+    },
+    {
+      "id": "starwood-1994",
+      "date": "1994",
+      "precision": "year",
+      "type": "talk",
+      "title": "Speaks at the Starwood Festival",
+      "summary": "McKenna appears as a speaker at the Starwood Festival. The Wikipedia article notes the year without a program-level date.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["speaking"]
+    },
+    {
+      "id": "new-statesman-essay",
+      "date": "1994",
+      "precision": "year",
+      "type": "publication",
+      "title": "Essay in New Statesman and Society",
+      "summary": "He publishes an essay in the British weekly New Statesman and Society.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["print"]
+    },
+    {
+      "id": "hacking-reality-talk",
+      "date": "1995-10",
+      "precision": "month",
+      "type": "talk",
+      "title": "\"Hacking Reality\" talk",
+      "summary": "A talk recorded in October 1995 and circulated by the Psychedelic Salon as episode 702, comparing cultures to computer operating systems. Venue unrecorded.",
+      "sources": [
+        { "label": "Psychedelic Salon: podcast 702", "url": "https://psychedelicsalon.com/podcast-702-hacking-reality/" },
+        { "label": "Psychedelic Salon: McKenna episode index", "url": "https://psychedelicsalon.com/category/people/terence-mckenna/" }
+      ],
+      "confidence": "documented",
+      "tags": ["speaking", "software"]
+    },
+    {
+      "id": "palenque-watkins-meeting",
+      "date": "1996",
+      "precision": "year",
+      "type": "life",
+      "title": "Meets Matthew Watkins at Palenque",
+      "summary": "At an entheobotany gathering at the Maya site of Palenque, Mexico, McKenna meets the mathematician Matthew Watkins, who had been corresponding with him about flaws in the timewave. Fourmilab's copy of the resulting paper places the meeting in January 1996; Watkins' later account says spring.",
+      "sources": [
+        { "label": "Fourmilab: The Watkins Objection", "url": "https://www.fourmilab.ch/rpkp/autopsy.html" },
+        { "label": "Reality Sandwich: The Watkins Objection", "url": "https://realitysandwich.com/watkins_objection/" }
+      ],
+      "confidence": "disputed",
+      "tags": ["timewave", "critique", "travel"]
+    },
+    {
+      "id": "watkins-objection",
+      "date": "1996",
+      "precision": "year",
+      "type": "artifact",
+      "title": "The Watkins Objection published",
+      "summary": "Watkins' paper, Autopsy for a Mathematical Hallucination?, is posted on McKenna's own website with McKenna's introduction. It shows the half twist in the 1975 construction has no mathematical justification. McKenna published the critique of his own theory rather than suppressing it.",
+      "sources": [
+        { "label": "Fourmilab: The Watkins Objection", "url": "https://www.fourmilab.ch/rpkp/autopsy.html" },
+        { "label": "Reality Sandwich: The Watkins Objection", "url": "https://realitysandwich.com/watkins_objection/" }
+      ],
+      "confidence": "documented",
+      "tags": ["timewave", "critique"]
+    },
+    {
+      "id": "sheliak-reconstruction",
+      "date": "1998",
+      "precision": "year",
+      "type": "artifact",
+      "title": "Sheliak's reconstruction of the wave",
+      "summary": "Physicist John Sheliak circulates a vector-formalized reconstruction, sometimes called Timewave One, intended to answer the Watkins Objection. The dossier dates the work to 1997 and 1998.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" },
+        { "label": "Reality Sandwich: The Watkins Objection", "url": "https://realitysandwich.com/watkins_objection/" }
+      ],
+      "confidence": "reported",
+      "tags": ["timewave", "critique", "software"]
+    },
+    {
+      "id": "fractal-time-software",
+      "dateRange": { "start": "1997", "end": "1998" },
+      "precision": "circa",
+      "type": "artifact",
+      "title": "Fractal Time software",
+      "summary": "Meyer's final DOS program, Fractal Time, ships all four historical number sets: Kelley, Watkins, Sheliak, and Huang Ti. Copies of the software survive on the Internet Archive.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" },
+        { "label": "Internet Archive: TWZ / Fractal Time software", "url": "https://archive.org/details/twz_win_4.3" }
+      ],
+      "confidence": "reported",
+      "tags": ["software", "timewave"]
+    },
+    {
+      "id": "evolutionary-mind",
+      "date": "1998",
+      "precision": "year",
+      "type": "publication",
+      "title": "The Evolutionary Mind",
+      "summary": "The second trialogue book with Sheldrake and Abraham is published.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" },
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["books", "trialogues"]
+    },
+    {
+      "id": "trialogues-1998",
+      "date": "1998",
+      "precision": "year",
+      "type": "talk",
+      "title": "Final recorded trialogues",
+      "summary": "The last trialogue recordings, made at various locations: skepticism, morphogenetic family fields, and a closing question and answer session.",
+      "sources": [
+        { "label": "Sheldrake.org: The Trialogues", "url": "https://www.sheldrake.org/audios/the-sheldrake-mckenna-abraham-trialogues" }
+      ],
+      "confidence": "documented",
+      "tags": ["trialogues"]
+    },
+    {
+      "id": "diagnosis",
+      "date": "1999-05-22",
+      "precision": "day",
+      "type": "life",
+      "title": "Diagnosed with glioblastoma multiforme",
+      "summary": "After increasingly severe headaches McKenna collapses and is diagnosed with glioblastoma multiforme, an aggressive brain cancer. Treatment, including experimental procedures, continued over the following months.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["illness"]
+    },
+    {
+      "id": "allchemical-arts",
+      "dateRange": { "start": "1999-09-12", "end": "1999-09-17" },
+      "precision": "day",
+      "type": "talk",
+      "title": "Hosts the AllChemical Arts Conference, Kona",
+      "summary": "McKenna hosts a conference on visionary states and creativity in Kona, Hawaii, four months after his diagnosis. For many attendees it was the last time they saw him.",
+      "sources": [
+        { "label": "Contact Consortium: 1999 events archive", "url": "https://www.ccon.org/events/events99.html" }
+      ],
+      "confidence": "documented",
+      "tags": ["speaking", "hawaii"]
+    },
+    {
+      "id": "final-esalen-gathering",
+      "date": "1999",
+      "precision": "circa",
+      "type": "talk",
+      "title": "Final gathering at Esalen",
+      "summary": "A last, small gathering at Esalen after brain surgery, released by the Psychedelic Salon in 2025. The program notes do not date the recording; establishing the date is an open task.",
+      "sources": [
+        { "label": "Psychedelic Salon: podcast 712", "url": "https://psychedelicsalon.com/podcast-712-terence-mckennas-final-esalen-gathering/" }
+      ],
+      "confidence": "circa",
+      "tags": ["esalen", "illness", "speaking"]
+    },
+    {
+      "id": "erik-davis-interview",
+      "date": "1999",
+      "precision": "circa",
+      "type": "life",
+      "title": "The Erik Davis interview",
+      "summary": "In late 1999 McKenna gives a long interview to the writer Erik Davis about his life and his approaching death.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["illness", "print"]
+    },
+    {
+      "id": "death",
+      "date": "2000-04-03",
+      "precision": "day",
+      "type": "life",
+      "title": "Terence McKenna dies",
+      "summary": "McKenna dies in San Rafael, California, at the age of 53.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["death"]
+    },
+    {
+      "id": "psychedelic-salon-founded",
+      "date": "2005-03-17",
+      "precision": "day",
+      "type": "archive",
+      "title": "The Psychedelic Salon begins",
+      "summary": "Lorenzo Hagerty starts the Psychedelic Salon podcast, which becomes the largest public outlet for McKenna's recorded talks over the following two decades.",
+      "sources": [
+        { "label": "Listen Notes: Psychedelic Salon", "url": "https://www.listennotes.com/podcasts/psychedelic-salon-lorenzo-hagerty-Cn_JPUjLlMr/" },
+        { "label": "Psychedelic Salon: McKenna episode index", "url": "https://psychedelicsalon.com/category/people/terence-mckenna/" }
+      ],
+      "confidence": "reported",
+      "tags": ["audio", "archive"]
+    },
+    {
+      "id": "library-fire",
+      "date": "2007-02-07",
+      "precision": "day",
+      "type": "archive",
+      "title": "The library fire",
+      "summary": "A fire in Monterey, California destroys McKenna's library of over 3,000 rare books and personal papers, held in storage since his death. Dennis preserved an index of the collection. The loss defines much of the archive work that remains.",
+      "sources": [
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["fire", "library", "archive"]
+    },
+    {
+      "id": "butterfly-hunter",
+      "date": "2008",
+      "precision": "year",
+      "type": "publication",
+      "title": "The Butterfly Hunter",
+      "summary": "Klea McKenna publishes The Butterfly Hunter, photographing her father's 1969 to 1972 butterfly collection with the scrap paper he wrapped it in, in an edition of 480 copies with a previously unpublished McKenna short story.",
+      "sources": [
+        { "label": "Klea McKenna: Books", "url": "https://www.kleamckenna.com/books" },
+        { "label": "Wikipedia: Terence McKenna", "url": "https://en.wikipedia.org/wiki/Terence_McKenna" }
+      ],
+      "confidence": "documented",
+      "tags": ["butterflies", "family", "books"]
+    },
+    {
+      "id": "brotherhood-kickstarter",
+      "date": "2011-04-07",
+      "precision": "day",
+      "type": "archive",
+      "title": "Kickstarter for Dennis's memoir",
+      "summary": "Dennis McKenna launches a crowdfunding campaign for his memoir of life with Terence.",
+      "sources": [
+        { "label": "Wikipedia: Dennis McKenna", "url": "https://en.wikipedia.org/wiki/Dennis_McKenna" }
+      ],
+      "confidence": "reported",
+      "tags": ["family", "books"]
+    },
+    {
+      "id": "brotherhood-published",
+      "date": "2012",
+      "precision": "year",
+      "type": "publication",
+      "title": "The Brotherhood of the Screaming Abyss",
+      "summary": "Dennis's memoir (North Star Press) becomes a primary source for the family history and the La Chorrera chronology, including the March 4, 1971 dating used in this timeline.",
+      "sources": [
+        { "label": "Wikipedia: Dennis McKenna", "url": "https://en.wikipedia.org/wiki/Dennis_McKenna" },
+        { "label": "Reality Sandwich: The Experiment at La Chorrera", "url": "https://realitysandwich.com/experiment_la_chorrera/" }
+      ],
+      "confidence": "documented",
+      "tags": ["books", "family", "la-chorrera"]
+    },
+    {
+      "id": "zero-date-passes",
+      "date": "2012-12-21",
+      "precision": "day",
+      "type": "artifact",
+      "title": "The zero date passes",
+      "summary": "The timewave's terminus arrives and passes without incident, twelve years after McKenna's death. The theory's public test is part of its record.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" }
+      ],
+      "confidence": "documented",
+      "tags": ["2012", "timewave"]
+    },
+    {
+      "id": "software-preserved",
+      "date": "2015-08-06",
+      "precision": "day",
+      "type": "archive",
+      "title": "Original software preserved online",
+      "summary": "Timewave Zero and Fractal Time binaries are uploaded to the Internet Archive, keeping the original programs downloadable and runnable.",
+      "sources": [
+        { "label": "Internet Archive: TWZ / Fractal Time software", "url": "https://archive.org/details/twz_win_4.3" }
+      ],
+      "confidence": "documented",
+      "tags": ["software", "archive"]
+    },
+    {
+      "id": "weird-naturalism-paper",
+      "date": "2017",
+      "precision": "year",
+      "type": "publication",
+      "title": "Academic study of La Chorrera",
+      "summary": "Erik Davis publishes The Weird Naturalism of the Brothers McKenna, an academic treatment of the experiment at La Chorrera, in the International Journal for the Study of New Religions.",
+      "sources": [
+        { "label": "Techgnosis: The Weird Naturalism of the Brothers McKenna", "url": "https://techgnosis.com/weird-naturalism-brothers-mckenna/" }
+      ],
+      "confidence": "documented",
+      "tags": ["la-chorrera", "print", "archive"]
+    },
+    {
+      "id": "esalen-archive-release",
+      "date": "2019-11-04",
+      "precision": "day",
+      "type": "archive",
+      "title": "Esalen republishes the 1982 lecture",
+      "summary": "The Voices of Esalen podcast releases the December 1982 lecture from the institute's own tape archive, with commentary by Allan Badiner. Institutional archives still hold undigitized McKenna material.",
+      "sources": [
+        { "label": "Esalen: Voices of Esalen, 1982 lecture", "url": "https://www.esalen.org/podcasts/archive-edition-terence-mckennas-1982-lecture-at-esalen-tryptamine-hallucinogen-consciousness" }
+      ],
+      "confidence": "documented",
+      "tags": ["esalen", "audio", "archive"]
+    },
+    {
+      "id": "salon-final-esalen-release",
+      "date": "2025-01-17",
+      "precision": "day",
+      "type": "archive",
+      "title": "An unheard recording surfaces",
+      "summary": "The Psychedelic Salon releases a previously uncirculated recording of McKenna's final Esalen gathering. A quarter century after his death, new tape is still surfacing.",
+      "sources": [
+        { "label": "Psychedelic Salon: podcast 712", "url": "https://psychedelicsalon.com/podcast-712-terence-mckennas-final-esalen-gathering/" }
+      ],
+      "confidence": "documented",
+      "tags": ["esalen", "audio", "archive"]
+    },
+    {
+      "id": "family-site-releases",
+      "date": "2026",
+      "precision": "year",
+      "type": "archive",
+      "title": "Authorized releases announced by the family site",
+      "summary": "terencemckenna.com, maintained with the family, announces new authorized audio releases for 2026 and describes the decades of unauthorized reproduction the estate is working to correct.",
+      "sources": [
+        { "label": "terencemckenna.com: Audio", "url": "https://www.terencemckenna.com/audio" }
+      ],
+      "confidence": "reported",
+      "tags": ["family", "audio", "archive"]
+    },
+    {
+      "id": "timewave-restoration",
+      "date": "2026",
+      "precision": "year",
+      "type": "archive",
+      "title": "The timewave restored as a web instrument",
+      "summary": "The timewave software is restored for the web, verified digit for digit against Meyer's original program. This chronology is scaffolding for the same restoration effort.",
+      "sources": [
+        { "label": "timewave-zero-ui: research dossier", "url": "https://github.com/newswim/timewave-zero-ui/blob/main/docs/research.md" },
+        { "label": "Timewave Zero restoration (live)", "url": "https://timewave-zero-ui.vercel.app" }
+      ],
+      "confidence": "documented",
+      "tags": ["software", "timewave", "archive"]
+    }
+  ]
+}
