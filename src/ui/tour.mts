@@ -42,10 +42,10 @@ const STEPS: Step[] = [
     body: "Rest your cursor anywhere on the wave and a small card appears with the date, the wave's value there, and the day's hexagram from the I Ching.",
   },
   {
-    title: "The one honest property",
+    title: "Temporal resonance",
     view: "modern",
     target: "#resonance",
-    body: "You are now at the final 67 years, 1945 to 2012. After the tour, press ⇡64: the view will widen 64 times and the curve will keep its exact shape. The wave repeats inside itself at every scale, and unlike the rest of the theory, that claim is simply true.",
+    body: "You are now at the final 67 years, 1945 to 2012. After the tour, press ⇡64: the view will widen 64 times and the curve will keep its exact shape. The wave repeats inside itself at every scale — McKenna called this temporal resonance, and it holds exactly; it is a provable property of the mathematics.",
   },
   {
     title: "Four versions of the numbers",
