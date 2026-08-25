@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terence McKenna, 1946&ndash;2000: a working chronology</title>
+  <meta name="description" content="A reconstruction scaffold for the McKenna archive project: a sourced, confidence-labeled timeline of Terence McKenna's life, built to be corrected." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='16' y='24' font-size='24' text-anchor='middle' fill='%23c98500'%3E%E4%B7%BF%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --paper: #0c101d;
+      --ink: #e9ecf5;
+      --ink-soft: #c3c7d4;
+      --muted: #8a8fa3;
+      --amber: #e2a223;
+      --violet: #a99df0;
+      --hairline: rgba(255, 255, 255, 0.14);
+      --card: rgba(255, 255, 255, 0.03);
+      --t-life: #e2a223;
+      --t-talk: #a99df0;
+      --t-publication: #7fc7a5;
+      --t-artifact: #d98d68;
+      --t-archive: #7fb5d9;
+      --disputed: #e07a7a;
+    }
+    * { margin: 0; box-sizing: border-box; }
+    body {
+      background: var(--paper);
+      color: var(--ink-soft);
+      font: 15px/1.65 Charter, Georgia, "Times New Roman", serif;
+    }
+    main { max-width: 840px; margin: 0 auto; padding: 48px 20px 90px; }
+    h1 { color: var(--ink); font-size: 28px; line-height: 1.2; font-weight: 600; margin-bottom: 4px; }
+    .subtitle { color: var(--muted); font-style: italic; margin-bottom: 22px; }
+    .standfirst { max-width: 640px; margin-bottom: 10px; }
+    .standfirst b { color: var(--ink); font-weight: 600; }
+    .counts { color: var(--muted); font-size: 14px; margin-bottom: 26px; }
+    .counts b { color: var(--amber); font-weight: 600; }
+    a { color: var(--violet); }
+
+    /* legend */
+    .legend { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center;
+      border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+      padding: 12px 2px; margin-bottom: 20px; font-size: 13px; color: var(--muted); }
+    .legend .item { display: inline-flex; align-items: center; gap: 7px; }
+
+    /* type marker shapes */
+    .mark { display: inline-block; width: 11px; height: 11px; flex: none; }
+    .mark.life { border-radius: 50%; background: var(--t-life); }
+    .mark.talk { width: 0; height: 0; background: none;
+      border-left: 6.5px solid transparent; border-right: 6.5px solid transparent;
+      border-bottom: 11px solid var(--t-talk); }
+    .mark.publication { background: var(--t-publication); }
+    .mark.artifact { background: var(--t-artifact); transform: rotate(45deg) scale(0.86); }
+    .mark.archive { background: var(--t-archive);
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+
+    /* controls */
+    .controls { position: sticky; top: 0; z-index: 5; background: var(--paper);
+      border-bottom: 1px solid var(--hairline); padding: 10px 0 12px; margin-bottom: 8px; }
+    .controls .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+    .controls .row:first-child { margin-top: 0; }
+    button, select, input[type="search"] {
+      font: 13px Charter, Georgia, serif; color: var(--ink-soft);
+      background: var(--card); border: 1px solid var(--hairline);
+      border-radius: 5px; padding: 4px 10px; cursor: pointer;
+    }
+    input[type="search"] { cursor: text; min-width: 200px; flex: 1 1 200px; }
+    input[type="search"]::placeholder { color: var(--muted); }
+    button.toggle { display: inline-flex; align-items: center; gap: 6px; }
+    button.toggle.off { opacity: 0.38; }
+    button.toggle.on { border-color: rgba(255,255,255,0.35); }
+    button:hover, select:hover { border-color: rgba(255,255,255,0.4); }
+    .conf-toggle.on.c-disputed { border-color: var(--disputed); color: var(--disputed); }
+    .showing { color: var(--muted); font-size: 13px; margin-left: auto; }
+    .exports { display: inline-flex; gap: 8px; }
+
+    /* decade nav */
+    .decades { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 4px; }
+    .decades a { font-size: 13px; color: var(--muted); text-decoration: none;
+      border: 1px solid var(--hairline); border-radius: 5px; padding: 2px 9px; }
+    .decades a:hover { color: var(--amber); border-color: var(--amber); }
+
+    /* gaps strip */
+    .gaps { margin: 18px 0 26px; }
+    .gaps .gaps-label { font-size: 13px; color: var(--muted); margin-bottom: 7px; }
+    .gaps .gaps-label b { color: var(--amber); font-weight: 600; }
+    .gaps .cells { display: flex; flex-wrap: wrap; gap: 3px; }
+    .gaps .cell { width: 22px; height: 14px; font-size: 0; border-radius: 2px;
+      background: rgba(255,255,255,0.10); }
+    .gaps .cell.empty { background: none; border: 1px dashed rgba(226,162,35,0.55); }
+    .gaps .key { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .gaps .key .sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px;
+      vertical-align: baseline; margin-right: 4px; }
+    .gaps .key .sw.full { background: rgba(255,255,255,0.10); }
+    .gaps .key .sw.hollow { border: 1px dashed rgba(226,162,35,0.55); }
+
+    /* timeline */
+    .year-group { margin-top: 26px; }
+    .year-head { color: var(--ink); font-size: 21px; font-weight: 600;
+      border-bottom: 1px solid var(--hairline); padding-bottom: 4px; margin-bottom: 4px;
+      scroll-margin-top: 120px; }
+    .year-head .n { color: var(--muted); font-size: 13px; font-weight: 400; margin-left: 8px; }
+    .entries { border-left: 1px solid var(--hairline); margin-left: 5px; padding-left: 0; }
+    .entry { position: relative; padding: 12px 4px 12px 26px; }
+    .entry + .entry { border-top: 1px dotted rgba(255,255,255,0.08); }
+    .entry .mark { position: absolute; left: -6px; top: 19px; }
+    .entry .mark.talk { left: -7px; }
+    .entry-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+    .entry-date { font-variant-numeric: tabular-nums; color: var(--amber); font-size: 13.5px; white-space: nowrap; }
+    .entry-title { color: var(--ink); font-weight: 600; font-size: 16px; }
+    .entry-summary { margin-top: 3px; max-width: 660px; }
+    .entry-foot { margin-top: 6px; font-size: 12.5px; color: var(--muted);
+      display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
+    .srcs a { color: var(--violet); text-decoration: none; border-bottom: 1px dotted rgba(169,157,240,0.5); }
+    .srcs a:hover { border-bottom-style: solid; }
+    .corr { color: var(--amber); font-style: italic; opacity: 0.8; }
+    .tags-line .tag { cursor: pointer; color: var(--muted); }
+    .tags-line .tag:hover { color: var(--ink); }
+    .tags-line .tag::before { content: "#"; opacity: 0.6; }
+
+    /* chips */
+    .chip { display: inline-block; font-size: 11px; letter-spacing: 0.4px;
+      text-transform: uppercase; border-radius: 4px; padding: 1px 7px;
+      border: 1px solid var(--hairline); color: var(--muted); vertical-align: 1px; }
+    .chip.c-documented { border-color: rgba(255,255,255,0.28); color: var(--ink-soft); }
+    .chip.c-reported { }
+    .chip.c-circa { border-style: dashed; font-style: italic; }
+    .chip.c-disputed { border-color: var(--disputed); color: var(--disputed); }
+    .chip.t { text-transform: none; letter-spacing: 0.2px; }
+    .chip.t-life { color: var(--t-life); border-color: rgba(226,162,35,0.4); }
+    .chip.t-talk { color: var(--t-talk); border-color: rgba(169,157,240,0.4); }
+    .chip.t-publication { color: var(--t-publication); border-color: rgba(127,199,165,0.4); }
+    .chip.t-artifact { color: var(--t-artifact); border-color: rgba(217,141,104,0.4); }
+    .chip.t-archive { color: var(--t-archive); border-color: rgba(127,181,217,0.4); }
+
+    /* inline gap rows */
+    .gap-row { padding: 5px 4px 5px 26px; margin-left: 5px; border-left: 1px solid var(--hairline);
+      color: var(--muted); font-size: 12.5px; font-style: italic; }
+    .gap-row b { color: var(--amber); font-weight: 600; font-style: normal; }
+
+    .nothing { color: var(--muted); font-style: italic; padding: 30px 0; }
+    .footer { margin-top: 54px; padding-top: 16px; border-top: 1px solid var(--hairline);
+      color: var(--muted); font-size: 13.5px; }
+    .loading { color: var(--muted); font-style: italic; padding: 40px 0; }
+
+    @media print {
+      :root { --paper: #ffffff; --ink: #111111; --ink-soft: #222222; --muted: #555555;
+        --amber: #7a5300; --violet: #4a3aa7; --hairline: rgba(0,0,0,0.3); --card: transparent;
+        --t-life: #7a5300; --t-talk: #4a3aa7; --t-publication: #1e6b4a;
+        --t-artifact: #8a3d1c; --t-archive: #1e5e8a; --disputed: #a02020; }
+      body { font-size: 10.5pt; }
+      main { max-width: none; padding: 0; }
+      .controls, .decades, .exports, .gaps .key { display: none; }
+      .entry, .year-group { break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+      .srcs a::after { content: " (" attr(href) ")"; font-size: 8pt; color: var(--muted); }
+      .gaps .cell.empty { border-color: #7a5300; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Terence McKenna, 1946&ndash;2000</h1>
+  <p class="subtitle">a working chronology, built to be corrected</p>
+
+  <p class="standfirst">
+    This is <b>reconstruction scaffolding</b>, not a finished biography. It was
+    seeded from public sources in August 2026 so that the archive work has a
+    frame to hang evidence on. Every entry carries its sources and an honest
+    label: <i>documented</i> means well attested, <i>reported</i> means a
+    secondary source says so, <i>circa</i> means the date is an approximation,
+    and <i>disputed</i> means the sources do not agree. Where we could not
+    verify a day, we did not invent one. Corrections, primary documents, and
+    additions are the point.
+  </p>
+  <p class="counts" id="counts">Loading&hellip;</p>
+
+  <div class="legend" id="legend" hidden>
+    <span class="item"><span class="mark life"></span> life</span>
+    <span class="item"><span class="mark talk"></span> talk</span>
+    <span class="item"><span class="mark publication"></span> publication</span>
+    <span class="item"><span class="mark artifact"></span> artifact</span>
+    <span class="item"><span class="mark archive"></span> archive</span>
+    <span class="item"><span class="chip c-documented">documented</span></span>
+    <span class="item"><span class="chip c-reported">reported</span></span>
+    <span class="item"><span class="chip c-circa">circa</span></span>
+    <span class="item"><span class="chip c-disputed">disputed</span></span>
+    <span class="item corr">&#8226; single source: needs corroboration</span>
+  </div>
+
+  <div class="controls" id="controls" hidden>
+    <div class="row" id="type-row"></div>
+    <div class="row">
+      <span id="conf-row"></span>
+      <select id="tag-select"><option value="">all tags</option></select>
+      <input type="search" id="search" placeholder="search titles and summaries" />
+    </div>
+    <div class="row">
+      <span class="exports">
+        <button id="export-json" title="Download the current filtered view as JSON">download JSON</button>
+        <button id="export-csv" title="Download the current filtered view as CSV">download CSV</button>
+        <button id="reset">reset filters</button>
+      </span>
+      <span class="showing" id="showing"></span>
+    </div>
+  </div>
+
+  <nav class="decades" id="decades" hidden></nav>
+
+  <div class="gaps" id="gaps" hidden>
+    <div class="gaps-label"><b>The to-do list:</b> years of his life with no entries yet.
+      Hollow slots below are years 1946&ndash;2000 that no entry touches.</div>
+    <div class="cells" id="gap-cells"></div>
+    <div class="key"><span class="sw full"></span>has entries&ensp;<span class="sw hollow"></span>no entries yet</div>
+  </div>
+
+  <div id="timeline"><p class="loading">Loading the chronology&hellip;</p></div>
+
+  <p class="footer" id="footer" hidden>
+    Dataset: <a href="timeline-data.json">timeline-data.json</a> &mdash; the same
+    file this page renders; edit it and reload.<br />
+    Part of the <a href="https://github.com/newswim/timewave-zero-ui">Timewave Zero restoration</a>.
+    The instrument lives at <a href="https://timewave-zero-ui.vercel.app">timewave-zero-ui.vercel.app</a>.<br />
+    Nothing here is final. If you hold a primary document that corrects an
+    entry, that document wins.
+  </p>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var TYPES = ["life", "talk", "publication", "artifact", "archive"];
+  var CONFS = ["documented", "reported", "circa", "disputed"];
+  var MONTHS = ["January","February","March","April","May","June","July",
+                "August","September","October","November","December"];
+
+  var state = {
+    types: {}, confs: {}, tag: "", search: "",
+    data: null, entries: []
+  };
+  TYPES.forEach(function (t) { state.types[t] = true; });
+  CONFS.forEach(function (c) { state.confs[c] = true; });
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* ---- date helpers ---- */
+  function startOf(e) { return e.date || (e.dateRange && e.dateRange.start) || ""; }
+  function endOf(e) { return e.date || (e.dateRange && e.dateRange.end) || ""; }
+  function sortKey(e) {
+    var s = startOf(e);
+    var p = s.split("-");
+    return (p[0] || "0000") + "-" + (p[1] || "00") + "-" + (p[2] || "00");
+  }
+  function yearOf(s) { return parseInt(s.slice(0, 4), 10); }
+
+  function fmtOne(s) {
+    var p = s.split("-");
+    if (p.length === 3) return parseInt(p[2], 10) + " " + MONTHS[p[1] - 1] + " " + p[0];
+    if (p.length === 2) return MONTHS[p[1] - 1] + " " + p[0];
+    return p[0];
+  }
+  function fmtDate(e) {
+    var out;
+    if (e.date) {
+      out = fmtOne(e.date);
+    } else {
+      var a = e.dateRange.start.split("-"), b = e.dateRange.end.split("-");
+      if (a.length === 3 && b.length === 3 && a[0] === b[0] && a[1] === b[1]) {
+        out = parseInt(a[2], 10) + "–" + parseInt(b[2], 10) + " " + MONTHS[a[1] - 1] + " " + a[0];
+      } else {
+        out = fmtOne(e.dateRange.start) + "–" + fmtOne(e.dateRange.end);
+      }
+    }
+    if (e.precision === "circa") out = "c. " + out;
+    return out;
+  }
+
+  /* ---- coverage (whole dataset, not the filtered view) ---- */
+  function coveredYears(entries) {
+    var cov = {};
+    entries.forEach(function (e) {
+      var y0 = yearOf(startOf(e)), y1 = yearOf(endOf(e));
+      for (var y = y0; y <= y1; y++) cov[y] = true;
+    });
+    return cov;
+  }
+
+  /* ---- filtering ---- */
+  function passes(e) {
+    if (!state.types[e.type]) return false;
+    if (!state.confs[e.confidence]) return false;
+    if (state.tag && e.tags.indexOf(state.tag) === -1) return false;
+    if (state.search) {
+      var hay = (e.title + " " + e.summary + " " + e.tags.join(" ")).toLowerCase();
+      if (hay.indexOf(state.search) === -1) return false;
+    }
+    return true;
+  }
+
+  /* ---- rendering ---- */
+  function renderControls() {
+    var tr = $("type-row");
+    TYPES.forEach(function (t) {
+      var b = el("button", "toggle on");
+      b.appendChild(el("span", "mark " + t));
+      b.appendChild(document.createTextNode(t));
+      b.title = "Show or hide " + t + " entries";
+      b.onclick = function () {
+        state.types[t] = !state.types[t];
+        b.className = "toggle " + (state.types[t] ? "on" : "off");
+        renderTimeline();
+      };
+      tr.appendChild(b);
+    });
+    var cr = $("conf-row");
+    CONFS.forEach(function (c) {
+      var b = el("button", "toggle conf-toggle on c-" + c, c);
+      b.title = "Show or hide entries with confidence: " + c;
+      b.onclick = function () {
+        state.confs[c] = !state.confs[c];
+        b.className = "toggle conf-toggle c-" + c + " " + (state.confs[c] ? "on" : "off");
+        renderTimeline();
+      };
+      cr.appendChild(b);
+    });
+    var tags = {};
+    state.entries.forEach(function (e) { e.tags.forEach(function (t) { tags[t] = true; }); });
+    Object.keys(tags).sort().forEach(function (t) {
+      var o = el("option", null, t); o.value = t; $("tag-select").appendChild(o);
+    });
+    $("tag-select").onchange = function () { state.tag = this.value; renderTimeline(); };
+    $("search").oninput = function () { state.search = this.value.trim().toLowerCase(); renderTimeline(); };
+    $("reset").onclick = function () {
+      TYPES.forEach(function (t) { state.types[t] = true; });
+      CONFS.forEach(function (c) { state.confs[c] = true; });
+      state.tag = ""; state.search = "";
+      $("tag-select").value = ""; $("search").value = "";
+      var i;
+      var tb = $("type-row").getElementsByTagName("button");
+      for (i = 0; i < tb.length; i++) tb[i].className = "toggle on";
+      var cb = $("conf-row").getElementsByTagName("button");
+      for (i = 0; i < cb.length; i++) cb[i].className = cb[i].className.replace(" off", " on");
+      renderTimeline();
+    };
+    $("export-json").onclick = exportJSON;
+    $("export-csv").onclick = exportCSV;
+  }
+
+  function renderDecades(years) {
+    var nav = $("decades");
+    nav.innerHTML = "";
+    var seen = {};
+    years.forEach(function (y) {
+      var d = Math.floor(y / 10) * 10;
+      if (!seen[d]) { seen[d] = y; }
+    });
+    Object.keys(seen).sort().forEach(function (d) {
+      var a = el("a", null, d + "s");
+      a.href = "#y" + seen[d];
+      nav.appendChild(a);
+    });
+  }
+
+  function renderGaps() {
+    var cov = coveredYears(state.entries);
+    var wrap = $("gap-cells");
+    wrap.innerHTML = "";
+    var s = state.data.meta.spanned_years;
+    for (var y = s.start; y <= s.end; y++) {
+      var c = el("span", "cell" + (cov[y] ? "" : " empty"), String(y));
+      c.title = cov[y] ? y + ": has entries" : y + ": no entries yet";
+      wrap.appendChild(c);
+    }
+  }
+
+  function entryNode(e) {
+    var d = el("div", "entry");
+    d.appendChild(el("span", "mark " + e.type));
+
+    var head = el("div", "entry-head");
+    head.appendChild(el("span", "entry-date", fmtDate(e)));
+    head.appendChild(el("span", "entry-title", e.title));
+    head.appendChild(el("span", "chip t t-" + e.type, e.type));
+    head.appendChild(el("span", "chip c-" + e.confidence, e.confidence));
+    d.appendChild(head);
+
+    d.appendChild(el("p", "entry-summary", e.summary));
+
+    var foot = el("div", "entry-foot");
+    var srcs = el("span", "srcs");
+    srcs.appendChild(document.createTextNode("Sources: "));
+    e.sources.forEach(function (s, i) {
+      if (i) srcs.appendChild(document.createTextNode(" · "));
+      var a = el("a", null, s.label);
+      a.href = s.url; a.target = "_blank"; a.rel = "noopener";
+      srcs.appendChild(a);
+    });
+    foot.appendChild(srcs);
+    if (e.sources.length === 1) {
+      foot.appendChild(el("span", "corr", "needs corroboration"));
+    }
+    var tl = el("span", "tags-line");
+    e.tags.forEach(function (t, i) {
+      if (i) tl.appendChild(document.createTextNode(" "));
+      var s = el("span", "tag", t);
+      s.title = "Filter by tag: " + t;
+      s.onclick = function () {
+        state.tag = t; $("tag-select").value = t; renderTimeline();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+      tl.appendChild(s);
+    });
+    foot.appendChild(tl);
+    d.appendChild(foot);
+    return d;
+  }
+
+  function renderTimeline() {
+    var box = $("timeline");
+    box.innerHTML = "";
+    var shown = state.entries.filter(passes);
+    $("showing").textContent = "showing " + shown.length + " of " + state.entries.length + " entries";
+
+    if (!shown.length) {
+      box.appendChild(el("p", "nothing", "No entries match the current filters."));
+      renderDecades([]);
+      return;
+    }
+
+    var byYear = {};
+    shown.forEach(function (e) {
+      var y = yearOf(startOf(e));
+      (byYear[y] = byYear[y] || []).push(e);
+    });
+    var years = Object.keys(byYear).map(Number).sort(function (a, b) { return a - b; });
+    renderDecades(years);
+
+    var span = state.data.meta.spanned_years;
+    var unfiltered = state.types.life && state.types.talk && state.types.publication &&
+      state.types.artifact && state.types.archive &&
+      state.confs.documented && state.confs.reported && state.confs.circa && state.confs.disputed &&
+      !state.tag && !state.search;
+    var cov = coveredYears(state.entries);
+
+    var prevYear = null;
+    years.forEach(function (y) {
+      /* inline gap rows: only in the unfiltered view, only within his lifetime */
+      if (unfiltered && prevYear !== null) {
+        var g0 = Math.max(prevYear + 1, span.start), g1 = Math.min(y - 1, span.end);
+        var run = [];
+        for (var gy = g0; gy <= g1; gy++) if (!cov[gy]) run.push(gy);
+        if (run.length) {
+          var label = run.length === 1 ? String(run[0]) : run[0] + "–" + run[run.length - 1];
+          var gr = el("div", "gap-row");
+          gr.appendChild(el("b", null, label));
+          gr.appendChild(document.createTextNode(
+            " — no entries yet (" + run.length + (run.length === 1 ? " year" : " years") + " to research)"));
+          box.appendChild(gr);
+        }
+      }
+      prevYear = y;
+
+      var group = el("section", "year-group");
+      var h = el("h2", "year-head", String(y));
+      h.id = "y" + y;
+      h.appendChild(el("span", "n", byYear[y].length + (byYear[y].length === 1 ? " entry" : " entries")));
+      group.appendChild(h);
+      var list = el("div", "entries");
+      byYear[y].sort(function (a, b) { return sortKey(a) < sortKey(b) ? -1 : 1; })
+        .forEach(function (e) { list.appendChild(entryNode(e)); });
+      group.appendChild(list);
+      box.appendChild(group);
+    });
+  }
+
+  /* ---- exports ---- */
+  function download(name, mime, text) {
+    var blob = new Blob([text], { type: mime });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  }
+  function exportJSON() {
+    var shown = state.entries.filter(passes);
+    var out = {
+      meta: {
+        exported: new Date().toISOString(),
+        source: "timeline.html working chronology",
+        note: "Filtered view export. Confidence and precision labels travel with the data.",
+        count: shown.length
+      },
+      entries: shown
+    };
+    download("mckenna-chronology-filtered.json", "application/json", JSON.stringify(out, null, 2));
+  }
+  function csvCell(v) {
+    v = v == null ? "" : String(v);
+    return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+  }
+  function exportCSV() {
+    var shown = state.entries.filter(passes);
+    var rows = [["id", "type", "title", "date_start", "date_end", "precision",
+      "confidence", "tags", "summary", "sources"]];
+    shown.forEach(function (e) {
+      rows.push([e.id, e.type, e.title, startOf(e), endOf(e), e.precision,
+        e.confidence, e.tags.join("; "), e.summary,
+        e.sources.map(function (s) { return s.label + " <" + s.url + ">"; }).join("; ")]);
+    });
+    var text = rows.map(function (r) { return r.map(csvCell).join(","); }).join("\r\n");
+    download("mckenna-chronology-filtered.csv", "text/csv", text);
+  }
+
+  /* ---- boot ---- */
+  fetch("./timeline-data.json")
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      state.data = data;
+      state.entries = data.entries.slice().sort(function (a, b) {
+        return sortKey(a) < sortKey(b) ? -1 : 1;
+      });
+      var urls = {};
+      state.entries.forEach(function (e) { e.sources.forEach(function (s) { urls[s.url] = true; }); });
+      var single = state.entries.filter(function (e) { return e.sources.length === 1; }).length;
+      $("counts").innerHTML =
+        "<b>" + state.entries.length + "</b> entries · <b>" +
+        Object.keys(urls).length + "</b> distinct sources · " +
+        single + " entries rest on a single source and need corroboration · dataset v" +
+        (data.meta.version || "?") + ", seeded " + (data.meta.generated || "?");
+      ["legend", "controls", "decades", "gaps", "footer"].forEach(function (id) {
+        $(id).hidden = false;
+      });
+      renderControls();
+      renderGaps();
+      renderTimeline();
+    })
+    .catch(function (err) {
+      $("timeline").innerHTML = "";
+      var p = el("p", "nothing",
+        "Could not load timeline-data.json (" + err.message + "). " +
+        "This page fetches its dataset from the same directory, so open it over HTTP " +
+        "(for development: npm run dev, then /timeline.html), not as a bare file.");
+      $("timeline").appendChild(p);
+    });
+})();
+</script>
+</body>
+</html>
