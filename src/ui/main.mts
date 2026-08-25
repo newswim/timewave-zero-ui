@@ -2,6 +2,7 @@ import "./style.css";
 import { makeWave, daysBeforeZero, type Wave } from "../timewave.mts";
 import { Camera } from "./camera.mts";
 import { Renderer, type PlacedEv, type Hexagram } from "./render.mts";
+import { startTour } from "./tour.mts";
 import { fmtDateAt, fmtValue } from "./format.mts";
 import numbersetsJson from "../../data/numbersets.json";
 import kingwenJson from "../../data/kingwen.json";
@@ -243,6 +244,31 @@ document.getElementById("about-btn")!.addEventListener("click", () =>
 document.getElementById("about-close")!.addEventListener("click", () => openAbout(false));
 about.addEventListener("click", (e) => { if (e.target === about) openAbout(false); });
 
+// ---------- tour ----------
+function launchTour(): void {
+  openAbout(false);
+  startTour({
+    goView(name) {
+      const v = VIEWS[name]!;
+      cam.setView(v.c, v.s, true);
+      clearPresetHighlight();
+      state.dirty = true;
+    },
+    rectFor(zone) {
+      const W = window.innerWidth, H = window.innerHeight;
+      const plotTop = 56, axis = 44, band = 30;
+      if (zone === "band") return { left: 0, top: H - axis - band - 10, width: W, height: band + 14 };
+      if (zone === "terminus") {
+        const px0 = cam.pxAt(0);
+        return { left: px0 - 90, top: plotTop, width: 180, height: H - plotTop - axis };
+      }
+      return { left: 8, top: plotTop + 8, width: W - 16, height: H - plotTop - axis - 16 };
+    },
+    onDone() { localStorage.setItem("twz-toured", "1"); },
+  });
+}
+document.getElementById("tour-btn")!.addEventListener("click", launchTour);
+
 // ---------- keyboard ----------
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { openAbout(false); return; }
@@ -257,6 +283,7 @@ window.addEventListener("keydown", (e) => {
   else if (e.key === "-") cam.zoomAt(cam.width / 2, 0.5);
   else if (e.key === "ArrowLeft") cam.panPx(cam.width / 8);
   else if (e.key === "ArrowRight") cam.panPx(-cam.width / 8);
+  else if (e.key === "t") launchTour();
   else return;
   e.preventDefault();
 });
