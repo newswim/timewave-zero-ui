@@ -4,14 +4,20 @@ import { Camera } from "./camera.mts";
 import { Renderer, type PlacedEv, type Hexagram } from "./render.mts";
 import { startTour } from "./tour.mts";
 import { fmtDateAt, fmtValue } from "./format.mts";
+import { deriveSeed, firstOrderDifferencesFromLines } from "../derivation.mts";
+import { DERIVATIONS, cyclePath, setStats, type SetName } from "./derivations.mts";
 import numbersetsJson from "../../data/numbersets.json";
 import kingwenJson from "../../data/kingwen.json";
 
-type SetName = "kelley" | "watkins" | "sheliak" | "huangti";
-const SETS = numbersetsJson.sets as Record<SetName, number[]>;
-const HEXAGRAMS = kingwenJson.hexagrams as Hexagram[];
+const HEXAGRAMS = kingwenJson.hexagrams as (Hexagram & { lines: number[] })[];
+/** The four historical sets, plus the seed they all grew from, derived live
+ * from the hexagrams (it never shipped as a data file). */
+const SETS: Record<SetName, number[]> = {
+  seed: deriveSeed(firstOrderDifferencesFromLines(HEXAGRAMS)),
+  ...(numbersetsJson.sets as Record<Exclude<SetName, "seed">, number[]>),
+};
 const HUES: Record<SetName, string> = {
-  kelley: "#c98500", watkins: "#199e70", sheliak: "#d95926", huangti: "#3987e5",
+  seed: "#a26bf5", kelley: "#c98500", watkins: "#199e70", sheliak: "#d95926", huangti: "#3987e5",
 };
 const VIEWS: Record<string, { c: number; s: number }> = {
   all: { c: 1.35e13, s: 2.9e13 },
@@ -38,6 +44,8 @@ const state = {
   hover: null as { px: number; x: number } | null,
   hoverEv: null as PlacedEv | null,
   ghost: null as { canvas: HTMLCanvasElement; t0: number } | null,
+  /** Screen rect of the derivation card, so canvas labels can avoid it. */
+  panel: null as { left: number; top: number; width: number; height: number } | null,
   dirty: true,
 };
 let placed: PlacedEv[] = [];
@@ -68,6 +76,7 @@ function resize(): void {
   const w = window.innerWidth, h = window.innerHeight;
   cam.width = w;
   renderer.resize(w, h, Math.min(2.5, window.devicePixelRatio || 1));
+  measurePanel();
   state.dirty = true;
 }
 window.addEventListener("resize", resize);
@@ -82,6 +91,7 @@ function drawScene(ghostLive = false): void {
     hover: state.hover,
     hoverEv: state.hoverEv,
     ghost: ghostLive ? state.ghost : null,
+    panel: state.panel,
   });
   state.dirty = false;
 }
@@ -230,7 +240,57 @@ function selectSet(s: SetName, redraw = true): void {
   state.set = s;
   document.documentElement.style.setProperty("--wave", HUES[s]);
   setBtns.forEach((b) => b.classList.toggle("on", b.dataset.set === s));
+  updateDerivation(s);
   if (redraw) { state.dirty = true; writeHash(); }
+}
+
+// ---------- derivation card (top-right) ----------
+const dv = {
+  box: document.getElementById("derivation")!,
+  name: document.querySelector<HTMLElement>("#derivation .dv-name")!,
+  era: document.querySelector<HTMLElement>("#derivation .dv-era")!,
+  line: document.querySelector<SVGPathElement>("#derivation .dv-line")!,
+  ghost: document.querySelector<SVGPathElement>("#derivation .dv-ghost")!,
+  stats: document.querySelector<HTMLElement>("#derivation .dv-stats")!,
+  body: document.querySelector<HTMLElement>("#derivation .dv-body")!,
+  steps: document.querySelector<HTMLElement>("#derivation .dv-steps")!,
+};
+const KELLEY_PATH = cyclePath(SETS.kelley, 300, 48);
+function updateDerivation(s: SetName): void {
+  const d = DERIVATIONS[s];
+  dv.name.textContent = d.name;
+  dv.era.textContent = d.era;
+  dv.line.setAttribute("d", cyclePath(SETS[s], 300, 48));
+  dv.ghost.setAttribute("d", s === "kelley" ? "" : KELLEY_PATH);
+  const st = setStats(SETS[s], SETS.kelley);
+  const period = s === "seed" ? "64 days, six times over" : "384 days";
+  const vs = s === "kelley"
+    ? "the reference the others are compared to"
+    : `differs from Kelley at ${st.differs} of 384 points (grey)`;
+  dv.stats.textContent = `one cycle: ${period} · values ${st.min}–${st.max}, mean ${st.mean.toFixed(1)} · ${vs}`;
+  dv.body.textContent = d.body;
+  dv.steps.replaceChildren(...d.steps.map((step) => {
+    const li = document.createElement("li");
+    li.textContent = step.label;
+    li.classList.toggle("off", !step.on);
+    li.title = step.on ? "part of this set's construction" : "not used in this set";
+    return li;
+  }));
+  // restart the entrance animation
+  dv.box.classList.add("dv-swap");
+  void dv.box.offsetWidth;
+  dv.box.classList.remove("dv-swap");
+  measurePanel();
+}
+const topbar = document.getElementById("topbar")!;
+function measurePanel(): void {
+  // the bar wraps to two rows on narrow screens; keep the card below it
+  document.documentElement.style.setProperty("--bar-h", `${topbar.offsetHeight}px`);
+  // offset* ignores the entrance transform, unlike getBoundingClientRect
+  const visible = dv.box.offsetWidth > 0 && getComputedStyle(dv.box).display !== "none";
+  state.panel = visible
+    ? { left: dv.box.offsetLeft, top: dv.box.offsetTop, width: dv.box.offsetWidth, height: dv.box.offsetHeight }
+    : null;
 }
 for (const b of setBtns) {
   b.addEventListener("click", () => selectSet(b.dataset.set as SetName));

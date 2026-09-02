@@ -284,3 +284,45 @@ export function deriveSheliak(
   }
   return out;
 }
+
+/**
+ * Derive McKenna's SEED — the "simple wave" of his derivation essay,
+ * before any of the construction that later sets add on top of it.
+ *
+ * McKenna's starting material is the first order of differences of the
+ * King Wen sequence (Figure 1 of the essay). He superimposes that graph
+ * on its own 180° rotation and notes that the two curves "achieve
+ * closure at four adjacent points" at the conventional beginning and
+ * end of the sequence (Figures 2–3). The vertical gap between the
+ * forward curve and its rotated copy is the simple wave: at integer
+ * positions it is 9 − h(−k) − h(k−1) (Watkins' linear divergence term
+ * D(k); Sheliak's linear complex wave lin(x) = r(x) − f(x) in stored
+ * order — the two formulations are identical, see the test). The gap
+ * is 64-periodic, so across the 384-unit cycle it simply repeats six
+ * times: the six "lines" of the linear level in Figure 4, and nothing
+ * more.
+ *
+ * What this set deliberately omits — and what every later set adds:
+ *   - the trigrammatic (×3) and hexagrammatic (×6) nesting of Figure 4
+ *     (present in Kelley, Watkins, Sheliak, Huang Ti);
+ *   - the line-length/skew scoring of Figures 6–7 (Kelley, Watkins,
+ *     Huang Ti);
+ *   - the half twist (Kelley only).
+ *
+ * Because the closure holds at four adjacent points per 64-unit period
+ * (k ≡ 63, 0, 1, 2 mod 64; the curves also cross at the isolated points
+ * k ≡ 18 and 47), the seed comes to rest at zero six times per cycle,
+ * not once: the nesting at three mutually offset scales is what leaves
+ * a single zero, at the end. Values are |gap| ("the sign … is ignored
+ * in the final graphing"), 0..5 for King Wen (never above 7). This set is
+ * not historical — no
+ * version of the software shipped it — it is the seed made visible so
+ * the four historical constructions can be compared against what they
+ * started from.
+ */
+export function deriveSeed(fod: readonly number[]): number[] {
+  const h = makeH(fod);
+  const out: number[] = [];
+  for (let k = 0; k < 384; k++) out.push(Math.abs(9 - h(-k) - h(k - 1)));
+  return out;
+}
