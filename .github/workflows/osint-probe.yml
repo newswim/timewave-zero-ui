@@ -51,6 +51,24 @@ jobs:
           sec "OTHER SITES"; for u in "https://time-wave-zero.vercel.app/" "https://christianmarques.com/projects/" "https://twz.noonian.io/" "https://zenodo.org/api/records/18994603" "https://www.terencemckenna.com/rights-permissions" "https://thesyntonytimes.substack.com/p/canaries-in-the-universal-mind/comments" "https://nufsed.substack.com/p/knowing"; do echo "## $u"; curl -sS -m 30 -A "$UA" -L "$u" -o out/o.html -w 'code %{http_code}\n'; grep -oiE '<title[^>]*>[^<]*</title>|<meta name="(description|author)"[^>]+>' out/o.html | head -4; grep -oiE '.{0,200}timewave-zero\.com.{0,200}' out/o.html | head -10; grep -oiE 'github\.com/[A-Za-z0-9_.-]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}' out/o.html | sort -u | head -15; done
           sec "ZENODO"; curl -sS -m 30 "https://zenodo.org/api/records/18994603" | jq -c '{title:.metadata.title,creators:.metadata.creators,pub:.metadata.publication_date,desc:(.metadata.description|tostring|.[0:1500])}'
           sec "DONE"
+
+      - name: Public metadata
+        env:
+          UA: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36"
+        run: |
+          set +e
+          sec(){ echo; echo "=================== $1 ==================="; }
+          sec "GH PUBLIC USER AEON-7"; curl -sS -m 30 -H 'Accept: application/vnd.github+json' https://api.github.com/users/AEON-7 | jq -c '{login,name,company,blog,location,email,bio,twitter_username,public_repos,followers,created_at,updated_at}'
+          sec "GH PUBLIC REPOS"; curl -sS -m 30 -H 'Accept: application/vnd.github+json' 'https://api.github.com/users/AEON-7/repos?per_page=100&sort=pushed' | jq -r '.[]|[.full_name,(.fork|tostring),.created_at,.pushed_at,(.homepage//""),(.description//"")]|@tsv' | head -60
+          sec "GH PUBLIC REPO"; curl -sS -m 30 -H 'Accept: application/vnd.github+json' https://api.github.com/repos/AEON-7/Timewave-Zero-Next | jq -c '{full_name,description,homepage,created_at,pushed_at,fork,license:.license.spdx_id,stargazers_count,visibility,message}'
+          sec "GH PUBLIC COMMITS"; curl -sS -m 30 -H 'Accept: application/vnd.github+json' 'https://api.github.com/repos/AEON-7/Timewave-Zero-Next/commits?per_page=100' | jq -r '.[]|[.commit.author.name,.commit.author.email,.commit.author.date,(.author.login//"-"),(.commit.message|split("\n")[0])]|@tsv' 2>/dev/null | head -80
+          sec "GH PUBLIC README"; curl -sS -m 30 -H 'Accept: application/vnd.github+json' https://api.github.com/repos/AEON-7/Timewave-Zero-Next/readme | jq -r '.content//empty' | base64 -d 2>/dev/null | head -c 5000; echo
+          sec "BUNDLE MERCH/STRIPE CONTEXT"; curl -sS -m 30 -A "$UA" https://timewave-zero.com/assets/index-DWbbLQ8H.js -o /tmp/b.js; wc -c /tmp/b.js
+          grep -oiE '.{0,200}(stripe|printful|printify|merch|t-shirt|tshirt|hoodie|poster|sticker|mug|checkout|price_[A-Za-z0-9]{8,}|prod_[A-Za-z0-9]{8,}|pk_live|pk_test|buy now|add to cart|unhash|AEON|lux natura|copyright|©|all rights|licen[sc]e|support@|mailto:).{0,200}' /tmp/b.js | sort -u | head -80
+          sec "BUNDLE LONG STRINGS"; grep -oE '"[^"]{50,500}"' /tmp/b.js | grep -iE 'mckenna|estate|family|lux|authori|official|licens|merch|shop|order|ship|purchas|payment|donat|patron|support|tier|premium|member|account|sign in|log in|about|credit|made by|built by' | sort -u | head -60
+          sec "SITE API"; for e in api/me api/wave/sets api/overlays 'api/events?min_weight=0' api/products api/shop api/merch api/config; do echo "## /$e"; curl -sS -m 20 -A "$UA" "https://timewave-zero.com/$e" -w '\n[%{http_code}]\n' | head -c 900; echo; done
+          sec "PUBLIC PAGES"; for u in https://unhash.me/ https://lab.unhash.me/ https://plausible.lab.unhash.me/ https://brain.unhash.me/ https://matrix.unhash.me/ https://auth.timewave-zero.com/; do echo "## $u"; curl -sS -m 20 -A "$UA" -L "$u" -o /tmp/u.html -w 'code %{http_code}\n'; grep -oiE '<title[^>]*>[^<]*</title>|<meta name="description"[^>]+>' /tmp/u.html | head -3; sed -e 's/<[^>]*>/ /g' /tmp/u.html | tr -s ' \n' | head -c 400; echo; done
+          sec "PUBLIC DONE"
       - uses: actions/upload-artifact@v4
         with:
           name: probe-out
