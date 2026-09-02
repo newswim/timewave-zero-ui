@@ -1,5 +1,7 @@
 name: domain-probe
 on:
+  push:
+    branches: [claude/timewave-zero-ownership-fwhn59]
   workflow_dispatch:
     inputs:
       domain:
@@ -15,7 +17,7 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y -qq whois dnsutils jq >/dev/null
       - name: Probe
         env:
-          D: ${{ inputs.domain }}
+          D: ${{ inputs.domain || 'timewave-zero.com' }}
           UA: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36"
         run: |
           set +e
