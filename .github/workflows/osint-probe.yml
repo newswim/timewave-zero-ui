@@ -1,0 +1,56 @@
+name: domain-probe
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: Domain to probe
+        required: true
+        default: timewave-zero.com
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Install tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq whois dnsutils jq >/dev/null
+      - name: Probe
+        env:
+          D: ${{ inputs.domain }}
+          UA: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36"
+        run: |
+          set +e
+          mkdir -p out
+          sec(){ echo; echo "=================== $1 ==================="; }
+          sec "WHOIS $D"; whois "$D" | grep -viE '^(%|#|>>>|NOTICE|TERMS|by submitting|to:|URL of the ICANN)' | head -120
+          sec "RDAP rdap.org"; curl -sS -m 30 "https://rdap.org/domain/$D" | jq . | head -250
+          sec "RDAP verisign"; curl -sS -m 30 "https://rdap.verisign.com/com/v1/domain/$D" | jq -c '{handle,status,events,nameservers:[.nameservers[].ldhName],entities:[.entities[]|{roles,handle,vcard:.vcardArray[1]}]}' 
+          sec "DNS"; for t in A AAAA NS MX TXT SOA CAA; do echo "-- $t"; dig +short "$D" $t; done
+          echo "-- www"; dig +short www.$D A; dig +short www.$D CNAME
+          for s in shop store mail api cdn admin app checkout; do r=$(dig +short $s.$D); [ -n "$r" ] && echo "-- $s: $r"; done
+          echo "-- _dmarc"; dig +short _dmarc.$D TXT
+          IP=$(dig +short "$D" A | head -1); echo "IP=$IP"
+          sec "PTR/ipinfo/ipwhois"; dig +short -x "$IP"; curl -sS -m 20 "https://ipinfo.io/$IP/json"; echo; whois "$IP" | grep -iE 'orgname|org-name|netname|descr|country|organisation|OrgName|CIDR|NetRange' | head -20
+          sec "reverse IP (hackertarget)"; curl -sS -m 30 "https://api.hackertarget.com/reverseiplookup/?q=$IP" | head -60
+          sec "HEADERS"; curl -sS -m 30 -A "$UA" -D - -o out/home.html -L "https://$D/" ; echo "size: $(wc -c < out/home.html)"
+          sec "HOME <head> + text (first 6000 chars)"; sed -e 's/<[^>]*>/ /g' out/home.html | tr -s ' \n' | head -c 6000; echo
+          sec "TITLE/META"; grep -oiE '<title[^>]*>[^<]*</title>|<meta[^>]+>' out/home.html | head -60
+          sec "ALL LINKS"; grep -oiE '(href|src|action)="[^"]+"' out/home.html | sort -u | head -200
+          sec "EXTERNAL URLS"; grep -oiE 'https?://[^"'"'"' <>)]+' out/home.html | grep -v "$D" | sort -u | head -100
+          sec "EMAILS/HANDLES"; grep -oiE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}|mailto:[^"]+|@[A-Za-z0-9_]{3,30}' out/home.html | sort -u | head -40
+          sec "PLATFORM/PAYMENT/ANALYTICS MARKERS"; grep -oiE 'shopify|myshopify\.com|woocommerce|wp-content|squarespace|wix\.com|bigcartel|printful|printify|teespring|spring\.com|fourthwall|gumroad|stripe|paypal|snipcart|lemonsqueezy|gtag|G-[A-Z0-9]{6,}|UA-[0-9]+-[0-9]|GTM-[A-Z0-9]+|plausible|umami|fathom|hotjar|clarity|vercel|netlify|cloudflare|github\.com/[A-Za-z0-9_.-]+|instagram\.com/[A-Za-z0-9_.]+|x\.com/[A-Za-z0-9_]+|twitter\.com/[A-Za-z0-9_]+|facebook\.com/[A-Za-z0-9_.]+|tiktok\.com/@[A-Za-z0-9_.]+|etsy\.com/[A-Za-z0-9_/]+|patreon\.com/[A-Za-z0-9_]+|ko-fi\.com/[A-Za-z0-9_]+|buymeacoffee\.com/[A-Za-z0-9_]+|linktr\.ee/[A-Za-z0-9_.]+|substack\.com|medium\.com/@[A-Za-z0-9_.]+|©[^<]{0,80}|copyright[^<]{0,80}' out/home.html | sort | uniq -c | sort -rn | head -60
+          sec "SCRIPT BUNDLES"; for s in $(grep -oiE 'src="[^"]+\.(m?js)[^"]*"' out/home.html | sed -E 's/src="([^"]+)"/\1/' | head -8); do case "$s" in http*) u="$s";; /*) u="https://$D$s";; *) u="https://$D/$s";; esac; echo "## $u"; curl -sS -m 30 -A "$UA" "$u" -o out/bundle.js; echo "bytes $(wc -c < out/bundle.js)"; grep -oiE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}|https?://[^"'"'"' )]{8,120}|pk_(live|test)_[A-Za-z0-9]{8,}|myshopify\.com|printful|printify|fourthwall|gumroad|stripe|paypal|snipcart|lemonsqueezy|shopify' out/bundle.js | grep -viE 'w3\.org|schema\.org|react|vite|three\.js|unpkg|jsdelivr' | sort -u | head -60; done
+          sec "COMMON PATHS"; for p in robots.txt sitemap.xml humans.txt manifest.json .well-known/security.txt about shop store merch products products.json collections/all cart checkout privacy terms contact faq shipping refund-policy policies/terms-of-service policies/privacy-policy feed rss.xml api/products; do code=$(curl -sS -m 20 -A "$UA" -o out/p.txt -w '%{http_code}' -L "https://$D/$p"); echo "$code /$p $(wc -c < out/p.txt)"; if [ "$code" = 200 ]; then case $p in robots.txt|sitemap.xml|humans.txt|manifest.json|.well-known/security.txt|products.json|api/products) head -c 3000 out/p.txt; echo;; *) sed -e 's/<[^>]*>/ /g' out/p.txt | tr -s ' \n' | head -c 1500; echo;; esac; fi; done
+          sec "crt.sh"; curl -sS -m 40 "https://crt.sh/?q=%25.$D&output=json" | jq -c '.[]|{i:.issuer_name,n:.name_value,nb:.not_before}' | sort -u | head -40
+          sec "WAYBACK CDX"; curl -sS -m 40 "https://web.archive.org/cdx/search/cdx?url=$D*&output=txt&collapse=digest&limit=200&fl=timestamp,original,statuscode" | head -120
+          FIRST=$(curl -sS -m 40 "https://web.archive.org/cdx/search/cdx?url=$D/&output=txt&limit=1&fl=timestamp" | head -1)
+          echo "first snapshot: $FIRST"
+          if [ -n "$FIRST" ]; then sec "EARLIEST SNAPSHOT $FIRST"; curl -sS -m 40 -L "https://web.archive.org/web/${FIRST}id_/https://$D/" -o out/first.html; grep -oiE '<title[^>]*>[^<]*</title>|<meta[^>]+>' out/first.html | head -30; sed -e 's/<[^>]*>/ /g' out/first.html | tr -s ' \n' | head -c 3000; echo; fi
+          sec "urlscan"; curl -sS -m 30 "https://urlscan.io/api/v1/search/?q=domain:$D" | jq -c '.results[]|{t:.task.time,u:.page.url,ip:.page.ip,asn:.page.asnname,srv:.page.server,r:.result}' | head -20
+          sec "OTHER SITES"; for u in "https://time-wave-zero.vercel.app/" "https://christianmarques.com/projects/" "https://twz.noonian.io/" "https://zenodo.org/api/records/18994603" "https://www.terencemckenna.com/rights-permissions" "https://thesyntonytimes.substack.com/p/canaries-in-the-universal-mind/comments" "https://nufsed.substack.com/p/knowing"; do echo "## $u"; curl -sS -m 30 -A "$UA" -L "$u" -o out/o.html -w 'code %{http_code}\n'; grep -oiE '<title[^>]*>[^<]*</title>|<meta name="(description|author)"[^>]+>' out/o.html | head -4; grep -oiE '.{0,200}timewave-zero\.com.{0,200}' out/o.html | head -10; grep -oiE 'github\.com/[A-Za-z0-9_.-]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}' out/o.html | sort -u | head -15; done
+          sec "ZENODO"; curl -sS -m 30 "https://zenodo.org/api/records/18994603" | jq -c '{title:.metadata.title,creators:.metadata.creators,pub:.metadata.publication_date,desc:(.metadata.description|tostring|.[0:1500])}'
+          sec "DONE"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: probe-out
+          path: out
+          if-no-files-found: ignore
