@@ -48,9 +48,9 @@ const STEPS: Step[] = [
     body: "You are now at the final 67 years, 1945 to 2012. After the tour, press ⇡64: the view will widen 64 times and the curve will keep its exact shape. The wave repeats inside itself at every scale — McKenna called this temporal resonance, and it holds exactly; it is a provable property of the mathematics.",
   },
   {
-    title: "Four versions of the numbers",
+    title: "Five versions of the numbers",
     target: "#sets",
-    body: "The wave's 384 numbers were computed four times between 1975 and 1998, with real disagreements along the way. Each button redraws the curve from one historical data set.",
+    body: "The wave's 384 numbers were computed four times between 1975 and 1998, with real disagreements along the way, and all four grew from one seed: the raw King Wen wave, shown here in purple. Each button redraws the curve from one set; the card at the top right says what that set did to the seed.",
   },
   {
     title: "The last days",

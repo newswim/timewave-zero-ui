@@ -39,6 +39,7 @@
     </nav>
     <div id="controls">
       <div id="sets" role="radiogroup" aria-label="Number set">
+        <button data-set="seed" title="McKenna's seed: the King Wen wave before any construction"><span class="full">Seed</span><span class="abbr">Seed</span></button>
         <button data-set="kelley" class="on" title="Original 1975 set, with the half twist"><span class="full">Kelley</span><span class="abbr">Kel</span></button>
         <button data-set="watkins" title="Half twist removed"><span class="full">Watkins</span><span class="abbr">Wat</span></button>
         <button data-set="sheliak" title="1998 vector re-derivation"><span class="full">Sheliak</span><span class="abbr">Shel</span></button>
@@ -58,6 +59,20 @@
     <div id="ro-hex">—</div>
     <div id="ro-res">—</div>
     <div id="ro-ev" hidden>—</div>
+  </aside>
+
+  <aside id="derivation" aria-live="polite" aria-label="About the selected number set">
+    <div class="dv-head">
+      <span class="dv-name">—</span>
+      <span class="dv-era">—</span>
+    </div>
+    <svg class="dv-cycle" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true">
+      <path class="dv-ghost" d="" />
+      <path class="dv-line" d="" />
+    </svg>
+    <div class="dv-stats">—</div>
+    <p class="dv-body">—</p>
+    <ul class="dv-steps"></ul>
   </aside>
 
   <div id="about" role="dialog" aria-modal="true" hidden>
@@ -95,9 +110,11 @@
         <b>T</b> tour · <b>H</b> help · <b>Esc</b> close
       </p>
       <p class="colophon">
-        Wave engine ported from Peter Meyer's public-domain C (1998). Four number
-        sets: Kelley (with the half twist), Watkins (without), Sheliak (1998
-        re-derivation), Huang Ti (alternative sequence).
+        Wave engine ported from Peter Meyer's public-domain C (1998). Five number
+        sets: the seed (McKenna's raw King Wen wave), Kelley (with the half
+        twist), Watkins (without), Sheliak (1998 re-derivation), Huang Ti
+        (alternative sequence). The card at the top right explains whichever
+        one is selected.
         <a href="https://github.com/newswim/timewave-zero-ui">Source</a>.
       </p>
       <button id="about-close">Close</button>

@@ -22,6 +22,7 @@ import {
   deriveWatkins,
   deriveKelley,
   deriveSheliak,
+  deriveSeed,
   KELLEY_DISCREPANCY,
   SHELIAK_DISCREPANCIES,
 } from "../src/derivation.mts";
@@ -114,5 +115,58 @@ describe("deriveSheliak (1998 vector re-derivation)", () => {
     const constructed = deriveSheliak(fod);
     expect(constructed[0]).toBe(0);
     expect(constructed[383]).toBe(0);
+  });
+});
+
+describe("deriveSeed (McKenna's simple wave: the FOD against its own 180° rotation)", () => {
+  const seed = deriveSeed(fod);
+
+  it("has 384 values, all integers in 0..5 for King Wen", () => {
+    expect(seed).toHaveLength(384);
+    for (const v of seed) {
+      expect(Number.isInteger(v)).toBe(true);
+      expect(v).toBeGreaterThanOrEqual(0);
+      expect(v).toBeLessThanOrEqual(5);
+    }
+  });
+
+  it("equals Sheliak's linear complex wave |r(x) - f(x)| in stored order (an independent formulation)", () => {
+    // Sheliak: F(i) = 9 - h(-1-i) - h(i), stored[k] = |F(384 - k)|, h cyclic mod 64.
+    const h = (i: number): number => {
+      const m = ((i % 64) + 64) % 64;
+      return m === 0 ? C_FOD[63]! : C_FOD[m - 1]!;
+    };
+    const sheliakLinear = Array.from({ length: 384 }, (_, k) => {
+      const x = 384 - k;
+      return Math.abs(9 - h(-1 - x) - h(x));
+    });
+    expect(seed).toEqual(sheliakLinear);
+  });
+
+  it("begins 0,0,0 like every historical set, so the fractal sum converges the same way", () => {
+    expect(seed.slice(0, 3)).toEqual([0, 0, 0]);
+  });
+
+  it("is 64-periodic: the simple wave repeats six times across the 384-unit cycle", () => {
+    for (let k = 64; k < 384; k++) expect(seed[k]).toBe(seed[k - 64]);
+  });
+
+  it("closes at four adjacent points per period (McKenna's Figure 2 claim) and crosses zero at two isolated points besides", () => {
+    // Per 64-unit period: the closure run k = 63, 0, 1, 2 where the forward
+    // FOD graph and its 180° rotation coincide, plus two isolated crossings
+    // at k = 18 and 47 (the curves intersect there without running together).
+    const zeros = seed.map((v, k) => (v === 0 ? k : -1)).filter((k) => k >= 0);
+    const expected: number[] = [];
+    for (let m = 0; m < 6; m++) expected.push(...[0, 1, 2, 18, 47, 63].map((r) => 64 * m + r));
+    expect(zeros).toEqual(expected.sort((a, b) => a - b));
+    // the closure run is the only place the wave RESTS at zero (>= 2 adjacent zeros)
+    const runs = zeros.filter((k) => seed[(k + 1) % 384] === 0);
+    expect(runs).toEqual([0, 1, 63, 64, 65, 127, 128, 129, 191, 192, 193, 255, 256, 257, 319, 320, 321, 383]);
+  });
+
+  it("is a genuine function of the hexagram data: perturbing one FOD value changes it", () => {
+    const perturbed = [...fod];
+    perturbed[10] = perturbed[10] === 4 ? 2 : 4;
+    expect(deriveSeed(perturbed)).not.toEqual(seed);
   });
 });

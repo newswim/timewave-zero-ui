@@ -23,7 +23,9 @@ the 2012 date that refuted it — is part of the exhibit.
 a full-bleed, zoomable wave from the 72-Gyr top cycle down to the final
 minutes before 2012-12-21 06:00. Drag to pan, scroll to zoom, `R` /
 `Shift+R` for resonance jumps (×64 about the zero date — the identical
-waveform, relabeled by history), four number sets, ~100 curated events
+waveform, relabeled by history), five number sets (the four historical
+sets plus the purple *seed* they all grew from, with a context card
+explaining whichever one is selected), ~100 curated events
 with a violet McKenna layer, the hexagram band at fine zoom, and the
 void after zero with "you are here." Explorer code: [src/ui/](src/ui/).
 Deployed at [timewave-zero-ui.vercel.app](https://timewave-zero-ui.vercel.app)
@@ -60,6 +62,11 @@ npm test
   1998 construction was recovered from his paper and reproduces 382/384.
   McKenna's "1 in 3770" Monte Carlo claim replicates within its own
   sampling error ([scripts/montecarlo.mts](scripts/montecarlo.mts)).
+  The explorer also derives the **seed** live from the hexagrams: the
+  first order of differences laid against its own 180° rotation, the
+  "simple wave" of McKenna's essay before any nesting, skew scoring or
+  half twist, so the four historical constructions can be compared
+  against their common starting point.
   Full findings in [docs/research.md](docs/research.md).
 - **Phase 3 — the explorer.** ✅ Built (see Status above).
 - **Phase 4 — the history layer.** A starter set of ~100 tiered events

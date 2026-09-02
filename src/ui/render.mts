@@ -19,6 +19,9 @@ export interface Scene {
   hover?: { px: number } | null;
   hoverEv?: PlacedEv | null;
   ghost?: { canvas: HTMLCanvasElement; t0: number } | null;
+  /** Screen rect of the DOM context card in the top-right; canvas text and
+   * event labels keep clear of it. */
+  panel?: { left: number; top: number; width: number; height: number } | null;
 }
 
 export interface PlacedEv { ev: Ev; px: number; py: number }
@@ -129,10 +132,12 @@ export class Renderer {
         ctx.globalAlpha = 1;
       }
     }
-    // habit/novelty orientation cue
+    // habit/novelty orientation cue (dropped below the context card when shown)
+    const panel = s.panel ?? null;
+    const panelBot = panel ? panel.top + panel.height : plotTop;
     ctx.fillStyle = MUTED; ctx.globalAlpha = 0.75;
     ctx.textAlign = "right";
-    ctx.fillText("habit ↑", W - 10, plotTop + 34);
+    ctx.fillText("habit ↑", W - 10, Math.max(plotTop + 34, panelBot + 18));
     ctx.fillText("novelty ↓", W - 10, plotBot - (cam.daysPerPx <= 0.8 ? 40 : 14));
     ctx.globalAlpha = 1;
 
@@ -176,10 +181,13 @@ export class Renderer {
         ctx.fillStyle = MUTED; ctx.globalAlpha = 0.85;
         ctx.font = "11px system-ui, sans-serif"; ctx.textAlign = "center";
         const cx = (vx + W) / 2;
-        ctx.fillText("the void", cx, plotTop + 30);
+        // if the caption would sit under the context card, drop it below the card
+        const under = panel && cx + 70 > panel.left && plotTop + 20 < panel.top + panel.height;
+        const cy = under ? panelBot + 26 : plotTop + 30;
+        ctx.fillText("the void", cx, cy);
         ctx.globalAlpha = 0.55;
         ctx.font = "10px system-ui, sans-serif";
-        ctx.fillText("after the end of history", cx, plotTop + 46);
+        ctx.fillText("after the end of history", cx, cy + 16);
         ctx.globalAlpha = 1;
       }
     }
@@ -321,6 +329,7 @@ export class Renderer {
     const x0 = cam.xAt(0), x1 = cam.xAt(W);
     const placed: PlacedEv[] = [];
     const rects: [number, number, number, number][] = [];
+    if (s.panel) rects.push([s.panel.left - 4, s.panel.top - 4, s.panel.width + 8, s.panel.height + 8]);
     let labels = Math.max(10, Math.min(30, Math.floor(W / 70)));
     let dots = 170;
     const voidBase = plotTop + (plotBot - plotTop) * 0.6;

@@ -7,6 +7,7 @@
   --grid: #1e2436;
   --hairline: rgba(255, 255, 255, 0.12);
   --wash: rgba(255, 255, 255, 0.07);
+  --seed: #a26bf5;
   --kelley: #c98500;
   --watkins: #199e70;
   --sheliak: #d95926;
@@ -97,6 +98,7 @@ button:hover { background: var(--wash); color: var(--ink); }
   background: var(--muted);
   opacity: 0.45;
 }
+#sets button[data-set="seed"]::before { background: var(--seed); }
 #sets button[data-set="kelley"]::before { background: var(--kelley); }
 #sets button[data-set="watkins"]::before { background: var(--watkins); }
 #sets button[data-set="sheliak"]::before { background: var(--sheliak); }
@@ -133,6 +135,64 @@ button:hover { background: var(--wash); color: var(--ink); }
 #ro-hex { color: var(--ink-2); }
 #ro-res { color: var(--muted); font-size: 11px; }
 #ro-ev { color: var(--mk); font-size: 11.5px; margin-top: 2px; }
+
+/* ---------- derivation context card (top-right negative space) ---------- */
+#derivation {
+  position: absolute;
+  top: calc(var(--bar-h, 56px) + 28px); right: 14px;  /* below the bar and the ZERO label */
+  z-index: 8;
+  width: 300px;
+  padding: 10px 12px 9px;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: color-mix(in srgb, #10162a 78%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;          /* the wave stays draggable through it */
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  animation: dv-in 0.35s ease;
+}
+#derivation.dv-swap { animation: none; }
+@keyframes dv-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.dv-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.dv-name {
+  display: flex; align-items: center; gap: 7px;
+  font-weight: 650; font-size: 13px; color: var(--ink); letter-spacing: 0.02em;
+}
+.dv-name::before {
+  content: ""; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--wave);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--wave) 70%, transparent);
+}
+.dv-era { font-size: 11px; color: var(--muted); }
+.dv-cycle { display: block; width: 100%; height: 48px; overflow: visible; }
+.dv-ghost { fill: none; stroke: var(--ink-2); stroke-opacity: 0.22; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.dv-line { fill: none; stroke: var(--wave); stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.dv-stats {
+  margin: 4px 0 7px;
+  font-size: 10.5px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  border-top: 1px solid var(--hairline);
+  padding-top: 5px;
+}
+.dv-body { margin: 0 0 8px; }
+.dv-steps { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; }
+.dv-steps li {
+  font-size: 10.5px; line-height: 1;
+  padding: 4px 7px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--ink-2);
+  display: flex; align-items: center; gap: 5px;
+}
+.dv-steps li::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--wave);
+}
+.dv-steps li.off { color: var(--muted); border-style: dashed; text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); }
+.dv-steps li.off::before { background: transparent; border: 1px solid var(--muted); width: 4px; height: 4px; }
 
 /* ---------- about ---------- */
 #about[hidden] { display: none; }
@@ -246,6 +306,12 @@ button:hover { background: var(--wash); color: var(--ink); }
     text-overflow: ellipsis;
   }
   #ro-res, #ro-ev { display: none; }
+
+  /* shorter card: name, era, one cycle, and the recipe chips carry it */
+  #derivation { width: 250px; font-size: 11.5px; padding: 8px 10px 8px; }
+  .dv-cycle { height: 36px; }
+  .dv-stats, .dv-body { display: none; }
+  .dv-steps { margin-top: 8px; }
 }
 
 /* ---------- phone ---------- */
@@ -287,4 +353,5 @@ button:hover { background: var(--wash); color: var(--ink); }
   #sets .full { display: none; }
   #sets .abbr { display: inline; }
   #resonance { grid-area: res; justify-self: end; }
+  #derivation { display: none; } /* no negative space to spare on a phone */
 }

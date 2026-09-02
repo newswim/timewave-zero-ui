@@ -142,6 +142,24 @@ hexagram data):
 All four begin `0,0,0` — the property that makes the fractal sum
 converge and the wave touch zero exactly once, at the zero date. ✓
 
+**A fifth, non-historical set: the seed (2026-09-02).** The explorer
+now also shows the "simple wave" of McKenna's essay (Figures 2–3) as a
+384-value set, `deriveSeed` in [src/derivation.mts](../src/derivation.mts):
+the FOD laid against its own 180° rotation, the gap between the two
+curves taken at integer positions, `|9 − h[−k] − h[k−1]|`. This is
+exactly Watkins' linear divergence term D(k) and exactly Sheliak's
+linear complex wave in stored order (✓ the two formulations agree at
+384/384). It omits everything the historical sets add: the three-scale
+nesting (all four), the skew scoring (Kelley, Watkins, Huang Ti) and
+the half twist (Kelley). Properties: ✓ values 0–5, mean 2.5; ✓
+64-periodic, so the cycle repeats six times across 384; ✓ zero at
+exactly four *adjacent* points per period (k ≡ 63, 0, 1, 2 mod 64 —
+McKenna's "closure at four adjacent points", now a tested claim) plus
+two isolated crossings (k ≡ 18, 47); ✓ differs from Kelley at 380/384
+points. Because it rests at zero six times per cycle rather than once,
+it makes visible what the nesting at three mutually offset scales
+actually buys the theory: a single zero, at the end.
+
 ### The fractal function
 
 From Meyer's public-domain C (`twz-generator.c`, 1998-01-05 — our
