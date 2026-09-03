@@ -1,0 +1,484 @@
+<title>Takedown Desk</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #f4f5f2; --panel: #ffffff; --ink: #1b1f24; --ink-2: #5a636e; --line: #d3d8d2; --line-2: #e6e9e4;
+    --accent: #0b5c58; --accent-ink: #ffffff; --accent-soft: #dcecea;
+    --warn: #8a5a00; --warn-bg: #fbf0d6; --ok: #0e6b5f; --ok-bg: #e3f2ee; --mono-bg: #eef0ec;
+    --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101317; --panel: #171b21; --ink: #e6e9ec; --ink-2: #9aa4ae; --line: #2b323b; --line-2: #222831;
+      --accent: #5fc4bb; --accent-ink: #06201e; --accent-soft: #143633;
+      --warn: #f0c060; --warn-bg: #382b0e; --ok: #6fd3c2; --ok-bg: #12302c; --mono-bg: #1d222a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101317; --panel: #171b21; --ink: #e6e9ec; --ink-2: #9aa4ae; --line: #2b323b; --line-2: #222831;
+    --accent: #5fc4bb; --accent-ink: #06201e; --accent-soft: #143633;
+    --warn: #f0c060; --warn-bg: #382b0e; --ok: #6fd3c2; --ok-bg: #12302c; --mono-bg: #1d222a;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; margin: 0; }
+  header { padding: 26px 24px 14px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+  header p { margin: 6px 0 0; color: var(--ink-2); max-width: 70ch; }
+  main { display: grid; grid-template-columns: minmax(320px, 440px) minmax(0, 1fr); gap: 0; min-height: 70vh; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .col { padding: 18px 24px 40px; }
+  .col.form { border-right: 1px solid var(--line); background: var(--panel); }
+  @media (max-width: 900px) { .col.form { border-right: 0; border-bottom: 1px solid var(--line); } }
+  h2 { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); margin: 22px 0 10px; font-weight: 700; }
+  h2:first-child { margin-top: 4px; }
+  h3 { font-family: var(--font-display); font-size: 1.05rem; margin: 0; font-weight: 700; }
+  label { display: block; font-size: 0.78rem; color: var(--ink-2); margin: 10px 0 4px; letter-spacing: 0.02em; }
+  input[type=text], input[type=email], input[type=url], textarea, select {
+    width: 100%; font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px;
+  }
+  textarea { min-height: 64px; resize: vertical; font-family: var(--font-body); }
+  input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .checks { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; font-size: 0.9rem; }
+  .checks label { display: inline-flex; align-items: center; gap: 6px; margin: 0; color: var(--ink); font-size: 0.9rem; }
+  button { font: inherit; cursor: pointer; border-radius: 4px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); padding: 7px 12px; }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  button.small { padding: 4px 9px; font-size: 0.8rem; }
+  .btnrow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .hint { font-size: 0.8rem; color: var(--ink-2); margin: 4px 0 0; }
+  .where { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 12px 16px; margin: 0 0 16px; border-radius: 0 4px 4px 0; }
+  .where h3 { margin-bottom: 6px; }
+  .where ol { margin: 6px 0 0; padding-left: 20px; }
+  .where li { margin: 3px 0; }
+  .where a { color: inherit; font-weight: 600; text-decoration-color: var(--accent); }
+  .tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+  .tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 8px 10px; color: var(--ink-2); }
+  .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+  .doc { position: relative; }
+  .doc pre { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; background: var(--mono-bg); border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px; margin: 0; max-height: 62vh; overflow: auto; }
+  .doc .copy { position: absolute; top: 8px; right: 8px; }
+  .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 4px; font-size: 0.85rem; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  .missing { color: var(--warn); background: var(--warn-bg); padding: 1px 4px; border-radius: 3px; }
+  section.wide { padding: 18px 24px 40px; border-top: 1px solid var(--line); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+  .tablewrap { overflow-x: auto; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); font-weight: 500; }
+  td a { color: inherit; text-decoration-color: var(--accent); }
+  .launch { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .launch a { display: inline-block; padding: 6px 10px; border: 1px solid var(--line); border-radius: 4px; text-decoration: none; color: var(--ink); font-size: 0.85rem; background: var(--panel); }
+  .launch a:hover { border-color: var(--accent); }
+  .status { font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 6px; border-radius: 3px; }
+  .s-found { color: var(--warn); background: var(--warn-bg); } .s-filed { color: var(--accent); background: var(--accent-soft); } .s-removed { color: var(--ok); background: var(--ok-bg); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 900px) { .two { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+
+<header>
+  <h1>Takedown Desk</h1>
+  <p>Paste the URL, pick the platform, copy the generated notice into the platform's form. Your rights-holder details are saved in this browser only.</p>
+</header>
+
+<main>
+  <div class="col form">
+    <h2>1 · Rights holder (saved once)</h2>
+    <label for="p-holder">Rights holder</label>
+    <input type="text" id="p-holder" placeholder="Lux Natura (the Estate of Terence McKenna)">
+    <div class="row">
+      <div><label for="p-agent">Your name</label><input type="text" id="p-agent" placeholder="Klea McKenna"></div>
+      <div><label for="p-title">Title / authority</label><input type="text" id="p-title" placeholder="Partner, Lux Natura"></div>
+    </div>
+    <label for="p-address">Mailing address</label>
+    <input type="text" id="p-address" placeholder="Street, City, State ZIP, Country">
+    <div class="row">
+      <div><label for="p-email">Email</label><input type="email" id="p-email" placeholder="rights@…"></div>
+      <div><label for="p-phone">Phone</label><input type="text" id="p-phone" placeholder="+1 …"></div>
+    </div>
+
+    <h2>2 · This case</h2>
+    <label for="c-urls">Infringing URL(s), one per line</label>
+    <textarea id="c-urls" placeholder="https://…"></textarea>
+    <label for="c-platform">Where it is hosted / sold</label>
+    <select id="c-platform"></select>
+    <label for="c-works">What of Terence's is being used</label>
+    <textarea id="c-works" placeholder="e.g. Audio of the lecture &quot;Timewave Zero&quot; (Esalen, 1994), copyright Lux Natura; Terence McKenna's name and likeness"></textarea>
+    <label for="c-original">Where the authorized version lives (optional)</label>
+    <input type="url" id="c-original" placeholder="https://www.terencemckenna.com/…">
+    <div class="checks" aria-label="Claim types">
+      <label><input type="checkbox" id="k-copy" checked> Copyright</label>
+      <label><input type="checkbox" id="k-name"> Name / trademark</label>
+      <label><input type="checkbox" id="k-pub"> Likeness / publicity</label>
+      <label><input type="checkbox" id="k-stripe"> Takes payment via Stripe</label>
+    </div>
+    <label for="c-operator">Operator name or email, if known (optional)</label>
+    <input type="text" id="c-operator" placeholder="e.g. aeon.forge@pm.me">
+    <label for="c-notes">Notes (what is sold, prices, dates)</label>
+    <textarea id="c-notes" placeholder="e.g. Sells posters, tees, hoodies and a paid membership branded Timewave Zero; McKenna video archive tab"></textarea>
+    <div class="btnrow">
+      <button class="primary" id="b-save">Save to case log</button>
+      <button id="b-example">Load timewave-zero.com example</button>
+      <button id="b-clear">Clear case</button>
+    </div>
+    <p class="hint">Fields marked <span class="missing">like this</span> in the output still need filling in.</p>
+  </div>
+
+  <div class="col out">
+    <div class="where" id="where"></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="doc"><button class="copy small" id="b-copy">Copy</button><pre id="doc"></pre></div>
+  </div>
+</main>
+
+<section class="wide">
+  <div class="two">
+    <div>
+      <h2>Who is behind a URL</h2>
+      <p class="hint" style="margin-bottom:8px">Enter a URL or domain. Each button opens a public lookup in a new tab. For the full automated report, run the GitHub Action.</p>
+      <input type="text" id="o-url" placeholder="https://example.com/listing/123">
+      <div class="launch" id="launch"></div>
+      <p class="hint">Order that usually works: Wayback (how long it has existed) → RDAP (registrar, creation date, registrant state) → crt.sh (hidden subdomains) → page source (GitHub links, emails, analytics IDs) → Google the handle.</p>
+    </div>
+    <div>
+      <h2>Case log (this browser)</h2>
+      <div class="tablewrap"><table id="log"><thead><tr><th>Date</th><th>URL</th><th>Platform</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div>
+      <div class="btnrow"><button class="small" id="b-csv">Copy log as CSV</button><button class="small" id="b-wipe">Delete all</button></div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:34px">Platform directory</h2>
+  <div class="tablewrap"><table id="dir"><thead><tr><th>Platform</th><th>File at</th><th>Notes</th></tr></thead><tbody></tbody></table></div>
+  <p class="hint" style="margin-top:14px">A DMCA notice covers copyright only. For Terence's name or likeness use the platform's "trademark" or "publicity rights" option where one exists, or the demand letter. Every notice is signed under penalty of perjury, so only the rights holder or someone authorized by it should send one.</p>
+</section>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const PLATFORMS = [
+    { id: "website", name: "Website on its own domain", file: "Host or Cloudflare, plus registrar", url: "https://abuse.cloudflare.com/dmca", notes: "Run the probe first. Cloudflare-proxied sites: DMCA at abuse.cloudflare.com/dmca, trademark at abuse.cloudflare.com/trademark, message the registrant via abuse.cloudflare.com/registrar_whois, identity via rdrs.icann.org. Other hosts: email the abuse address the probe finds.",
+      steps: ["Run the probe on the URL to learn the host and registrar.", "Cloudflare-proxied: file the notice at <a href='https://abuse.cloudflare.com/dmca'>abuse.cloudflare.com/dmca</a>. Other host: email the notice to the host's abuse address.", "Send the demand letter through <a href='https://abuse.cloudflare.com/registrar_whois'>Cloudflare's registrant relay</a> (or the registrar's equivalent) and to any known operator address.", "Redacted WHOIS: request the registrant's identity at <a href='https://rdrs.icann.org/'>rdrs.icann.org</a> using the RDRS statement."] },
+    { id: "stripe", name: "Stripe merchant (any site that charges via Stripe)", file: "ip-notice@stripe.com", url: "https://stripe.com/files/legal/IP_Notice.pdf", notes: "Fill Stripe's IP Notice PDF, attach evidence, email to ip-notice@stripe.com. Policy: stripe.com/legal/ip-policy.",
+      steps: ["Download the <a href='https://stripe.com/files/legal/IP_Notice.pdf'>Stripe IP Notice PDF</a> and fill it using the Stripe text here.", "Email the PDF and screenshots to ip-notice@stripe.com.", "Also file with the site's host so the storefront itself comes down."] },
+    { id: "youtube", name: "YouTube", file: "YouTube Studio → Content detection → Removal requests", url: "https://support.google.com/youtube/answer/2807622", notes: "Sign in, then Studio → Content detection → Removal requests → New removal request. Paste the DMCA text into the description.",
+      steps: ["Sign in to <a href='https://studio.youtube.com/'>YouTube Studio</a>, open Content detection → Removal requests → New removal request.", "Paste the video URLs and the notice text.", "Tick the legal statements and sign. Guide: <a href='https://support.google.com/youtube/answer/2807622'>YouTube Help</a>."] },
+    { id: "etsy", name: "Etsy", file: "etsy.com/legal/ip/report", url: "https://www.etsy.com/legal/ip/report", notes: "Web form; supports copyright, trademark and publicity rights. Listing URLs one per line.",
+      steps: ["Open <a href='https://www.etsy.com/legal/ip/report'>etsy.com/legal/ip/report</a>.", "Choose the claim type, paste the listing URLs and the notice text.", "Sign and submit; Etsy emails a case number."] },
+    { id: "redbubble", name: "Redbubble", file: "Notice and Takedown form or dmca@redbubble.com", url: "https://help.redbubble.com/hc/en-us/requests/new?ticket_form_id=18569", notes: "Form accepts a list of URLs; publicity rights are covered by their IP/Publicity Rights policy.",
+      steps: ["Open the <a href='https://help.redbubble.com/hc/en-us/requests/new?ticket_form_id=18569'>Redbubble takedown form</a> (or email dmca@redbubble.com).", "Paste the work URLs and the notice text.", "Submit; keep the ticket number."] },
+    { id: "amazon", name: "Amazon", file: "amazon.com/report/infringement", url: "https://www.amazon.com/report/infringement", notes: "Rights-owner form; ASIN or listing URLs.",
+      steps: ["Open <a href='https://www.amazon.com/report/infringement'>amazon.com/report/infringement</a>.", "Choose copyright or trademark, paste the ASINs/URLs and the notice text.", "Submit; Amazon replies by email."] },
+    { id: "ebay", name: "eBay", file: "vero@ebay.com with the NOCI form", url: "https://ir.ebaystatic.com/pictures/aw/pics/pdf/us/help/community/EN-NOCI.pdf", notes: "Notice of Claimed Infringement PDF, emailed to vero@ebay.com; VeRO portal at pages.ebay.com/vero.",
+      steps: ["Fill the <a href='https://ir.ebaystatic.com/pictures/aw/pics/pdf/us/help/community/EN-NOCI.pdf'>eBay NOCI form</a> with the notice text.", "Email it to vero@ebay.com with the item numbers.", "Repeat offenders: register at <a href='https://pages.ebay.com/vero'>eBay VeRO</a>."] },
+    { id: "facebook", name: "Facebook", file: "facebook.com/help/contact/copyrightform", url: "https://www.facebook.com/help/contact/copyrightform", notes: "Meta form; separate form for Instagram.",
+      steps: ["Open the <a href='https://www.facebook.com/help/contact/copyrightform'>Facebook copyright form</a>.", "Paste the post/page URLs and the notice text.", "Submit; Meta emails a report number."] },
+    { id: "instagram", name: "Instagram", file: "Instagram copyright report form", url: "https://help.instagram.com/454951664593304", notes: "Start from the help page; it links the current form.",
+      steps: ["Open <a href='https://help.instagram.com/454951664593304'>Instagram: Reporting copyright infringements</a> and follow the form link.", "Paste the post URLs and the notice text.", "Submit."] },
+    { id: "tiktok", name: "TikTok", file: "tiktok.com/legal/report/Copyright", url: "https://www.tiktok.com/legal/report/Copyright", notes: "Web form; video URLs.",
+      steps: ["Open <a href='https://www.tiktok.com/legal/report/Copyright'>TikTok copyright report</a>.", "Paste the video URLs and the notice text.", "Submit."] },
+    { id: "x", name: "X (Twitter)", file: "help.x.com/en/forms/ipi/dmca", url: "https://help.x.com/en/forms/ipi/dmca", notes: "DMCA form; tweet URLs.",
+      steps: ["Open the <a href='https://help.x.com/en/forms/ipi/dmca'>X DMCA form</a>.", "Paste the post URLs and the notice text.", "Submit."] },
+    { id: "spotify", name: "Spotify", file: "infringement-claim@spotify.com", url: "https://www.spotify.com/us/legal/intellectual-property-policy/", notes: "Email the notice; policy page links the web form.",
+      steps: ["Email the notice to infringement-claim@spotify.com with the track/podcast URLs.", "Or use the form linked from <a href='https://www.spotify.com/us/legal/intellectual-property-policy/'>Spotify's IP policy</a>."] },
+    { id: "apple", name: "Apple Music / iTunes / Podcasts / App Store", file: "apple.com/legal/intellectual-property/dispute-forms", url: "https://www.apple.com/legal/intellectual-property/dispute-forms/", notes: "Pick the store; up to 50 items per dispute.",
+      steps: ["Open <a href='https://www.apple.com/legal/intellectual-property/dispute-forms/'>Apple dispute forms</a> and pick the store (Music, Podcasts, App Store, iCloud).", "Paste the item URLs and the notice text.", "Submit."] },
+    { id: "soundcloud", name: "SoundCloud", file: "soundcloud.com/pages/copyright/report", url: "https://soundcloud.com/pages/copyright/report", notes: "Web form; track URLs.",
+      steps: ["Open <a href='https://soundcloud.com/pages/copyright/report'>SoundCloud copyright report</a>.", "Paste the track URLs and the notice text.", "Submit."] },
+    { id: "bandcamp", name: "Bandcamp", file: "bandcamp.com/copyright", url: "https://bandcamp.com/copyright", notes: "Use the Report link on the item page, or the copyright page.",
+      steps: ["Open the item, use its Report link (or <a href='https://bandcamp.com/copyright'>bandcamp.com/copyright</a>).", "Paste the notice text.", "Submit."] },
+    { id: "patreon", name: "Patreon", file: "copyright@patreon.com", url: "https://www.patreon.com/policy/copyright", notes: "Email or the form linked from the policy page.",
+      steps: ["Email the notice to copyright@patreon.com with the post URLs.", "Policy and form: <a href='https://www.patreon.com/policy/copyright'>patreon.com/policy/copyright</a>."] },
+    { id: "shopify", name: "Shopify store", file: "shopify.com/legal/dmca", url: "https://www.shopify.com/legal/dmca", notes: "Online form; 10–14 business days.",
+      steps: ["Open <a href='https://www.shopify.com/legal/dmca'>shopify.com/legal/dmca</a>.", "Paste the product URLs and the notice text.", "Submit."] },
+    { id: "archive", name: "Internet Archive", file: "info@archive.org", url: "https://archive.org/about/dmca.php", notes: "Email the Copyright Agent; identify the exact item URLs.",
+      steps: ["Email the notice to info@archive.org with the item URLs.", "Policy: <a href='https://archive.org/about/dmca.php'>archive.org/about/dmca.php</a>."] },
+    { id: "github", name: "GitHub", file: "github.com/contact/dmca", url: "https://github.com/contact/dmca", notes: "Web form; repository or file URLs.",
+      steps: ["Open <a href='https://github.com/contact/dmca'>github.com/contact/dmca</a>.", "Paste the repository URLs and the notice text.", "Submit."] },
+    { id: "google", name: "Google Search (delist a page)", file: "Google legal removal request", url: "https://support.google.com/legal/troubleshooter/1114905", notes: "Removes the page from search results; does not take the page down.",
+      steps: ["Open <a href='https://support.google.com/legal/troubleshooter/1114905'>Google's legal removal troubleshooter</a> → Web Search → copyright.", "Paste the page URLs and the notice text."] },
+    { id: "other", name: "Other platform", file: "Search for its IP form", url: "", notes: "Most platforms have a form named 'copyright' or 'intellectual property report'.",
+      steps: ["Search the platform name plus 'report copyright infringement form'.", "Paste the notice text; every platform asks for the same elements.", "If no form exists, run the probe and email the host's abuse address."] },
+  ];
+
+  const sel = $("c-platform");
+  PLATFORMS.forEach(p => { const o = document.createElement("option"); o.value = p.id; o.textContent = p.name; sel.appendChild(o); });
+
+  const dirBody = document.querySelector("#dir tbody");
+  PLATFORMS.filter(p => p.id !== "other").forEach(p => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${p.name}</td><td>${p.url ? `<a href="${p.url}" target="_blank" rel="noopener">${p.file}</a>` : p.file}</td><td>${p.notes}</td>`;
+    dirBody.appendChild(tr);
+  });
+
+  const PROFILE_KEYS = ["p-holder", "p-agent", "p-title", "p-address", "p-email", "p-phone"];
+  const CASE_KEYS = ["c-urls", "c-platform", "c-works", "c-original", "c-operator", "c-notes"];
+  const CHECKS = ["k-copy", "k-name", "k-pub", "k-stripe"];
+
+  function load(key) { try { return JSON.parse(localStorage.getItem(key) || "null"); } catch { return null; } }
+  function store(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch {} }
+
+  const savedP = load("td.profile") || {};
+  PROFILE_KEYS.forEach(k => { if (savedP[k]) $(k).value = savedP[k]; });
+  const savedC = load("td.case") || {};
+  CASE_KEYS.forEach(k => { if (savedC[k]) $(k).value = savedC[k]; });
+  CHECKS.forEach(k => { if (k in savedC) $(k).checked = !!savedC[k]; });
+
+  function v(id) { return ($(id).value || "").trim(); }
+  function need(id, label) { const x = v(id); return x ? x : `[${label}]`; }
+  function esc(s) { return s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])); }
+  function mark(s) { return esc(s).replace(/\[([^\]\n]{2,60})\]/g, '<span class="missing">[$1]</span>'); }
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function urls() { return v("c-urls").split(/\n+/).map(s => s.trim()).filter(Boolean); }
+  function domainOf(u) { try { return new URL(u.startsWith("http") ? u : "https://" + u).hostname.replace(/^www\./, ""); } catch { return u; } }
+  function claims() {
+    const c = []; if ($("k-copy").checked) c.push("copyright"); if ($("k-name").checked) c.push("trademark and name rights"); if ($("k-pub").checked) c.push("right of publicity in Terence McKenna's likeness"); return c;
+  }
+  function claimSentence() {
+    const c = claims(); if (!c.length) return "intellectual property rights";
+    return c.length === 1 ? c[0] : c.slice(0, -1).join(", ") + " and " + c[c.length - 1];
+  }
+
+  function docDMCA(p) {
+    const list = urls().length ? urls().map(u => "  " + u).join("\n") : "  [infringing URL]";
+    return `NOTICE OF CLAIMED INFRINGEMENT
+(17 U.S.C. § 512(c)(3))
+
+To: ${p.name} — Designated Copyright Agent
+Date: ${today()}
+
+1. COPYRIGHTED WORK(S) INFRINGED
+${need("c-works", "describe the works, e.g. audio recording of the lecture 'Timewave Zero' (1994), copyright Lux Natura")}
+${v("c-original") ? "Authorized copies are available at: " + v("c-original") : "Authorized releases are administered by " + need("p-holder", "rights holder") + "."}
+
+2. INFRINGING MATERIAL AND ITS LOCATION
+${list}
+${v("c-notes") ? "\nDescription: " + v("c-notes") : ""}
+
+3. COMPLAINANT
+${need("p-holder", "rights holder")}
+by ${need("p-agent", "your name")}, ${need("p-title", "title")}
+${need("p-address", "mailing address")}
+${need("p-email", "email")} · ${need("p-phone", "phone")}
+
+4. STATEMENTS
+I have a good faith belief that use of the copyrighted material described above in the manner complained of is not authorized by the copyright owner, its agent, or the law.
+
+I swear, under penalty of perjury, that the information in this notification is accurate and that I am the owner, or am authorized to act on behalf of the owner, of an exclusive right that is allegedly infringed.
+
+5. REQUESTED ACTION
+Remove or disable access to the material identified above. Where the account responsible is a repeat infringer, terminate it in accordance with your repeat-infringer policy.
+
+Signature: /s/ ${need("p-agent", "your name")}
+${need("p-title", "title")}, ${need("p-holder", "rights holder")}`;
+  }
+
+  function docDemand() {
+    const d = urls().length ? domainOf(urls()[0]) : "[domain]";
+    const to = v("c-operator") || "[operator name or email]";
+    return `${today()}
+
+To: ${to}
+Re: Unauthorized commercial use of Terence McKenna's works and name at ${d}
+
+Dear Sir or Madam,
+
+I write on behalf of ${need("p-holder", "rights holder")}, which owns and administers the intellectual property of the late Terence McKenna, including the copyrights in his recorded lectures, writings and images and the rights in his name and likeness.
+
+Your site ${d} makes commercial use of that property without a license. Specifically:
+${urls().map(u => "  · " + u).join("\n") || "  · [infringing URL]"}
+${v("c-notes") ? "\n" + v("c-notes") + "\n" : ""}
+This use infringes ${claimSentence()} held by ${need("p-holder", "rights holder")}. No license, consent or other authorization has been given.
+
+${need("p-holder", "rights holder")} requires that, within ten (10) days of the date of this letter, you:
+  1. cease all sale, distribution and display of the material and products identified above and remove them from the site;
+  2. provide a written accounting of all units sold and all revenue received from them, including membership and subscription revenue;
+  3. confirm in writing that you have complied and will not resume; and
+  4. preserve all records relating to the site, its sales, its suppliers and its customers.
+
+If you do not comply, ${need("p-holder", "rights holder")} will pursue the remedies available to it, including statutory damages, an injunction and recovery of its costs and attorney's fees, without further notice. Nothing in this letter waives any right or remedy, all of which are expressly reserved.
+
+Please direct your response to ${need("p-email", "email")}.
+
+Sincerely,
+
+${need("p-agent", "your name")}
+${need("p-title", "title")}
+${need("p-holder", "rights holder")}
+${need("p-address", "mailing address")}
+${need("p-phone", "phone")}`;
+  }
+
+  function docStripe() {
+    const d = urls().length ? domainOf(urls()[0]) : "[domain]";
+    return `RESTRICTED BUSINESS INTELLECTUAL PROPERTY NOTICE — STRIPE
+(Use these answers to complete stripe.com/files/legal/IP_Notice.pdf; email it to ip-notice@stripe.com)
+
+Name of IP owner: ${need("p-holder", "rights holder")}
+Submitted by: ${need("p-agent", "your name")}, ${need("p-title", "title")} — authorized representative of the IP owner
+Contact: ${need("p-address", "mailing address")} · ${need("p-email", "email")} · ${need("p-phone", "phone")}
+
+IP rights at issue: ${claimSentence()} in the works of Terence McKenna, specifically:
+${need("c-works", "describe the works")}
+Registration numbers (if any): [US copyright / trademark registration numbers, or "unregistered; ownership by inheritance and assignment"]
+
+Business using Stripe: ${d}
+${v("c-operator") ? "Operator: " + v("c-operator") : ""}
+URLs of the infringing goods or services:
+${urls().map(u => "  " + u).join("\n") || "  [infringing URL]"}
+
+How each good or service infringes:
+${v("c-notes") || "[e.g. print-on-demand posters, apparel and a paid membership marketed under Terence McKenna's name and the title of his work, with an embedded archive of his recorded lectures, none of it licensed]"}
+
+Evidence the business uses Stripe: the site's own text describes a "Stripe-backed subscription" and its checkout code loads Stripe. [Attach screenshots of the checkout or a receipt.]
+
+Prior notice to the business: [date sent, channel] / The business publishes no IP-notice process of its own.
+
+I have a good-faith belief that the business is using Stripe's services in connection with the sale of goods or services that infringe the IP rights identified above. The information in this notice is accurate, and I am authorized to act on behalf of the IP owner.
+
+Signature: /s/ ${need("p-agent", "your name")}    Date: ${today()}`;
+  }
+
+  function docRelay() {
+    const d = urls().length ? domainOf(urls()[0]) : "[domain]";
+    return `Message for the registrant of ${d}
+(paste into abuse.cloudflare.com/registrar_whois — Cloudflare forwards it to the registrant's email on file)
+
+Legal notice from ${need("p-holder", "rights holder")}, owner of the intellectual property of Terence McKenna.
+
+Your site ${d} sells goods and memberships that use Terence McKenna's works and name without a license (${urls().slice(0, 3).join(", ") || "[URLs]"}). ${need("p-holder", "rights holder")} requires that you stop within ten (10) days, remove the material, and account for the revenue received. A full demand letter has been sent to the addresses associated with the site.
+
+Please respond to ${need("p-agent", "your name")}, ${need("p-title", "title")}, at ${need("p-email", "email")}. All rights are reserved.`;
+  }
+
+  function docRDRS() {
+    const d = urls().length ? domainOf(urls()[0]) : "[domain]";
+    return `REGISTRATION DATA REQUEST — ${d}
+(rdrs.icann.org — answers for the request form)
+
+Requestor: ${need("p-agent", "your name")}, ${need("p-title", "title")}, on behalf of ${need("p-holder", "rights holder")}
+Contact: ${need("p-address", "mailing address")} · ${need("p-email", "email")} · ${need("p-phone", "phone")}
+Requestor type: Intellectual property rights holder / authorized representative
+
+Domain name: ${d}
+Registrar: [from the probe report, e.g. Cloudflare, Inc. (IANA 1910)]
+
+Data requested: registrant name, organization, postal address, email address and telephone number.
+
+Purpose and legal basis: enforcement of ${claimSentence()} owned by ${need("p-holder", "rights holder")} in the works of Terence McKenna. The domain is used to sell infringing goods and paid memberships (${urls().slice(0, 3).join(", ") || "[URLs]"}). The registrant's identity is required to serve a pre-litigation demand and, if necessary, to name the correct defendant in proceedings. The public WHOIS record is redacted, and no working contact for the operator is published on the site.
+
+Supporting evidence: [attach the probe report, screenshots of the storefront and the notice already sent to the host].
+
+The data will be used only for the purpose stated above and will not be further disclosed except as required for that enforcement. To the best of my knowledge this request is complete and accurate.
+
+${need("p-agent", "your name")} · ${today()}`;
+  }
+
+  const TABS = [
+    { id: "notice", label: "Takedown notice", make: (p) => docDMCA(p), show: () => true },
+    { id: "demand", label: "Demand letter", make: () => docDemand(), show: () => true },
+    { id: "stripe", label: "Stripe notice", make: () => docStripe(), show: () => $("k-stripe").checked || v("c-platform") === "stripe" },
+    { id: "relay", label: "Registrant message", make: () => docRelay(), show: () => v("c-platform") === "website" },
+    { id: "rdrs", label: "Identity request", make: () => docRDRS(), show: () => v("c-platform") === "website" },
+  ];
+  let active = "notice";
+
+  function render() {
+    const p = PLATFORMS.find(x => x.id === v("c-platform")) || PLATFORMS[0];
+    $("where").innerHTML = `<h3>Where to file: ${esc(p.name)}</h3><ol>${p.steps.map(s => `<li>${s}</li>`).join("")}</ol>`;
+    const tabs = $("tabs"); tabs.innerHTML = "";
+    const visible = TABS.filter(t => t.show());
+    if (!visible.some(t => t.id === active)) active = visible[0].id;
+    visible.forEach(t => {
+      const b = document.createElement("button"); b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(t.id === active)); b.textContent = t.label;
+      b.addEventListener("click", () => { active = t.id; render(); }); tabs.appendChild(b);
+    });
+    const t = visible.find(x => x.id === active);
+    $("doc").innerHTML = mark(t.make(p));
+    const prof = {}; PROFILE_KEYS.forEach(k => prof[k] = v(k)); store("td.profile", prof);
+    const cs = {}; CASE_KEYS.forEach(k => cs[k] = v(k)); CHECKS.forEach(k => cs[k] = $(k).checked); store("td.case", cs);
+    renderLaunch();
+  }
+
+  function renderLaunch() {
+    const raw = v("o-url") || urls()[0] || "";
+    const d = raw ? domainOf(raw) : "";
+    const box = $("launch"); box.innerHTML = "";
+    if (!d) { box.innerHTML = '<span class="hint">Enter a URL above to enable the lookups.</span>'; return; }
+    const links = [
+      ["Wayback history", `https://web.archive.org/web/*/${d}*`],
+      ["RDAP (registrar, dates)", `https://rdap.org/domain/${d}`],
+      ["WHOIS", `https://who.is/whois/${d}`],
+      ["DNS records", `https://www.nslookup.io/domains/${d}/dns-records/`],
+      ["crt.sh subdomains", `https://crt.sh/?q=%25.${d}`],
+      ["urlscan.io", `https://urlscan.io/search/#domain:${d}`],
+      ["BuiltWith", `https://builtwith.com/${d}`],
+      ["Google: pages on the site", `https://www.google.com/search?q=site:${d}`],
+      ["Google: who mentions it", `https://www.google.com/search?q=%22${d}%22`],
+      ["ICANN lookup", `https://lookup.icann.org/en/lookup?name=${d}`],
+      ["Run the full probe (GitHub Action)", `https://github.com/newswim/timewave-zero-ui/actions/workflows/estate-probe.yml`],
+    ];
+    links.forEach(([label, href]) => { const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = label; box.appendChild(a); });
+  }
+
+  function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1400); }
+
+  $("b-copy").addEventListener("click", async () => {
+    const text = $("doc").textContent;
+    try { await navigator.clipboard.writeText(text); toast("Copied"); }
+    catch { const r = document.createRange(); r.selectNodeContents($("doc")); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); toast("Select-all and copy"); }
+  });
+
+  $("b-example").addEventListener("click", () => {
+    $("c-urls").value = "https://timewave-zero.com/?tab=merch\nhttps://timewave-zero.com/?tab=mckenna\nhttps://timewave-zero.com/?tab=subscription";
+    $("c-platform").value = "website";
+    $("c-works").value = "Terence McKenna's recorded lectures embedded in the site's \"McKenna\" video archive; the title \"Timewave Zero\" and Terence McKenna's name used to market posters, calendars, apparel, a hardcover \"Novelty Ledger\" and a paid membership";
+    $("c-original").value = "https://www.terencemckenna.com/";
+    $("c-operator").value = "aeon.forge@pm.me";
+    $("c-notes").value = "Print-on-demand storefront (tees $29.95, hoodies $99.95, calendar $39.95, book $99.95, shower curtain $109.95) and a Stripe-backed membership at $2.99/month or $79.99 lifetime, branded \"Timewave Zero\" and marketed with Terence McKenna's name. Domain registered 2026-04-27 at Cloudflare Registrar (registrant redacted, NC, US). Operator publishes as AEON-7 on GitHub and @SpaceTimeViking on X.";
+    $("k-copy").checked = true; $("k-name").checked = true; $("k-pub").checked = true; $("k-stripe").checked = true;
+    render();
+  });
+  $("b-clear").addEventListener("click", () => { CASE_KEYS.forEach(k => $(k).value = ""); $("c-platform").value = "website"; $("k-copy").checked = true; $("k-name").checked = false; $("k-pub").checked = false; $("k-stripe").checked = false; render(); });
+
+  // Case log
+  function cases() { return load("td.cases") || []; }
+  function renderLog() {
+    const body = document.querySelector("#log tbody"); body.innerHTML = "";
+    const cs = cases();
+    if (!cs.length) { body.innerHTML = '<tr><td colspan="5" class="hint">Nothing logged yet.</td></tr>'; return; }
+    cs.forEach((c, i) => {
+      const tr = document.createElement("tr");
+      const pname = (PLATFORMS.find(p => p.id === c.platform) || {}).name || c.platform;
+      tr.innerHTML = `<td style="white-space:nowrap">${esc(c.date)}</td><td style="word-break:break-all">${esc(c.url)}</td><td>${esc(pname)}</td><td></td><td></td>`;
+      const sel = document.createElement("select"); ["found", "filed", "removed", "escalated"].forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = s; if (s === c.status) o.selected = true; sel.appendChild(o); });
+      sel.className = "status s-" + c.status; sel.style.width = "auto";
+      sel.addEventListener("change", () => { const all = cases(); all[i].status = sel.value; store("td.cases", all); renderLog(); });
+      tr.children[3].appendChild(sel);
+      const del = document.createElement("button"); del.className = "small"; del.textContent = "✕"; del.title = "Remove";
+      del.addEventListener("click", () => { const all = cases(); all.splice(i, 1); store("td.cases", all); renderLog(); });
+      tr.children[4].appendChild(del);
+      body.appendChild(tr);
+    });
+  }
+  $("b-save").addEventListener("click", () => {
+    const us = urls(); if (!us.length) { toast("Add a URL first"); return; }
+    const all = cases();
+    us.forEach(u => all.unshift({ date: today(), url: u, platform: v("c-platform"), status: "found", notes: v("c-notes") }));
+    store("td.cases", all); renderLog(); toast("Logged");
+  });
+  $("b-csv").addEventListener("click", async () => {
+    const rows = [["date", "url", "platform", "status", "notes"]].concat(cases().map(c => [c.date, c.url, c.platform, c.status, c.notes || ""]));
+    const csv = rows.map(r => r.map(x => '"' + String(x).replace(/"/g, '""') + '"').join(",")).join("\n");
+    try { await navigator.clipboard.writeText(csv); toast("CSV copied"); } catch { toast("Copy failed"); }
+  });
+  $("b-wipe").addEventListener("click", () => { if (confirm("Delete the whole case log in this browser?")) { store("td.cases", []); renderLog(); } });
+
+  [...PROFILE_KEYS, ...CASE_KEYS, ...CHECKS, "o-url"].forEach(k => { $(k).addEventListener("input", render); $(k).addEventListener("change", render); });
+  if (!v("c-platform")) $("c-platform").value = "website";
+  render(); renderLog();
+})();
+</script>
