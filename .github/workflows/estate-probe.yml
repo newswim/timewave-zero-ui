@@ -1,0 +1,126 @@
+# Estate probe: paste a URL, get a report on who is behind it.
+#
+# Run it from GitHub: Actions → "estate-probe" → "Run workflow" → enter the URL.
+# The report appears on the run's Summary page and as a downloadable artifact.
+# Read-only: it only performs public GET requests and public registry lookups.
+name: estate-probe
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "URL or domain to investigate (e.g. https://example.com/listing/123)"
+        required: true
+        default: "https://timewave-zero.com/"
+  push:
+    branches: [claude/timewave-zero-ownership-fwhn59]
+    paths: [".github/workflows/estate-probe.yml"]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Install tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq whois dnsutils jq >/dev/null
+      - name: Probe
+        env:
+          TARGET: ${{ inputs.target || 'https://timewave-zero.com/' }}
+          UA: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36"
+        run: |
+          set +e
+          mkdir -p out
+          R=out/report.md
+          T="$TARGET"; case "$T" in http*) ;; *) T="https://$T";; esac
+          D=$(printf '%s' "$T" | sed -E 's#^https?://##; s#/.*##; s#^www\.##')
+          h(){ printf '\n## %s\n\n' "$1" >> "$R"; }
+          code(){ printf '```\n%s\n```\n' "$(cat)" >> "$R"; }
+          line(){ printf '%s\n' "$1" >> "$R"; }
+          printf '# Probe report: %s\n\nTarget: %s  \nDate: %s (UTC)\n' "$D" "$T" "$(date -u +%Y-%m-%dT%H:%MZ)" > "$R"
+
+          # ---------- Page ----------
+          curl -sS -m 40 -A "$UA" -L -D out/headers.txt -o out/page.html "$T"
+          h "Page"
+          { echo "title: $(grep -oiE '<title[^>]*>[^<]*</title>' out/page.html | head -1 | sed -E 's/<[^>]+>//g')"
+            grep -oiE '<meta[^>]+(name|property)="(description|author|og:site_name|og:title|og:url|twitter:site|twitter:creator|generator|application-name)"[^>]*>' out/page.html | sed -E 's/\s+/ /g' | head -12
+            echo "server: $(grep -iE '^(server|x-powered-by|via|x-shopify-stage|x-served-by):' out/headers.txt | tr -d '\r' | tr '\n' ' ')"
+            echo "final url: $(grep -iE '^location:' out/headers.txt | tail -1 | tr -d '\r')"
+            echo "bytes: $(wc -c < out/page.html)"; } | code
+
+          h "Platform fingerprints"
+          grep -oiE 'shopify|myshopify\.com|woocommerce|wp-content|squarespace|wix\.com|bigcartel|printful|printify|gelato|teespring|spring\.com|fourthwall|gumroad|stripe|paypal|snipcart|lemonsqueezy|redbubble|etsy|teepublic|society6|bandcamp|gtag|G-[A-Z0-9]{6,}|UA-[0-9]+-[0-9]|GTM-[A-Z0-9]+|plausible|umami|fathom|hotjar|vercel|netlify|cloudflare|caddy|nginx|apache' out/page.html out/headers.txt | cut -d: -f2- | tr 'A-Z' 'a-z' | sort | uniq -c | sort -rn | head -20 | code
+
+          h "Names, handles, emails on the page"
+          { grep -oiE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}' out/page.html | grep -viE 'example\.com|sentry|wixpress|schema' | sort -u | head -15
+            grep -oiE '(github\.com|instagram\.com|x\.com|twitter\.com|facebook\.com|tiktok\.com/@|etsy\.com/shop|redbubble\.com/people|patreon\.com|ko-fi\.com|buymeacoffee\.com|linktr\.ee|youtube\.com/(@|channel/|c/)|linkedin\.com/in|discord\.gg|t\.me|mastodon\.social/@|bsky\.app/profile|substack\.com|medium\.com/@)[A-Za-z0-9_./-]+' out/page.html | sort -u | head -30
+            grep -oiE '(©|copyright|&copy;)[^<]{0,90}' out/page.html | sed -E 's/\s+/ /g' | sort -u | head -5
+            grep -oiE '"(author|creator|publisher|seller|shop_name|shopName|ownerName|artist|channelName|author_name|brand)"\s*:\s*"[^"]{2,80}"' out/page.html | sort -u | head -15; } | code
+
+          h "Outbound links (top domains)"
+          grep -oiE 'https?://[^"'"'"' <>)]+' out/page.html | sed -E 's#^https?://##; s#/.*##' | grep -v "$D" | sort | uniq -c | sort -rn | head -25 | code
+
+          # ---------- Site-specific quick wins ----------
+          case "$T" in
+            *youtube.com*|*youtu.be*)
+              h "YouTube oEmbed (uploader)"; curl -sS -m 20 "https://www.youtube.com/oembed?url=$T&format=json" | jq -c '{author_name,author_url,title}' | code ;;
+            *etsy.com*|*redbubble.com*|*teepublic.com*|*ebay.com*|*amazon.com*)
+              h "Marketplace seller fields"; grep -oiE '"(shop_name|shopName|seller_name|sellerName|artist_name|artistName|store_name|byline|owner)"\s*:\s*"[^"]{2,80}"|Sold by[^<]{0,80}|by <a[^>]*>[^<]{2,60}' out/page.html | sort -u | head -15 | code ;;
+          esac
+
+          # ---------- Scripts ----------
+          h "Script bundles: repo links, emails, payment keys"
+          for s in $(grep -oiE 'src="[^"]+\.m?js[^"]*"' out/page.html | sed -E 's/src="([^"]+)"/\1/' | head -6); do
+            case "$s" in http*) u="$s";; //*) u="https:$s";; /*) u="https://$D$s";; *) u="https://$D/$s";; esac
+            curl -sS -m 30 -A "$UA" "$u" -o out/b.js || continue
+            printf '%s (%s bytes)\n' "$u" "$(wc -c < out/b.js)"
+            grep -oiE 'github\.com/[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)?|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}|pk_(live|test)_[A-Za-z0-9]{8,}|[a-z0-9-]+\.myshopify\.com|printful|printify|gelato|fourthwall|stripe' out/b.js | grep -viE 'facebook|react|sentry|w3\.org' | sort | uniq -c | sort -rn | head -15
+          done | code
+
+          # ---------- Registry ----------
+          h "WHOIS (registry + registrar)"
+          whois "$D" | grep -iE '^\s*(domain name|registrar:|registrar iana|creation date|updated date|registry expiry|registrar registration expiration|domain status|name server|registrant (name|organization|state|country|email)|admin email|tech email|registrar abuse contact):?' | sed -E 's/^\s+//' | awk '!seen[$0]++' | head -40 | code
+          h "RDAP"
+          curl -sS -m 30 "https://rdap.org/domain/$D" | jq -c '{status,events:[.events[]?|{a:.eventAction,d:.eventDate}],ns:[.nameservers[]?.ldhName],registrar:[.entities[]?|select(.roles[]?=="registrar")|.vcardArray[1][]?|select(.[0]=="fn")|.[3]]}' 2>/dev/null | code
+
+          # ---------- DNS / hosting ----------
+          h "DNS"
+          { for t in A AAAA NS MX TXT; do printf '%s  %s\n' "$t" "$(dig +short "$D" $t | tr '\n' ' ')"; done
+            printf 'DMARC  %s\n' "$(dig +short _dmarc.$D TXT | tr '\n' ' ')"
+            printf 'www  %s\n' "$(dig +short www.$D | tr '\n' ' ')"; } | code
+          IP=$(dig +short "$D" A | head -1)
+          h "Hosting (IP $IP)"
+          { curl -sS -m 20 "https://ipinfo.io/$IP/json" | jq -c '{org,city,region,country,hostname}' 2>/dev/null
+            whois "$IP" 2>/dev/null | grep -iE '^(OrgName|org-name|NetName|netname|descr|OrgAbuseEmail|abuse-mailbox):' | awk '!seen[$0]++' | head -8; } | code
+
+          # ---------- Subdomains / history ----------
+          h "Certificate transparency (subdomains)"
+          curl -sS -m 40 "https://crt.sh/?q=%25.$D&output=json" | jq -r '.[].name_value' 2>/dev/null | tr ',' '\n' | sort -u | head -30 | code
+          h "Wayback Machine"
+          { first=$(curl -sS -m 40 "https://web.archive.org/cdx/search/cdx?url=$D/&output=txt&limit=1&fl=timestamp" | head -1)
+            last=$(curl -sS -m 40 "https://web.archive.org/cdx/search/cdx?url=$D/&output=txt&limit=-1&fl=timestamp" | tail -1)
+            echo "first capture: ${first:-none}"; echo "latest capture: ${last:-none}"
+            [ -n "$first" ] && echo "https://web.archive.org/web/$first/https://$D/"; } | code
+          h "urlscan.io"
+          curl -sS -m 30 "https://urlscan.io/api/v1/search/?q=domain:$D" | jq -r '.results[]?|"\(.task.time[0:10])  \(.page.ip)  \(.page.asnname)  \(.result)"' 2>/dev/null | head -8 | code
+
+          # ---------- Common paths ----------
+          h "Storefront and policy paths"
+          for p in products.json collections/all about contact privacy terms policies/terms-of-service policies/refund-policy .well-known/security.txt humans.txt robots.txt sitemap.xml; do
+            c=$(curl -sS -m 20 -A "$UA" -o out/p.txt -w '%{http_code}' -L "https://$D/$p"); sz=$(wc -c < out/p.txt)
+            [ "$c" = 200 ] && [ "$sz" -gt 0 ] && printf '%s /%s (%s bytes)\n' "$c" "$p" "$sz"
+            if [ "$p" = products.json ] && [ "$c" = 200 ]; then jq -r '.products[]?|"  product: \(.title) — vendor: \(.vendor)"' out/p.txt 2>/dev/null | head -10; fi
+          done | code
+
+          # ---------- GitHub owner, if the site links one ----------
+          gh=$(grep -ohiE 'github\.com/[A-Za-z0-9_.-]+' out/page.html out/b.js 2>/dev/null | grep -viE 'github\.com/(features|topics|apps|sponsors|marketplace|about|contact|site|login|jackyzha0)' | sort | uniq -c | sort -rn | head -1 | awk '{print $2}' | cut -d/ -f2)
+          if [ -n "$gh" ]; then
+            h "GitHub account linked from the site: $gh"
+            curl -sS -m 20 -H 'Accept: application/vnd.github+json' "https://api.github.com/users/$gh" | jq -c '{login,name,company,blog,location,email,bio,twitter_username,public_repos,created_at}' | code
+          fi
+
+          h "Next steps"
+          line "- Registrar and host abuse contacts are above; registrant identity behind a redacted WHOIS is requested via https://rdrs.icann.org/"
+          line "- Generate the notices with the Takedown Desk page, then file at the platform's IP form."
+          cp "$R" "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: probe-report
+          path: out/report.md
