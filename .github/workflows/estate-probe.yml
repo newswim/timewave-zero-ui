@@ -120,6 +120,7 @@ jobs:
           line "- Registrar and host abuse contacts are above; registrant identity behind a redacted WHOIS is requested via https://rdrs.icann.org/"
           line "- Generate the notices with the Takedown Desk page, then file at the platform's IP form."
           cp "$R" "$GITHUB_STEP_SUMMARY"
+          echo "::group::Report"; cat "$R"; echo "::endgroup::"
       - uses: actions/upload-artifact@v4
         with:
           name: probe-report
