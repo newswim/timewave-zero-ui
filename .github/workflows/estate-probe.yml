@@ -11,9 +11,6 @@ on:
         description: "URL or domain to investigate (e.g. https://example.com/listing/123)"
         required: true
         default: "https://timewave-zero.com/"
-  push:
-    branches: [claude/timewave-zero-ownership-fwhn59]
-    paths: [".github/workflows/estate-probe.yml"]
 jobs:
   probe:
     runs-on: ubuntu-latest
@@ -76,9 +73,11 @@ jobs:
 
           # ---------- Registry ----------
           h "WHOIS (registry + registrar)"
-          whois "$D" | grep -iE '^\s*(domain name|registrar:|registrar iana|creation date|updated date|registry expiry|registrar registration expiration|domain status|name server|registrant (name|organization|state|country|email)|admin email|tech email|registrar abuse contact):?' | sed -E 's/^\s+//' | awk '!seen[$0]++' | head -40 | code
+          whois "$D" | grep -iE '^\s*(Domain Name|Registrar|Registrar IANA ID|Creation Date|Updated Date|Registry Expiry Date|Registrar Registration Expiration Date|Domain Status|Name Server|DNSSEC|Registrant (Name|Organization|State/Province|Country|Email)|Admin Email|Tech Email|Registrar Abuse Contact (Email|Phone)):' | sed -E 's/^\s+//' | awk '!seen[$0]++' | head -40 | code
           h "RDAP"
-          curl -sS -m 30 "https://rdap.org/domain/$D" | jq -c '{status,events:[.events[]?|{a:.eventAction,d:.eventDate}],ns:[.nameservers[]?.ldhName],registrar:[.entities[]?|select(.roles[]?=="registrar")|.vcardArray[1][]?|select(.[0]=="fn")|.[3]]}' 2>/dev/null | code
+          rd=$(curl -sS -m 15 "https://rdap.org/domain/$D"); tld="${D##*.}"
+          [ -z "$rd" ] && case "$tld" in com|net) rd=$(curl -sS -m 20 "https://rdap.verisign.com/$tld/v1/domain/$D");; esac
+          printf '%s' "$rd" | jq -c '{status,events:[.events[]?|{a:.eventAction,d:.eventDate}],ns:[.nameservers[]?.ldhName],registrar:[.entities[]?|select(.roles[]?=="registrar")|.vcardArray[1][]?|select(.[0]=="fn")|.[3]]}' 2>/dev/null | code
 
           # ---------- DNS / hosting ----------
           h "DNS"
@@ -103,9 +102,12 @@ jobs:
 
           # ---------- Common paths ----------
           h "Storefront and policy paths"
+          home=$(wc -c < out/page.html)
           for p in products.json collections/all about contact privacy terms policies/terms-of-service policies/refund-policy .well-known/security.txt humans.txt robots.txt sitemap.xml; do
             c=$(curl -sS -m 20 -A "$UA" -o out/p.txt -w '%{http_code}' -L "https://$D/$p"); sz=$(wc -c < out/p.txt)
-            [ "$c" = 200 ] && [ "$sz" -gt 0 ] && printf '%s /%s (%s bytes)\n' "$c" "$p" "$sz"
+            if [ "$c" = 200 ] && [ "$sz" -gt 0 ]; then
+              if [ "$sz" = "$home" ]; then printf '%s /%s (same as the home page: single-page app, no real page here)\n' "$c" "$p"; else printf '%s /%s (%s bytes)\n' "$c" "$p" "$sz"; fi
+            fi
             if [ "$p" = products.json ] && [ "$c" = 200 ]; then jq -r '.products[]?|"  product: \(.title) — vendor: \(.vendor)"' out/p.txt 2>/dev/null | head -10; fi
           done | code
 
